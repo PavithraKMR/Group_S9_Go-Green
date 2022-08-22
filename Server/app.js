@@ -1,48 +1,74 @@
+const mongoose = require('mongoose'); 
+const express = require('express');
+const bodyParser = require('body-parser');
+const HttpError = require('./models/http-error');
+// npm install mongoose-unique-validator //  like email
+// npm install --save bcryptjs
+// npm install --save jsonwebtoken
 var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+// var path = require('path');
+// var cookieParser = require('cookie-parser');
+// var logger = require('morgan');
 
-var cors = require('cors');   /// read
+// npm install --save multer // for file upload
+const app = express();
 
-const mongoose  = require('mongoose'); // i read
-mongoose.connect('mongodb://localhost/green-go') // i read
+const adminRouter = require('./routes/Admin');
+const authRouter = require('./routes/Auth');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 
-var customerRouter = require('./routes/customer'); // import this // i read
-var app = express();
-// view engine setup
-app.use(cors());
-
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-app.use('/customers', customerRouter);  // i read
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
+app.use(bodyParser.json()); // to get body ,this should be used before routers
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+// CORS Headers => Required for cross-origin/ cross-server communication
+app.use((req, res, next) => {
+	//middleware
+	res.setHeader('Access-Control-Allow-Origin', '*');
+	res.setHeader(
+		'Access-Control-Allow-Headers',
+		'Origin, X-Requested-With, Content-Type, Accept, Authorization'
+	);
+	res.setHeader(
+		'Access-Control-Allow-Methods',
+		'GET, POST, PATCH, DELETE, OPTIONS'
+	);
+	next();
 });
 
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+
+
+// here route should be mentioned
+
+app.use('/api/crop', adminRouter);
+app.use('/api/GreenLive', authRouter);
+
+// for unsupported router error handler
+app.use((req, res, next) => {
+	const error = new HttpError('could not find this route..');
+	throw error;
 });
 
-module.exports = app;
+//after using all routes
+app.use((error, req, res, next) => {
+	if (res.sendHeader) {
+		return next(error);
+	}
+	res
+		.status(error.code || 500)
+		.json({ message: error.message || 'An Unknown Error Occurred!' });
+});
+
+//connect mongodb
+mongoose
+	.connect(
+		'mongodb+srv://projectgreen:projectgreen@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
+	)
+	.then(() => {
+		console.log('connected to Database');
+		app.listen(5000); // start Node + Express server on port 5000
+	})
+	.catch((error) => {
+		console.log(error);
+	});

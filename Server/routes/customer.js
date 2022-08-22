@@ -7,7 +7,7 @@ const customerModel = require('../models/customer.model');
 
 var mongoose  = require('mongoose');
 
-router.get('/list',function(req,res,next){
+router.get('/list',function(req,res){
     customerModel.find(function(err,customerlistResponse){
         if(err)
         {
@@ -23,7 +23,7 @@ router.get('/list',function(req,res,next){
 
 
 /* create new customers. */ // i read
-router.post('/add', function(req, res, next) {
+router.post('/add', function(req, res) {
 
     let newCustomerObj = new customerModel({
         firstname:req.body.firstname,
@@ -48,7 +48,7 @@ router.post('/add', function(req, res, next) {
 });
 
 /* Get Specific customer. */ // i read
-router.get('/view', function(req, res, next) {
+router.get('/view', function(req, res) {
 
     const userId = req.query.userId;
 
@@ -66,7 +66,7 @@ router.get('/view', function(req, res, next) {
 });
 
 /* update a customers. */ // i read
-router.put('/update', function(req, res, next) {
+router.put('/update', function(req, res) {
 
     const userId = req.body.userId;
 
@@ -91,7 +91,7 @@ router.put('/update', function(req, res, next) {
 });
 
 /* delete a customers. */   // i read
-router.delete('/delete', function(req, res, next) {
+router.delete('/delete', function(req, res) {
     const userId = req.body.userId;
 
     customerModel.findByIdAndDelete(userId,function(err,customerResponse){
@@ -107,7 +107,7 @@ router.delete('/delete', function(req, res, next) {
 });
 
 /* delete multiple customers. */   // i read
-router.delete('/delete-many', function(req, res, next) {
+router.delete('/delete-many', function(req, res) {
     const userId = req.body.userId;
 
     customerModel.deleteMany({'firstname':'mohammed'},function(err,customerResponse){
@@ -123,7 +123,7 @@ router.delete('/delete-many', function(req, res, next) {
 });
 
 /* search a customers. */   // i read
-router.get('/search', function(req, res, next) {
+router.get('/search', function(req, res) {
     res.send('respond with a resource');
 });
 
