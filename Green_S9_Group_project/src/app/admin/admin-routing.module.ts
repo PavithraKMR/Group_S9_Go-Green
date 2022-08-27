@@ -44,7 +44,7 @@ const routes: Routes = [
                   // {
 									// 	path: 'edit/:tipId',
 									// 	loadChildren: () =>
-									// 		import('./home/crop/crop-tips/edit-tip/edit-tip.module').then(
+									// 		import('../admin/home/crop/crop-tips/edit-tip/edit-tip.module').then(
 									// 			m => m.EditTipPageModule
 									// 		)
 									// }

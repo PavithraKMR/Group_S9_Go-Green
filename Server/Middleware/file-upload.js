@@ -7,11 +7,9 @@ const MIME_TYPE_MAP = {
 	'image/jfif': 'jfif'
 };
 const fileUpload = multer({
-	limits: 500000000,
-
 	storage: multer.diskStorage({
 		destination: (req, file, cb) => {
-			cb(null, 'uploads/CropImages');
+			cb(null, 'uploads/Diseases');
 		},
 
 		filename: (req, file, cb) => {

@@ -28,6 +28,7 @@ export class ShowTipPage implements OnInit, OnDestroy {
 	) {}
 
 	tipidSub: Subscription;
+	deletSub: Subscription;
 	cropTip: CropTips;
 	isLoading = false;
 	cropTipSub: Subscription;
@@ -108,15 +109,16 @@ export class ShowTipPage implements OnInit, OnDestroy {
 								})
 								.then(loadingEl => {
 									loadingEl.present();
-									this.homeService.DeleteTip(id).subscribe(() => {
-										loadingEl.dismiss();
-									});
+									this.deletSub = this.homeService
+										.DeleteTip(id)
+										.subscribe(() => {
+											loadingEl.dismiss();
+										});
 								});
 						}
 					},
 					{
-						text: 'Cancel',
-
+						text: 'Cancel'
 					}
 				]
 			})
@@ -134,9 +136,10 @@ export class ShowTipPage implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.cropTipSub || this.tipidSub) {
+		if (this.cropTipSub || this.tipidSub || this.deletSub) {
 			this.cropTipSub.unsubscribe();
 			this.tipidSub.unsubscribe();
+			this.deletSub.unsubscribe();
 		}
 	}
 }
