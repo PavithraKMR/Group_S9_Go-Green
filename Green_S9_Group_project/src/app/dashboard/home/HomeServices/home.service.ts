@@ -77,7 +77,7 @@ export class HomeService {
             tips.push({
               tipsId:key,
               name:name,
-              type:data[key].type,
+              // type:data[key].type,
               information:data[key].information
             })
           }
@@ -123,7 +123,7 @@ export class HomeService {
 
   addTips(
     name:string,
-    type:string,
+    // type:string,
     information:string
   )
   {
@@ -132,7 +132,7 @@ export class HomeService {
     const newCropTip = {
       tipsId:Math.random().toString(),
       name:name,
-      type:type,
+      // type:type,
       information:information
     }
     return this.http.post<{name:string}>("https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips.json",{...newCropTip,tipsId:null}).pipe(
@@ -188,7 +188,7 @@ export class HomeService {
         return{
           cropTipId:cropTipId,
           name:data.name,
-          type:data.type,
+          // type:data.type,
           information:data.information
         }
       })
@@ -215,7 +215,7 @@ export class HomeService {
   updateTip(
     id:string,
     name:string,
-    type:string,
+    // type:string,
     information:string
   )
   {
@@ -242,7 +242,7 @@ export class HomeService {
         updatedtips[index] = {
           tipsId:id,
           name:name,
-          type:type,
+          // type:type,
           information:information
         }
 

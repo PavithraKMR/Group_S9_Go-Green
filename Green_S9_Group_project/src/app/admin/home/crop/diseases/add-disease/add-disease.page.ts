@@ -82,16 +82,18 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 					this.form.value.remedyAction,
 					this.form.value.image
 				)
-				.subscribe(() => {
-					this.router.navigate([
-						'/admin',
-						'tabs',
-						'home',
-						this.crop.name,
-						'diseases'
-					]);
-				});
+				.subscribe();
+
+        this.router.navigate([
+          '/admin',
+          'tabs',
+          'home',
+          this.crop.name,
+          'diseases'
+        ]);
 		}
+
+		this.form.reset();
 	}
 
 	ngOnDestroy(): void {

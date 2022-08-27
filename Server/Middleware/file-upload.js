@@ -15,7 +15,7 @@ const fileUpload = multer({
 
 		filename: (req, file, cb) => {
 			const ext = MIME_TYPE_MAP[file.mimetype];
-			cb(null, Date.now()+ '.'+ ext);
+			cb(null, Date.now() + '.' + ext);
 		},
 		fileFilter: (req, file, cb) => {
 			const isValid = !!MIME_TYPE_MAP[file.mimetype];
@@ -25,21 +25,4 @@ const fileUpload = multer({
 	})
 }); //it provide middleware
 
-// const storage = multer.diskStorage({
-// 	destination: (req, file, cb) => {
-// 		cb(null, 'Server/uploads');
-// 	},
-
-// 	filename: (req, file, cb) => {
-// 		const name = file.originalname.toLowerCase().split(' ').join('-');
-// 		const ext = MIME_TYPE_MAP[file.mimetype];
-// 		cb(null, name +'-'+Date.now()+'.'+ ext);
-// 	},
-// 	fileFilter: (req, file, cb) => {
-// 		const isValid = !!MIME_TYPE_MAP[file.mimetype];
-// 		const error = isValid ? null : new Error('Invalid Mime Type');
-// 		cb(error, isValid);
-// 	}
-// });
-// module.exports = storage;
 module.exports = fileUpload;

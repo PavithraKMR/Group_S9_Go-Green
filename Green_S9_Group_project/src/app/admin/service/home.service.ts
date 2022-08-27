@@ -61,17 +61,17 @@ export class HomeService {
 				take(1),
 				map(data => {
 					if (data.message) {
-						console.log(data.message);
+					
 						return data;
 					} else {
 						const tips = [];
 						for (var tip of data.cropTips) {
-							console.log(tip);
+				
 
 							tips.push({
 								tipsId: tip.id,
 								name: tip.name,
-								type: tip.type,
+								// type: tip.type,
 								information: tip.information
 							});
 						}
@@ -118,11 +118,11 @@ export class HomeService {
 			);
 	}
 
-	addTips(name: string, type: string, information: string) {
+	addTips(name: string, information: string) {
 		let genId: string;
 		const newCropTip = {
 			cropName: name,
-			type: type,
+		
 			information: information
 		};
 		return this.http
@@ -175,7 +175,7 @@ export class HomeService {
 					return {
 						tipsId: data.tip.id,
 						name: data.tip.name,
-						type: data.tip.type,
+						// type: data.tip.type,
 						information: data.tip.information
 					};
 				})
@@ -200,7 +200,7 @@ export class HomeService {
 			);
 	}
 
-	updateTip(id: string, name: string, type: string, information: string) {
+	updateTip(id: string, name: string, information: string) {
 		let updatedtips: CropTips[];
 		return this.AllcropTips.pipe(
 			take(1),
@@ -220,7 +220,7 @@ export class HomeService {
 				updatedtips[index] = {
 					tipsId: id,
 					name: name,
-					type: type,
+					// type: type,
 					information: information
 				};
 

@@ -51,6 +51,7 @@ const getDiseasesByCropName = async (req, res, next) => {
 	if (!cropDiseases || cropDiseases.length === 0) {
 		res.status(201).json({ message: 'There is no Diseases' });
 	} else {
+		console.log(cropDiseases);
 		res.status(200).json({
 			cropDiseases: cropDiseases.map((disease) =>
 				disease.toObject({ getters: true })

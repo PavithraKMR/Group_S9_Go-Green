@@ -20,12 +20,8 @@ const notificationRouter = require('./routes/Notification');
 const userRouter = require('./routes/users');
 
 app.use(bodyParser.json()); // to get body ,this should be used before routers
-app.use(
-	bodyParser.urlencoded({
-		extended: true
-	})
-);
-app.use('/uploads', express.static(path.join('backend/uploads')));
+
+
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
 	//middleware
@@ -77,3 +73,13 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
+	app.use(
+		bodyParser.urlencoded({
+			extended: false
+		})
+	);
+	app.use('/uploads', express.static(path.join('Server/uploads')));
+	app.use(
+		'/uploads/Diseases',
+		express.static(path.join('Server/uploads/Diseases'))
+	);
