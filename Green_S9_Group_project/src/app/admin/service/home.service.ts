@@ -275,18 +275,16 @@ export class HomeService {
 	//   )
 	// }
 
-	CancelTip(id: string) {
+	DeleteTip(id: string) {
 		return this.http
-			.delete(
-				`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`
-			)
+			.delete('http://localhost:5000/api/crop/cropTips/delete/' + id)
 			.pipe(
 				take(1),
-				switchMap(() => {
+				switchMap(res => {
 					return this.AllcropTips;
 				}),
 				tap(tips => {
-					this._croptips.next(tips.filter(p => p.cropId !== id));
+					this._croptips.next(tips.filter(p => p.tipsId !== id));
 				})
 			);
 	}
@@ -298,7 +296,9 @@ export class HomeService {
 			)
 			.pipe(
 				take(1),
-				switchMap(() => {
+				switchMap((res) => {
+          console.log(res);
+
 					return this.AllDiseases;
 				}),
 				tap(tips => {
