@@ -61,12 +61,12 @@ export class HomeService {
 				take(1),
 				map(data => {
 					if (data.message) {
-					
+
 						return data;
 					} else {
 						const tips = [];
 						for (var tip of data.cropTips) {
-				
+
 
 							tips.push({
 								tipsId: tip.id,
@@ -122,7 +122,7 @@ export class HomeService {
 		let genId: string;
 		const newCropTip = {
 			cropName: name,
-		
+
 			information: information
 		};
 		return this.http
@@ -174,7 +174,7 @@ export class HomeService {
 				map(data => {
 					return {
 						tipsId: data.tip.id,
-						name: data.tip.name,
+						name: data.tip.cropName,
 						// type: data.tip.type,
 						information: data.tip.information
 					};

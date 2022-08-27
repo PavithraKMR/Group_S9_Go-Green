@@ -23,7 +23,7 @@
   <ion-grid *ngIf="!isLoading && message">
     <p>{{message}}</p>
   </ion-grid>
-  
+
   <ion-grid *ngIf="!isLoading && !message">
     <ion-row>
       <ion-col class="img">
@@ -39,22 +39,23 @@
 
         <ion-list *ngFor="let saw of cropTips ">
           <ion-item-sliding>
-
             <ion-card
-              
               [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','show',saw.tipsId]"
-            >
+              >
               <ion-card-content>
                 <ion-item href="#">
                   <p>{{saw.information}}</p>
                 </ion-item>
               </ion-card-content>
-
             </ion-card>
 
             <ion-item-options side="end">
-              <ion-item-option color="primary" >
-                <ion-icon name="create-outline" slot="icon-only" [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]"></ion-icon>
+              <ion-item-option color="primary">
+                <ion-icon
+                  name="create-outline"
+                  slot="icon-only"
+                  [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]"
+                ></ion-icon>
               </ion-item-option>
             </ion-item-options>
 

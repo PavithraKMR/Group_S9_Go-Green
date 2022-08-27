@@ -11,11 +11,11 @@ import { HomeService } from 'src/app/admin/service/home.service';
 import { Crop } from 'src/app/models/crop.model';
 
 @Component({
-	selector: 'app-show-tip',
-	templateUrl: './show-tip.page.html',
-	styleUrls: ['./show-tip.page.scss']
+	selector: 'app-show-tips',
+	templateUrl: './show-tips.page.html',
+	styleUrls: ['./show-tips.page.scss']
 })
-export class ShowTipPage implements OnInit, OnDestroy {
+export class ShowTipsPage implements OnInit, OnDestroy {
 	constructor(
 		private animationCtrl: AnimationController,
 		private loadCtrl: LoadingController,
@@ -30,6 +30,7 @@ export class ShowTipPage implements OnInit, OnDestroy {
 	cropSub: Subscription;
 	cropTipSub: Subscription;
 	Tips_for_choosing = 'Tips_for_choosing';
+
 	ngOnInit() {
 		this.isLoading = true;
 
@@ -42,8 +43,8 @@ export class ShowTipPage implements OnInit, OnDestroy {
 				.getTip(paraMap.get('tipId'))
 				.subscribe(tip => {
 					this.cropTip = tip;
-					console.log(this.cropTip);
-					this.isLoading = false;
+			this.isLoading = false;
+
 				});
 		});
 	}
@@ -52,13 +53,11 @@ export class ShowTipPage implements OnInit, OnDestroy {
 		setTimeout(() => {
 			this.isLoading = true;
 
-			this.isLoading = true;
 			this.tipSub = this.homeService
 				.getTip(this.cropTip.tipsId)
 				.subscribe(tips => {
 					this.cropTip = tips;
 					this.isLoading = false;
-					console.log(this.cropTip);
 				});
 			event.target.complete();
 		}, 2000);
@@ -70,8 +69,6 @@ export class ShowTipPage implements OnInit, OnDestroy {
 			.getTip(this.cropTip.tipsId)
 			.subscribe(tips => {
 				this.cropTip = tips;
-				console.log(this.cropTip);
-
 				this.isLoading = false;
 			});
 	}
