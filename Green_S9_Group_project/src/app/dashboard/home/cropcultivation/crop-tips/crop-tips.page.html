@@ -20,8 +20,7 @@
     <ion-row>
       <ion-col class="img">
         <ion-list *ngFor="let saw of cropTips ">
-          <ion-card >
-
+          <ion-card [routerLink] = "['/dashboard','tabs','home',crop.name,'crop-tips',saw.tipsId]">
             <ion-card-content> {{saw.information}} </ion-card-content>
           </ion-card>
         </ion-list>
@@ -39,7 +38,6 @@
           </ion-card>
         </ion-list>
       </ion-col> -->
-
   </ion-grid>
 
   <ion-grid *ngIf="isLoading">

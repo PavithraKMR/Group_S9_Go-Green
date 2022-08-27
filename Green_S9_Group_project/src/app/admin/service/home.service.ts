@@ -61,13 +61,10 @@ export class HomeService {
 				take(1),
 				map(data => {
 					if (data.message) {
-
 						return data;
 					} else {
 						const tips = [];
 						for (var tip of data.cropTips) {
-
-
 							tips.push({
 								tipsId: tip.id,
 								name: tip.name,
@@ -123,7 +120,6 @@ export class HomeService {
 		const newCropTip = {
 			cropName: name,
 
-
 			information: information
 		};
 		return this.http
@@ -156,7 +152,6 @@ export class HomeService {
 
 		return this.http
 			.post<any>('http://localhost:5000/api/crop/createDisease', formData)
-
 			.pipe(
 				take(1),
 				switchMap(data => {
@@ -204,7 +199,6 @@ export class HomeService {
 	}
 
 	updateTip(id: string, name: string, information: string) {
-
 		let updatedtips: CropTips[];
 		return this.AllcropTips.pipe(
 			take(1),

@@ -17,6 +17,7 @@ export class DiseasesPage implements OnInit, OnDestroy {
   constructor(private homeService: HomeService,private route: ActivatedRoute,private router: Router) { }
 
   tipSub:Subscription
+  idSub:Subscription
   diseases:Disease[];
   crop:Crop;
   isLoading = false
@@ -25,7 +26,7 @@ export class DiseasesPage implements OnInit, OnDestroy {
   ngOnInit() {
     this.isLoading = true
 
-    this.route.paramMap.subscribe(paraMap=>{
+    this.idSub = this.route.paramMap.subscribe(paraMap=>{
       if(!paraMap.has('cropId'))
       {
         return
@@ -51,21 +52,22 @@ export class DiseasesPage implements OnInit, OnDestroy {
 
   about(id:string)
   {
-    this.router.navigate(['/admin','tabs','home',this.crop.name,'diseases','about-disease',id]);
+    this.router.navigate(['/dashboard','tabs','home',this.crop.name,'diseases','about-disease',id]);
   }
 
   remedy(id:string)
   {
-    this.router.navigate(['/admin','tabs','home',this.crop.name,'diseases','remedy-disease',id]);
+    this.router.navigate(['/dashboard','tabs','home',this.crop.name,'diseases','remedy-disease',id]);
 
   }
 
 
   ngOnDestroy()
   {
-    if(this.tipSub)
+    if(this.tipSub ||this.idSub)
     {
       this.tipSub.unsubscribe()
+      this.idSub.unsubscribe()
     }
   }
 

@@ -24,17 +24,53 @@ export class ShowTipsPage implements OnInit, OnDestroy {
 		private route: ActivatedRoute
 	) {}
 
-	tipSub: Subscription;
+	tipidSub: Subscription;
 	cropTip: CropTips;
 	isLoading = false;
-	cropSub: Subscription;
 	cropTipSub: Subscription;
-	Tips_for_choosing = 'Tips_for_choosing';
 
 	ngOnInit() {
 		this.isLoading = true;
 
-		this.route.paramMap.subscribe(paraMap => {
+		this.tipidSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('tipId')) {
+				return;
+			}
+
+
+			this.cropTipSub = this.homeService
+				.getTip(paraMap.get('tipId'))
+				.subscribe(tip => {
+					this.cropTip = tip;
+					this.isLoading = false;
+				});
+		});
+	}
+
+	doRefresh(event) {
+		setTimeout(() => {
+			this.isLoading = true;
+      this.tipidSub = this.route.paramMap.subscribe(paraMap => {
+				if (!paraMap.has('tipId')) {
+					return;
+				}
+
+				this.cropTipSub = this.homeService
+					.getTip(paraMap.get('tipId'))
+					.subscribe(tip => {
+						this.cropTip = tip;
+
+						this.isLoading = false;
+					});
+			});
+
+			event.target.complete();
+		}, 2000);
+	}
+
+	ionViewWillEnter() {
+		this.isLoading = true;
+		 this.tipidSub = this.route.paramMap.subscribe(paraMap => {
 			if (!paraMap.has('tipId')) {
 				return;
 			}
@@ -43,40 +79,16 @@ export class ShowTipsPage implements OnInit, OnDestroy {
 				.getTip(paraMap.get('tipId'))
 				.subscribe(tip => {
 					this.cropTip = tip;
-			this.isLoading = false;
 
+					this.isLoading = false;
 				});
 		});
 	}
 
-	doRefresh(event) {
-		setTimeout(() => {
-			this.isLoading = true;
-
-			this.tipSub = this.homeService
-				.getTip(this.cropTip.tipsId)
-				.subscribe(tips => {
-					this.cropTip = tips;
-					this.isLoading = false;
-				});
-			event.target.complete();
-		}, 2000);
-	}
-
-	ionViewWillEnter() {
-		this.isLoading = true;
-		this.tipSub = this.homeService
-			.getTip(this.cropTip.tipsId)
-			.subscribe(tips => {
-				this.cropTip = tips;
-				this.isLoading = false;
-			});
-	}
-
 	ngOnDestroy() {
-		if (this.cropTipSub || this.tipSub) {
+		if (this.cropTipSub  || this.tipidSub)  {
 			this.cropTipSub.unsubscribe();
-			this.tipSub.unsubscribe();
+			this.tipidSub.unsubscribe();
 		}
 	}
 }

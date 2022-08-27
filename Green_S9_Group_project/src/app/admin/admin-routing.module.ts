@@ -41,13 +41,13 @@ const routes: Routes = [
 												m => m.ShowTipPageModule
 											)
 									},
-                  {
-										path: 'edit/:tipId',
-										loadChildren: () =>
-											import('./home/crop/crop-tips/edit-tip/edit-tip.module').then(
-												m => m.EditTipPageModule
-											)
-									}
+                  // {
+									// 	path: 'edit/:tipId',
+									// 	loadChildren: () =>
+									// 		import('./home/crop/crop-tips/edit-tip/edit-tip.module').then(
+									// 			m => m.EditTipPageModule
+									// 		)
+									// }
 								]
 							},
 							{

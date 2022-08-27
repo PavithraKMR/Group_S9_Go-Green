@@ -12,8 +12,7 @@ const createTip = async (req, res, next) => {
 
 	const newTip = new CropTip({
 		cropName: req.body.cropName,
-		information: req.body.information,
-
+		information: req.body.information
 	});
 	console.log(newTip);
 	try {
@@ -61,11 +60,12 @@ const getTip = async (req, res, next) => {
 	if (!errors.isEmpty()) {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
-
 	const { tipId } = req.params;
+
 	let tip;
 	try {
 		tip = await CropTip.findById(tipId);
+		console.log(tip); 
 	} catch (err) {
 		const error = new HttpError('finding user failed bt id,try again', 500);
 		return next(error);

@@ -1,28 +1,35 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button
-        *ngIf="!isLoading"
-        [defaultHref]="['/dashboard','tabs','home',cropTip.name,'crop-tips']"
-      ></ion-back-button>
+      <ion-back-button [defaultHref]="['/dashboard','tabs','home',crop.name,'diseases']"></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="isLoading">Tip Details Loading....</ion-title>
-    <ion-title *ngIf="!isLoading">{{cropTip.name}}</ion-title>
+    <ion-title *ngIf="!disLoading">Remedy Action</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-grid *ngIf="!isLoading ">
-    <ion-row>
-      <ion-col>
-        <ion-card>
-          <ion-card-content>{{cropTip.information}} </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+
+  <ion-grid  *ngIf="!cisLoading && !disLoading">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{disease.diseaseName}}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-img [src]="disease.image" *ngIf="disease.image"></ion-img>
+        <p>{{disease.remedyAction}}</p>
+      </ion-card-content>
+    </ion-card>
+`
+
   </ion-grid>
 
-  <ion-grid *ngIf="isLoading">
+
+
+
+  <ion-grid *ngIf="cisLoading && disLoading">
     <ion-list-header>
       <ion-label>
         <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
@@ -80,6 +87,7 @@
       </ion-label>
     </ion-item>
 
+
     <ion-item>
       <ion-avatar slot="start">
         <ion-skeleton-text animated></ion-skeleton-text>
@@ -96,6 +104,7 @@
         </p>
       </ion-label>
     </ion-item>
+
 
     <ion-item>
       <ion-avatar slot="start">
@@ -181,5 +190,7 @@
         </p>
       </ion-label>
     </ion-item>
+
   </ion-grid>
+
 </ion-content>
