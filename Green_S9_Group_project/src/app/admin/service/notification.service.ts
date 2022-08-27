@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { take, map, tap, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -113,7 +112,7 @@ export class NotificationService {
 		return this.http.get<any>('http://localhost:5000/api/Notification').pipe(
 			take(1),
 			map(res => {
-      
+
 
 				const notifications = [];
 				for (var notification of res.notifications) {
@@ -133,14 +132,5 @@ export class NotificationService {
 			})
 		);
 	}
-=======
-import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
-export class NotificationService {
-
-  constructor() { }
->>>>>>> main
 }

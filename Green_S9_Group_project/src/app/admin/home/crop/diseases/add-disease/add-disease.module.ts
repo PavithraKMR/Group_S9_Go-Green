@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-<<<<<<< HEAD
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-=======
-import { FormsModule } from '@angular/forms';
->>>>>>> main
+
 
 import { IonicModule } from '@ionic/angular';
 
@@ -17,12 +14,9 @@ import { AddDiseasePage } from './add-disease.page';
     CommonModule,
     FormsModule,
     IonicModule,
-<<<<<<< HEAD
     AddDiseasePageRoutingModule,
     ReactiveFormsModule
-=======
-    AddDiseasePageRoutingModule
->>>>>>> main
+
   ],
   declarations: [AddDiseasePage]
 })

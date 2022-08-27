@@ -6,11 +6,8 @@ const cropDiseaseSchema = new Schema({
 	about: { type: String, required: true },
 	cropName: { type: String, required: true },
 	diseaseName: { type: String, required: true, unique: true },
-<<<<<<< HEAD
 	image: { type: String,required:true},
-=======
-	image: { type: String},
->>>>>>> main
+
 	remedyAction: { type: String, required: true }
 });
 

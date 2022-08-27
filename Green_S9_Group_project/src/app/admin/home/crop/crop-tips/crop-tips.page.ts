@@ -99,17 +99,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 			});
 	}
 
-	// type = 'sowing';
-	// segmentChanged(event:CustomEvent<SegmentChangeEventDetail>)
-	// {
-	//   if(event.detail.value === 'sowing')
-	//   {
-	//     this.type = 'sowing'
-	//   }
-	//   else{
-	//     this.type = 'tips_for_choosing'
-	//   }
-	// }
+
 
 	showPage() {}
 

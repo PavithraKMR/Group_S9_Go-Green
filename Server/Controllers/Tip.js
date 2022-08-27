@@ -13,11 +13,7 @@ const createTip = async (req, res, next) => {
 	const newTip = new CropTip({
 		cropName: req.body.cropName,
 		information: req.body.information,
-<<<<<<< HEAD
-		// type: req.body.type
-=======
-		type: req.body.type
->>>>>>> main
+
 	});
 	console.log(newTip);
 	try {

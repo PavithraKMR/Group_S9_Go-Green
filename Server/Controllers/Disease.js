@@ -10,7 +10,6 @@ const createDisease = async (req, res, next) => {
 	}
 
 	console.log(req.body);
-<<<<<<< HEAD
 	const url = req.protocol + '://' + req.get('host');
 
 	const newDisease = new Disease({
@@ -18,13 +17,7 @@ const createDisease = async (req, res, next) => {
 		cropName: req.body.cropName,
 		diseaseName: req.body.diseaseName,
 		image: url + '/uploads/Diseases/' + req.file.filename,
-=======
-	const newDisease = new Disease({
-		about: req.body.about,
-		cropName: req.body.cropName,
-		diseaseName: req.body.diseaseName,
-		image: req.body.image,
->>>>>>> main
+
 		remedyAction: req.body.remedyAction
 	});
 	console.log(newDisease);
@@ -57,32 +50,15 @@ const getDiseasesByCropName = async (req, res, next) => {
 	}
 
 	if (!cropDiseases || cropDiseases.length === 0) {
-<<<<<<< HEAD
 		res.status(201).json({ message: 'There is no Diseases' });
 	} else {
 		console.log(cropDiseases);
 		res.status(200).json({
-=======
-		// const error = new HttpError('There is no crops', 422);
-		// res.status().json({message:'There is no Diseases'});
-		// return next(error);
-
-		res.status(201).json({ message: 'There is no Diseases' });
-
-	}
-
-	res
-		.status(200)
-		.json({
->>>>>>> main
 			cropDiseases: cropDiseases.map((disease) =>
 				disease.toObject({ getters: true })
 			)
 		});
-<<<<<<< HEAD
 	}
-=======
->>>>>>> main
 };
 
 const getDisease = async (req, res, next) => {
@@ -102,18 +78,10 @@ const getDisease = async (req, res, next) => {
 	}
 
 	if (!disease) {
-<<<<<<< HEAD
 		res.status(201).json({ message: 'There is no Disease ' });
 	} else {
 		return res.status(201).json(disease.toObject({ getters: true }));
 	}
-=======
-		const error = new HttpError('finding user failed,try again', 500);
-		return next(error);
-	}
-
-	return res.status(201).json(disease.toObject({ getters: true }));
->>>>>>> main
 };
 
 const updateDiseaseByCropName = async (req, res, next) => {
@@ -185,6 +153,6 @@ const deleteDiseaseByCropName = async (req, res, next) => {
 
 exports.getDiseasesByCropName = getDiseasesByCropName;
 exports.getDisease = getDisease;
-exports.createDisease = createDisease;
-exports.updateDiseaseByCropName = updateDiseaseByCropName;
 exports.deleteDiseaseByCropName = deleteDiseaseByCropName;
+exports.updateDiseaseByCropName = updateDiseaseByCropName;
+exports.createDisease = createDisease;

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { AuthService } from 'src/app/login/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -42,20 +41,5 @@ export class ProfilePage implements OnInit, OnDestroy {
 			this.userSub.unsubscribe;
 		}
 	}
-=======
-import { Component, OnInit } from '@angular/core';
 
-@Component({
-  selector: 'app-profile',
-  templateUrl: './profile.page.html',
-  styleUrls: ['./profile.page.scss'],
-})
-export class ProfilePage implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
->>>>>>> main
 }

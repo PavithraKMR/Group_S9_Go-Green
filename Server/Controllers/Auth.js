@@ -127,11 +127,8 @@ const signIn = async (req, res, next) => {
 			username: identifyUser.username,
 			token: token,
 			role: identifyUser.role,
-<<<<<<< HEAD
 			expiresIn: '1h'
-=======
-			expiresIn:'1h'
->>>>>>> main
+
 		}
 	});
 };

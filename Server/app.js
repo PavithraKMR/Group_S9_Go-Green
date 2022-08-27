@@ -1,13 +1,8 @@
-<<<<<<< HEAD
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-=======
-const mongoose = require('mongoose'); 
-const express = require('express');
-const bodyParser = require('body-parser');
->>>>>>> main
+
 const HttpError = require('./models/http-error');
 // npm install mongoose-unique-validator //  like email
 // npm install --save bcryptjs
@@ -22,21 +17,11 @@ const app = express();
 
 const adminRouter = require('./routes/Admin');
 const authRouter = require('./routes/Auth');
-<<<<<<< HEAD
 const notificationRouter = require('./routes/Notification');
 const userRouter = require('./routes/users');
 
 app.use(bodyParser.json()); // to get body ,this should be used before routers
 
-
-=======
-
-
-app.use(bodyParser.json()); // to get body ,this should be used before routers
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
->>>>>>> main
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
 	//middleware
@@ -52,21 +37,12 @@ app.use((req, res, next) => {
 	next();
 });
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> main
 // here route should be mentioned
 
 app.use('/api/crop', adminRouter);
 app.use('/api/GreenLive', authRouter);
-<<<<<<< HEAD
 app.use('/api/Notification', notificationRouter);
 app.use('/api/user', userRouter);
-=======
->>>>>>> main
 
 // for unsupported router error handler
 app.use((req, res, next) => {
@@ -87,12 +63,8 @@ app.use((error, req, res, next) => {
 //connect mongodb
 mongoose
 	.connect(
-<<<<<<< HEAD
 		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
 		// { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
-=======
-		'mongodb+srv://projectgreen:projectgreen@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
->>>>>>> main
 	)
 	.then(() => {
 		console.log('connected to Database');
@@ -101,16 +73,13 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
-<<<<<<< HEAD
-	app.use(
-		bodyParser.urlencoded({
-			extended: false
-		})
-	);
-	app.use('/uploads', express.static(path.join('Server/uploads')));
-	app.use(
-		'/uploads/Diseases',
-		express.static(path.join('Server/uploads/Diseases'))
-	);
-=======
->>>>>>> main
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+);
+app.use('/uploads', express.static(path.join('Server/uploads')));
+app.use(
+	'/uploads/Diseases',
+	express.static(path.join('Server/uploads/Diseases'))
+);
