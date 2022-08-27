@@ -8,7 +8,11 @@
 </ion-header>
 
 <ion-content>
+<<<<<<< HEAD
   <ion-grid >
+=======
+  <ion-grid>
+>>>>>>> main
     <ion-row class="weather-row">
      <ion-col>
       <ion-card class="cardStyle">
@@ -16,6 +20,7 @@
           <p style="font-weight: 500; color:white; margin-top: 15px;" >Today's Report </p>
           <ion-label id="date"  slot="end">{{ todayDate | date: "EEE dd MMM"}}</ion-label>
         </ion-item>
+<<<<<<< HEAD
 
         <ion-item lines="none">
           <span id="temp">
@@ -25,6 +30,17 @@
           <img slot="end" width="140px" height="140px" [src]=weatherIcon>
         </ion-item>
 
+=======
+        
+        <ion-item lines="none">
+          <span id="temp">
+            {{(weatherTemp.temp - 273.15).toFixed(0)}}
+          </span> 
+          <span style="font-size: 1.3em; font-weight:bold; color:#f59e0b; margin-bottom: 25px;">o</span>
+          <img slot="end" width="140px" height="140px" [src]=weatherIcon>
+        </ion-item>
+    
+>>>>>>> main
         <ion-item lines="none">
           <ion-icon id="locationIcon"  name="location"></ion-icon>
           <span style="font-size: 2em;">{{cityName}}</span>
@@ -32,6 +48,7 @@
 
         <ion-item>
           <span>Maximum Temp</span>
+<<<<<<< HEAD
           <span slot="end">{{(max_temp - 273.15).toFixed(0)}}℃</span>
         </ion-item>
 
@@ -55,6 +72,31 @@
      </ion-col>
 
 
+=======
+          <span slot="end">{{(weatherTemp.temp_max - 273.15).toFixed(0)}}℃</span>
+        </ion-item>
+    
+        <ion-item>
+          <span>Manimum Temp</span>
+          <span slot="end">{{(weatherTemp.temp_min - 273.15).toFixed(0)}}℃</span>
+          
+        </ion-item>
+    
+        <ion-item>
+          <span>Humidity</span>
+          <span slot="end">{{weatherTemp.humidity}}%</span>
+          
+        </ion-item>
+        <ion-item>
+          <span>Wind Speed</span>
+          <span slot="end">{{windSpeed.speed}}m/s</span>
+          
+        </ion-item>
+      </ion-card>
+     </ion-col>
+      
+  
+>>>>>>> main
     </ion-row>
     <ion-row>
       <h2>Select Your Crops</h2>
@@ -80,6 +122,10 @@
         </ion-item>
       </ion-col>
     </ion-row>
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> main
   </ion-grid>
 </ion-content>

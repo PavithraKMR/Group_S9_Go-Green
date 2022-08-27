@@ -6,6 +6,10 @@ import {
 	ModalController
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+<<<<<<< HEAD
+=======
+import { CropTips } from 'src/app/admin/models/croptips.models';
+>>>>>>> main
 import { Disease } from 'src/app/models/disease.model';
 import { HomeService } from 'src/app/admin/service/home.service';
 import { Crop } from 'src/app/models/crop.model';
@@ -53,6 +57,10 @@ export class DiseasesPage implements OnInit {
 		this.tipSub = this.homeService
 			.fetchAllDisease(this.crop.name)
 			.subscribe(diseases => {
+<<<<<<< HEAD
+=======
+			
+>>>>>>> main
 				if (diseases.message) {
 					this.message = diseases.message;
 					this.isLoading = false;

@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { Component, OnDestroy, OnInit } from '@angular/core';
+=======
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+>>>>>>> main
 import { LoadingController } from '@ionic/angular';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -19,8 +24,12 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 	crop: Crop;
 	isLoading = false;
 	cropSub: Subscription;
+<<<<<<< HEAD
 	form: FormGroup;
 	imagePreview: string;
+=======
+
+>>>>>>> main
 	constructor(
 		private loadCtrl: LoadingController,
 		private homeService: HomeService,
@@ -41,6 +50,7 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 					this.crop = crop;
 				});
 		});
+<<<<<<< HEAD
 
 		this.form = new FormGroup({
 			diseaseName: new FormControl(null, {
@@ -94,6 +104,91 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 		}
 
 		this.form.reset();
+=======
+	}
+
+	selectiveFile: File = null;
+
+	uploadedFiles: Array<File>;
+	uploadfile(event) {
+		// console.log(this.selectiveFile =<File> event.target.files[0]);
+
+		this.selectiveFile = event.target.files[0];
+		console.log(this.selectiveFile);
+
+		// lastModified: 1642140488289
+		// lastModifiedDate: Fri Jan 14 2022 11:38:08 GMT+0530 (India Standard Time) {}
+		// name: "vlcsnap-2022-01-14-11h38m08s289.png"
+		// size: 553764
+		// type: "image/png"
+		// webkitRelativePath: ""
+	}
+
+	async SubmittedForm(form: NgForm) {
+		if (!form.valid) {
+			return;
+		} else {
+			const formdata = new FormData();
+
+			if (form.value.image !== '') {
+				// formdata.append('about', form.value.adisease);
+				// formdata.append('cropName', this.crop.name);
+				// formdata.append('remedyAction', form.value.raction);
+				// formdata.append('diseaseName', form.value.disease);
+				formdata.append('image', form.value.image);
+
+				this.cropSub = this.homeService
+					.addDisease(
+						form.value.disease,
+						form.value.adisease,
+						this.crop.name,
+						form.value.raction,
+						this.selectiveFile
+					)
+					.subscribe(() => {
+						// e.dismiss()
+						this.router.navigate([
+							'/admin',
+							'tabs',
+							'home',
+							this.crop.name,
+							'diseases'
+						]);
+					});
+			}
+      // else {
+			// 	this.cropSub = this.homeService
+			// 		.addDisease(
+			// 			form.value.disease,
+			// 			form.value.adisease,
+			// 			this.crop.name,
+			// 			form.value.raction,
+			// 		  ''
+			// 		)
+			// 		.subscribe(() => {
+			// 			// e.dismiss()
+			// 			this.router.navigate([
+			// 				'/admin',
+			// 				'tabs',
+			// 				'home',
+			// 				this.crop.name,
+			// 				'diseases'
+			// 			]);
+			// 		});
+			// }
+
+			// './assets/images/{}/event.target.files[0]
+
+			// this.loadCtrl.create({
+			//   message:"Creating...",
+			//   duration:1000,
+			//   spinner:'bubbles',
+			// }).then(e=>{
+			//   e.present()
+
+			// })
+		}
+>>>>>>> main
 	}
 
 	ngOnDestroy(): void {

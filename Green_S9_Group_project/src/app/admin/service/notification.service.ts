@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { take, map, tap, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
@@ -132,4 +133,14 @@ export class NotificationService {
 			})
 		);
 	}
+=======
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class NotificationService {
+
+  constructor() { }
+>>>>>>> main
 }

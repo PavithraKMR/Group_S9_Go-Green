@@ -23,7 +23,11 @@
   <ion-grid *ngIf="!isLoading && message">
     <p>{{message}}</p>
   </ion-grid>
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> main
   <ion-grid *ngIf="!isLoading && !message">
     <ion-row>
       <ion-col class="img">
@@ -34,19 +38,32 @@
     <ion-row>
       <ion-col class="img">
         <ion-toolbar color="primary" class="sawbar">
+<<<<<<< HEAD
           <!-- <ion-title>Sowing Tips</ion-title> -->
+=======
+          <ion-title>Sowing Tips</ion-title>
+>>>>>>> main
         </ion-toolbar>
 
         <ion-list *ngFor="let saw of cropTips ">
           <ion-item-sliding>
+<<<<<<< HEAD
             <ion-card
               [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','show',saw.tipsId]"
               >
+=======
+
+            <ion-card
+              *ngIf="saw.type === 'Sowing_tips'"
+              [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','show',saw.tipsId]"
+            >
+>>>>>>> main
               <ion-card-content>
                 <ion-item href="#">
                   <p>{{saw.information}}</p>
                 </ion-item>
               </ion-card-content>
+<<<<<<< HEAD
             </ion-card>
 
             <ion-item-options side="end">
@@ -56,6 +73,14 @@
                   slot="icon-only"
                   [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]"
                 ></ion-icon>
+=======
+
+            </ion-card>
+
+            <ion-item-options side="end">
+              <ion-item-option color="primary" >
+                <ion-icon name="create-outline" slot="icon-only" [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]"></ion-icon>
+>>>>>>> main
               </ion-item-option>
             </ion-item-options>
 
@@ -69,7 +94,11 @@
       </ion-col>
     </ion-row>
 
+<<<<<<< HEAD
     <!-- <ion-row *ngIf="crop.name !== 'Paddy' && crop.name !== 'Pottato'">
+=======
+    <ion-row *ngIf="crop.name !== 'Paddy' && crop.name !== 'Pottato'">
+>>>>>>> main
       <ion-col class="img">
         <ion-toolbar color="danger" class="sawbar">
           <ion-title>Tips For Choosing What to Grow</ion-title>
@@ -80,7 +109,11 @@
           </ion-card>
         </ion-list>
       </ion-col>
+<<<<<<< HEAD
     </ion-row> -->
+=======
+    </ion-row>
+>>>>>>> main
   </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">

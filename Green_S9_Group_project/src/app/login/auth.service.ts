@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Preferences } from '@capacitor/preferences';
 import { HttpClient } from '@angular/common/http';
 import { Injectable, OnDestroy } from '@angular/core';
@@ -7,6 +8,16 @@ import { map, take, tap, switchMap } from 'rxjs/operators';
 import { Users } from '../models/users.model';
 import { User } from './user.model';
 
+=======
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject, from } from 'rxjs';
+import { map, take, tap, switchMap } from 'rxjs/operators';
+import { Users } from '../models/users.model';
+import { User } from './user.model';
+import { Plugins } from '@capacitor/core';
+>>>>>>> main
 // ng build
 // ionic capacitor add android
 // ionic capacitor copy android
@@ -26,6 +37,53 @@ export class AuthService {
 	constructor(private router: Router, private http: HttpClient) {}
 
 	private _user = new BehaviorSubject<User>(null);
+<<<<<<< HEAD
+=======
+	// // private _userId = null;
+	// private _users = new BehaviorSubject<Users[]>(null);
+
+	// get getAllUsers() {
+	// 	return this._users.asObservable();
+	// }
+
+	// fetchAllUsers() {
+	// 	return this.http
+	// 		.get<{ [key: string]: Users }>(
+	// 			'https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json'
+	// 		)
+	// 		.pipe(
+	// 			take(1),
+	// 			map(data => {
+	// 				const users = [];
+	// 				for (const key in data) {
+	// 					if (data.hasOwnProperty(key)) {
+	// 						users.push({
+	// 							userId: key,
+	// 							userName: data[key].userName,
+	// 							yourName: data[key].yourName,
+	// 							password: this.decryptData(data[key].password),
+	// 							mobile: data[key].mobile,
+	// 							nic: this.decryptData(data[key].nic),
+	// 							role: data[key].role,
+	// 							address: data[key].address,
+	// 							registerd: data[key].registerd,
+	// 							token: this.decryptData(data[key].token),
+	// 							zone: data[key].zone
+	// 						});
+	// 					}
+	// 				}
+
+	// 				return users;
+	// 			}),
+	// 			tap(data => {
+	// 				this._users.next(data);
+	// 			})
+	// 		)
+	// 		.subscribe(users => {
+	// 			console.log(users);
+	// 		});
+	// }
+>>>>>>> main
 
 	get isAuthenticated() {
 		return this._user.asObservable().pipe(
@@ -39,6 +97,14 @@ export class AuthService {
 		);
 	}
 
+<<<<<<< HEAD
+=======
+	// get getUserId()
+	// {
+	//   return this._userId;
+	// }
+
+>>>>>>> main
 	get getUserId() {
 		return this._user.asObservable().pipe(
 			map(user => {
@@ -59,9 +125,16 @@ export class AuthService {
 	}
 
 	logout() {
+<<<<<<< HEAD
 		this._user.next(null);
 
 		Preferences.remove({ key: 'userData' });
+=======
+		// this._isAuthenticated = false
+		this._user.next(null);
+		localStorage.removeItem('token');
+		this.router.navigateByUrl('/login');
+>>>>>>> main
 	}
 
 	signup(
@@ -107,9 +180,16 @@ export class AuthService {
 			tokenExpirationDate: tokenExpirationDate
 		});
 
+<<<<<<< HEAD
 		// localStorage.setItem('data', data);
 		// Preferences.Storage.set({ key: 'authData', value: data });
 		Preferences.set({ key: 'userData', value: data });
+=======
+		console.log(data);
+
+		localStorage.setItem('data', JSON.stringify(data));
+		// Plugins.Storage.set({ key: 'authData', value: data });
+>>>>>>> main
 	}
 
 	private setUserData(userData: AuthResponseData) {
@@ -134,6 +214,7 @@ export class AuthService {
 		);
 	}
 
+<<<<<<< HEAD
 	authSub: Subscription;
 	getUser(userId: string) {
 		let user = [];
@@ -202,4 +283,62 @@ export class AuthService {
 			this.authSub.unsubscribe();
 		}
 	}
+=======
+	getUser(token: string) {
+		let user = [];
+
+		return this.http
+			.get(
+				`https://greenproject-6f3b9-default-rtdb.firebaseio.com/users.json?orderBy="token"&equalTo="${token}"`
+			)
+			.pipe(
+				take(1),
+				map(resData => {
+					console.log(resData);
+
+					return resData;
+				})
+			);
+	}
+
+	// autoLogin() {
+	// 	return from(Plugins.Storage.get({ key: 'authData' })).pipe(
+	// 		map(storeData => {
+	// 			if (!storeData || !storeData.value) {
+	// 				return null;
+	// 			}
+
+	// 			const parsedData = JSON.parse(storeData.value) as {
+	// 				userId: string;
+	// 				token: string;
+	// 				role: string;
+	// 				username: string;
+	// 				tokenExpirationDate: string;
+	// 			};
+
+	// 			const expirationTime = new Date(parsedData.tokenExpirationDate);
+
+	// 			if (expirationTime <= new Date()) {
+	// 				return null;
+	// 			}
+
+	// 			const user = new User(
+	// 				parsedData.role,
+	// 				parsedData.userId,
+	// 				parsedData.username,
+	// 				parsedData.token,
+	// 				expirationTime
+	// 			);
+
+	// 			return user;
+	// 		}),
+	// 		tap(user => {
+	// 			this._user.next(user);
+	// 		}),
+	// 		map(user => {
+	// 			return !!user;
+	// 		})
+	// 	);
+	// }
+>>>>>>> main
 }

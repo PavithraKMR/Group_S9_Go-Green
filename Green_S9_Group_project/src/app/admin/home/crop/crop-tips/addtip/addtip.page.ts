@@ -60,11 +60,18 @@ export class AddtipPage implements OnInit {
       }).then(el=>{
         el.present()
 
+<<<<<<< HEAD
           this.cropSub = this.homeService.addTips(this.crop.name,form.value.information).subscribe(()=>{
             el.dismiss()
           })
           this.router.navigate(['/admin','tabs','home',this.crop.name,'crop-tips'])
 
+=======
+          this.cropSub = this.homeService.addTips(this.crop.name,form.value.type,form.value.information).subscribe(()=>{
+            el.dismiss()
+            this.router.navigate(['/admin','tabs','home',this.crop.name,'crop-tips'])
+          })
+>>>>>>> main
       })
 
 
