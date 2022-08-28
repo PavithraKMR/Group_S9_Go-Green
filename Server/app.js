@@ -63,12 +63,7 @@ app.use((error, req, res, next) => {
 //connect mongodb
 mongoose
 	.connect(
-<<<<<<< HEAD
 		"mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority"
-=======
-		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
-		// { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
->>>>>>> origin/master
 	)
 
 	.then(() => {

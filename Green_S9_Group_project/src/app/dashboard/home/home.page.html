@@ -7,13 +7,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
   <ion-grid >
-
+    <!--
     <ion-row class="weather-row">
+    -->
+    <!--
      <ion-col>
+    -->
       <ion-card class="cardStyle">
-        <ion-item lines="none">
+        <ion-item>
           <p style="font-weight: 500; color:white; margin-top: 15px;" >Today's Report </p>
           <ion-label id="date"  slot="end">{{ todayDate | date: "EEE dd MMM"}}</ion-label>
         </ion-item>
@@ -51,15 +54,17 @@
         <ion-item>
           <span>Wind Speed</span>
           <span slot="end">{{windSpeed}}m/s</span>
-
         </ion-item>
       </ion-card>
+    <!--
      </ion-col>
+    -->
 
-
+    <!--
     </ion-row>
+    -->
     <ion-row>
-      <h2>Select Your Crops</h2>
+      <h2 >Select Your Crops</h2>
     </ion-row>
     <ion-row class="crop-card-row">
       <ion-col size-sm="1" *ngFor="let crop of crops">
@@ -83,19 +88,5 @@
       </ion-col>
     </ion-row>
 
-<<<<<<< HEAD
-    <br><br>
-
-    <ion-row>
-      <ion-col>
-        <ion-card>
-          <br><br>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  
-  
-=======
->>>>>>> origin/master
   </ion-grid>
 </ion-content>

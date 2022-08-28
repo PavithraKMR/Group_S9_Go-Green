@@ -11,6 +11,10 @@
   <ion-grid>
     <ion-row class="img">
       <ion-col>
+        <h3>Onion</h3>
+      </ion-col>
+
+      <ion-col>
         <ion-img [src]="crop.img"></ion-img>
       </ion-col>
     </ion-row>
@@ -21,9 +25,10 @@
           [routerLink]="['/dashboard','tabs','home',crop.name,'fertilizer-calculator']"
         >
           <ion-img
-            src="assets//project_images/fertilizer_calculator.png"
+            src="assets//project_images/fert.jpg"
           ></ion-img>
-          <ion-card-title> Fertilizer Calculator </ion-card-title>
+          <ion-card-title> Fertilizer
+            Calculator </ion-card-title>
         </ion-card>
       </ion-col>
 
@@ -31,16 +36,18 @@
         <ion-card
           [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips']"
         >
-          <ion-img src="assets//project_images/croptips.jfif"></ion-img>
+          <ion-img src="assets//project_images/croptips.jpg"></ion-img><br>
           <ion-card-title> Crop Tips </ion-card-title>
         </ion-card>
       </ion-col>
+    </ion-row>
 
+    <ion-row class="details">
       <ion-col>
         <ion-card
           [routerLink]="['/dashboard','tabs','home',crop.name,'diseases']"
         >
-          <ion-img src="assets//project_images/disease.jfif"></ion-img>
+          <ion-img style = " width: 150px; height: 150px;" src="assets//project_images/disease.jpg"></ion-img><br>
           <ion-card-title> Diseases </ion-card-title>
         </ion-card>
       </ion-col>
@@ -49,12 +56,14 @@
         <ion-card
           [routerLink]="['/dashboard','tabs','home',crop.name,'animal-intervention']"
         >
-          <ion-img
-            src="assets//project_images/animal_intervention.jfif"
+          <ion-img style=" width: 150px; height: 150px;"
+            src="assets//project_images/grasshoper.jpg"
           ></ion-img>
-          <ion-card-title> Animal Intervention </ion-card-title>
+          <ion-card-title>Pest<br>Intervention </ion-card-title>
         </ion-card>
       </ion-col>
     </ion-row>
+
+    
   </ion-grid>
 </ion-content>

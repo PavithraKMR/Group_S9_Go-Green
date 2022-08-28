@@ -62,14 +62,9 @@ export class LoginPage implements OnInit, OnDestroy {
 				this.authSub = this.authService.login(userName, password).subscribe(
 					resData => {
 						console.log(resData);
-<<<<<<< HEAD
-						
-						if (resData.data.role === 'farmer') {
-=======
 
 						if (resData.data.role === 'farmer') {
 
->>>>>>> origin/master
 							this.router.navigateByUrl('/dashboard/tabs/home');
 						} else {
 							this.router.navigateByUrl('/admin/tabs/home');

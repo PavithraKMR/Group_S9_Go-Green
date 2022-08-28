@@ -114,11 +114,6 @@ export class AuthService {
 		// Preferences.Storage.set({ key: 'authData', value: data });
 		Preferences.set({ key: 'userData', value: data });
 
-<<<<<<< HEAD
-		localStorage.setItem('data', JSON.stringify(data));
-		Plugins.Storage.set({ key: 'authData', value: data });
-=======
->>>>>>> origin/master
 	}
 
 	private setUserData(userData: AuthResponseData) {

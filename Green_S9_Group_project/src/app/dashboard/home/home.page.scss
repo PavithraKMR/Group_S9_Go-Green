@@ -1,10 +1,13 @@
+/*
 .weather{
-    background-color: lightblue;
+    background-color: rgb(5, 131, 174);
     width: 500px;
     height: 200px;
     border-radius: 25px;
     color: black;
 }
+*/
+
 
 ion-row{
     display: flex;
@@ -73,5 +76,35 @@ ion-col{
     padding-inline: 65px;
     border-radius: 30px;
     margin-top: 10px;
+}
+
+.cardStyle{
+    border-radius: 20px;
+    --ion-background-color:#38bdf8;
+  
+    span{
+      color: white;
+      font-weight: 300;
+    }
+  
+    #temp{
+      font-weight: 300;
+      font-size: 4em;
+      margin: 5px;
+    }
+  
+    #locationIcon{
+      color:#f6b844;
+      font-size: 2em;
+    }
+    #date{
+      color:white;
+      font-weight: 100;
+    }
+  }
+
+h2{
+  font-size: 1.4rem;
+  font-weight: 550;  
 }
 

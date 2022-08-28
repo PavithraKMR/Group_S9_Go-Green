@@ -29,23 +29,11 @@ export class HomePage implements OnInit {
 	constructor(private homeService: HomeService, public httpClient: HttpClient) {
   }
 
-<<<<<<< HEAD
-  weatherTemp: any;
-  todayDate = new Date();
-  cityName: any;
-  weatherIcon: any;
-  weatherDetails: any;
-  windSpeed: any;
-
-  constructor(private homeService: HomeService, public httpClient: HttpClient) { 
-  }
-=======
 	loadData() {
 		this.httpClient
 			.get(`${API_URL}/weather?q=${'jaffna'},{'ISO 3166-1'}&appid=${API_KEY}`)
 			.subscribe(results => {
 
->>>>>>> origin/master
 
 				this.weatherTemp = results['main'].temp;
 				this.max_temp = results['main'].temp_max;
@@ -61,12 +49,7 @@ export class HomePage implements OnInit {
 			});
 	}
 
-<<<<<<< HEAD
-  ngOnInit() {
-    this.loadData();
-=======
 	crops: Crop[];
->>>>>>> origin/master
 
 	cropsSub: Subscription;
 
