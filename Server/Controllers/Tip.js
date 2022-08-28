@@ -3,7 +3,6 @@ const { validationResult } = require('express-validator');
 const CropTip = require('../models/CropTip');
 
 const createTip = async (req, res, next) => {
-	console.log(req.body);
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
@@ -12,10 +11,8 @@ const createTip = async (req, res, next) => {
 
 	const newTip = new CropTip({
 		cropName: req.body.cropName,
-		information: req.body.information,
-		type: req.body.type
+		information: req.body.information
 	});
-	console.log(newTip);
 	try {
 		await newTip.save();
 	} catch (err) {
@@ -61,8 +58,8 @@ const getTip = async (req, res, next) => {
 	if (!errors.isEmpty()) {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
-
 	const { tipId } = req.params;
+
 	let tip;
 	try {
 		tip = await CropTip.findById(tipId);
@@ -141,7 +138,7 @@ const deleteTipByCropName = async (req, res, next) => {
 		);
 		return next(error);
 	}
-	res.status(200).json({ message: 'Deleted User' });
+	res.status(200).json({ cropTip:cropTip.toObject({getters:true})});
 };
 
 exports.getTipsByCropName = getTipsByCropName;

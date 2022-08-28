@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
+	AlertController,
 	AnimationController,
 	LoadingController,
 	ModalController
@@ -21,19 +22,21 @@ export class ShowTipPage implements OnInit, OnDestroy {
 		private loadCtrl: LoadingController,
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private router: Router,
+		private alertCtrl: AlertController
 	) {}
 
-	tipSub: Subscription;
-	cropTip: CropTips[];
+	tipidSub: Subscription;
+	deletSub: Subscription;
+	cropTip: CropTips;
 	isLoading = false;
-	cropSub: Subscription;
 	cropTipSub: Subscription;
-	Tips_for_choosing = 'Tips_for_choosing';
+
 	ngOnInit() {
 		this.isLoading = true;
 
-		this.route.paramMap.subscribe(paraMap => {
+		this.tipidSub = this.route.paramMap.subscribe(paraMap => {
 			if (!paraMap.has('tipId')) {
 				return;
 			}
@@ -41,7 +44,8 @@ export class ShowTipPage implements OnInit, OnDestroy {
 			this.cropTipSub = this.homeService
 				.getTip(paraMap.get('tipId'))
 				.subscribe(tip => {
-					// this.cropTip = tip;
+					this.cropTip = tip;
+					this.isLoading = false;
 				});
 		});
 	}
@@ -49,41 +53,93 @@ export class ShowTipPage implements OnInit, OnDestroy {
 	doRefresh(event) {
 		setTimeout(() => {
 			this.isLoading = true;
+			this.tipidSub = this.route.paramMap.subscribe(paraMap => {
+				if (!paraMap.has('tipId')) {
+					return;
+				}
 
-			this.isLoading = true;
-			// this.tipSub = this.homeService.fetchAlltips(this.crop.name).subscribe(tips=>{
-			//   this.cropTips = tips
-			//   this.isLoading = false
-			// })
+				this.cropTipSub = this.homeService
+					.getTip(paraMap.get('tipId'))
+					.subscribe(tip => {
+						this.cropTip = tip;
+
+						this.isLoading = false;
+					});
+			});
+
 			event.target.complete();
 		}, 2000);
 	}
 
 	ionViewWillEnter() {
-		// this.isLoading = true
-		// this.tipSub = this.homeService.fetchAlltips(this.crop.name).subscribe(tips=>{
-		//   this.cropTips = tips
-		//   console.log(this.cropTips);
-		//   this.isLoading = false
-		// })
+		this.isLoading = true;
+		this.tipidSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('tipId')) {
+				return;
+			}
+
+			this.cropTipSub = this.homeService
+				.getTip(paraMap.get('tipId'))
+				.subscribe(tip => {
+					this.cropTip = tip;
+
+					this.isLoading = false;
+				});
+		});
 	}
 
-	// type = 'sowing';
-	// segmentChanged(event:CustomEvent<SegmentChangeEventDetail>)
-	// {
-	//   if(event.detail.value === 'sowing')
-	//   {
-	//     this.type = 'sowing'
-	//   }
-	//   else{
-	//     this.type = 'tips_for_choosing'
-	//   }
-	// }
+	cancelSub: Subscription;
+
+	deleteTip(id: string) {
+		this.alertCtrl
+			.create({
+				header: 'Do You Want to Delete',
+				message: 'If you delete it will be removed',
+				buttons: [
+					{
+						text: 'Okay',
+						handler: () => {
+							this.loadCtrl
+								.create({
+									message: 'Deleting...',
+									animated: true,
+									duration: 100,
+									keyboardClose: false,
+									spinner: 'circles'
+								})
+								.then(loadingEl => {
+									loadingEl.present();
+									this.deletSub = this.homeService
+										.DeleteTip(id)
+										.subscribe(() => {
+											loadingEl.dismiss();
+										});
+								});
+						}
+					},
+					{
+						text: 'Cancel'
+					}
+				]
+			})
+			.then(e => {
+				e.present();
+			});
+
+		this.router.navigate([
+			'/admin',
+			'tabs',
+			'home',
+			this.cropTip.name,
+			'crop-tips'
+		]);
+	}
 
 	ngOnDestroy() {
-		if ( this.cropTipSub) {
-			
+		if (this.cropTipSub || this.tipidSub || this.deletSub) {
 			this.cropTipSub.unsubscribe();
+			this.tipidSub.unsubscribe();
+			this.deletSub.unsubscribe();
 		}
 	}
 }

@@ -28,6 +28,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	) {}
 
 	tipSub: Subscription;
+	idSub: Subscription;
 	cropTips: CropTips[];
 	crop: Crop;
 	isLoading = false;
@@ -39,7 +40,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.isLoading = true;
 
-		this.route.paramMap.subscribe(paraMap => {
+		this.idSub = this.route.paramMap.subscribe(paraMap => {
 			if (!paraMap.has('cropId')) {
 				return;
 			}
@@ -68,7 +69,47 @@ export class CropTipsPage implements OnInit, OnDestroy {
 		setTimeout(() => {
 			this.isLoading = true;
 
-			this.isLoading = true;
+			this.idSub = this.route.paramMap.subscribe(paraMap => {
+				if (!paraMap.has('cropId')) {
+					return;
+				}
+
+				this.cropSub = this.homeService
+					.getCrop(paraMap.get('cropId'))
+					.subscribe(crop => {
+						this.crop = crop;
+					});
+
+				this.tipSub = this.homeService
+					.fetchAlltips(this.crop.name)
+					.subscribe(tips => {
+						if (tips.message) {
+							this.message = tips.message;
+							this.isLoading = false;
+						} else {
+							this.cropTips = tips;
+							this.isLoading = false;
+						}
+					});
+			});
+			event.target.complete();
+		}, 2000);
+	}
+	message: string;
+	ionViewWillEnter() {
+		this.isLoading = true;
+
+		this.idSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('cropId')) {
+				return;
+			}
+
+			this.cropSub = this.homeService
+				.getCrop(paraMap.get('cropId'))
+				.subscribe(crop => {
+					this.crop = crop;
+				});
+
 			this.tipSub = this.homeService
 				.fetchAlltips(this.crop.name)
 				.subscribe(tips => {
@@ -80,43 +121,16 @@ export class CropTipsPage implements OnInit, OnDestroy {
 						this.isLoading = false;
 					}
 				});
-			event.target.complete();
-		}, 2000);
+		});
 	}
-	message: string;
-	ionViewWillEnter() {
-		this.isLoading = true;
-		this.tipSub = this.homeService
-			.fetchAlltips(this.crop.name)
-			.subscribe(tips => {
-				if (tips.message) {
-					this.message = tips.message;
-					this.isLoading = false;
-				} else {
-					this.cropTips = tips;
-					this.isLoading = false;
-				}
-			});
-	}
-
-	// type = 'sowing';
-	// segmentChanged(event:CustomEvent<SegmentChangeEventDetail>)
-	// {
-	//   if(event.detail.value === 'sowing')
-	//   {
-	//     this.type = 'sowing'
-	//   }
-	//   else{
-	//     this.type = 'tips_for_choosing'
-	//   }
-	// }
 
 	showPage() {}
 
 	ngOnDestroy() {
-		if (this.tipSub || this.cropSub) {
+		if (this.tipSub || this.cropSub || this.idSub) {
 			this.tipSub.unsubscribe();
 			this.cropSub.unsubscribe();
+			this.idSub.unsubscribe();
 		}
 	}
 }

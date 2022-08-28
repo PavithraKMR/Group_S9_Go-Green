@@ -1,6 +1,8 @@
-const mongoose = require('mongoose'); 
+const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
+const path = require('path');
+
 const HttpError = require('./models/http-error');
 // npm install mongoose-unique-validator //  like email
 // npm install --save bcryptjs
@@ -15,12 +17,11 @@ const app = express();
 
 const adminRouter = require('./routes/Admin');
 const authRouter = require('./routes/Auth');
-
+const notificationRouter = require('./routes/Notification');
+const userRouter = require('./routes/users');
 
 app.use(bodyParser.json()); // to get body ,this should be used before routers
-app.use(bodyParser.urlencoded({
-    extended: true
-}));
+
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
 	//middleware
@@ -36,13 +37,12 @@ app.use((req, res, next) => {
 	next();
 });
 
-
-
-
 // here route should be mentioned
 
 app.use('/api/crop', adminRouter);
 app.use('/api/GreenLive', authRouter);
+app.use('/api/Notification', notificationRouter);
+app.use('/api/user', userRouter);
 
 // for unsupported router error handler
 app.use((req, res, next) => {
@@ -63,7 +63,12 @@ app.use((error, req, res, next) => {
 //connect mongodb
 mongoose
 	.connect(
+<<<<<<< HEAD
 		"mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority"
+=======
+		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
+		// { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
+>>>>>>> origin/master
 	)
 
 	.then(() => {
@@ -73,3 +78,13 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+);
+app.use('/uploads', express.static(path.join('Server/uploads')));
+app.use(
+	'/uploads/Diseases',
+	express.static(path.join('Server/uploads/Diseases'))
+);

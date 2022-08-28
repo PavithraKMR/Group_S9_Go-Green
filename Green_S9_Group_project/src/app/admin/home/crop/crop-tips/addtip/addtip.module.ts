@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { AddtipPageRoutingModule } from './addtip-routing.module';
 
 import { AddtipPage } from './addtip.page';
-
+  
 @NgModule({
   imports: [
     CommonModule,

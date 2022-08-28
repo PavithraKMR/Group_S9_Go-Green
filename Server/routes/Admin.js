@@ -3,6 +3,10 @@ var router = express.Router();
 var TipController = require('../Controllers/Tip');
 var diseaseController = require('../Controllers/Disease');
 var fileUpload = require('../Middleware/file-upload');
+const multer = require('multer');
+// const storage = require('../Middleware/file-upload')
+
+
 
 router.get('/cropTips/:tipId', TipController.getTip);
 router.get('/getTips/:cropName', TipController.getTipsByCropName);

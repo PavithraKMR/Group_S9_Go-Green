@@ -1,5 +1,5 @@
 import { AuthService } from 'src/app/login/auth.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Crop } from 'src/app/models/crop.model';
 import { HomeService } from '../service/home.service';
@@ -9,7 +9,7 @@ import { HomeService } from '../service/home.service';
 	templateUrl: './home.page.html',
 	styleUrls: ['./home.page.scss']
 })
-export class HomePage implements OnInit {
+export class HomePage implements OnInit, OnDestroy {
 	constructor(
 		private homeService: HomeService,
 		private authService: AuthService
@@ -19,15 +19,22 @@ export class HomePage implements OnInit {
 
 	cropsSub: Subscription;
 	authSub: Subscription;
+	value;
 
 	ngOnInit() {
 		this.cropsSub = this.homeService.AllCrops.subscribe(crops => {
 			this.crops = crops;
 		});
 
-		this.authSub = this.authService.isAuthenticated.subscribe(data => {
-			console.log(data);
-		});
+		this.authSub = this.authService.isAuthenticated.subscribe(data => {});
+
+		this.authService.autoLogin();
+	}
+
+	ngOnDestroy(): void {
+		if (this.crops) {
+			this.cropsSub.unsubscribe();
+		}
 	}
 }
 

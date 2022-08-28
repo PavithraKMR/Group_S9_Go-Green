@@ -75,27 +75,3 @@ ion-col{
     margin-top: 10px;
 }
 
-.cardStyle{
-    border-radius: 20px;
-    --ion-background-color:#38bdf8;
-  
-    span{
-      color: white;
-      font-weight: 300;
-    }
-  
-    #temp{
-      font-weight: 300;
-      font-size: 4em;
-      margin: 5px;
-    }
-  
-    #locationIcon{
-      color:#f6b844;
-      font-size: 2em;
-    }
-    #date{
-      color:white;
-      font-weight: 100;
-    }
-  }

@@ -61,17 +61,14 @@ export class HomeService {
 				take(1),
 				map(data => {
 					if (data.message) {
-						console.log(data.message);
 						return data;
 					} else {
 						const tips = [];
 						for (var tip of data.cropTips) {
-							console.log(tip);
-
 							tips.push({
 								tipsId: tip.id,
 								name: tip.name,
-								type: tip.type,
+
 								information: tip.information
 							});
 						}
@@ -118,11 +115,11 @@ export class HomeService {
 			);
 	}
 
-	addTips(name: string, type: string, information: string) {
+	addTips(name: string, information: string) {
 		let genId: string;
 		const newCropTip = {
 			cropName: name,
-			type: type,
+
 			information: information
 		};
 		return this.http
@@ -145,20 +142,16 @@ export class HomeService {
 		remedyAction: string,
 		image: File
 	) {
-    const formData = new FormData()
-    formData.append('image',image)
-    console.log(formData);
-    console.log(image);
+		const formData = new FormData();
 
-		const newCropTip = {
-			diseaseName: diseaseName,
-			about: aboutDisease,
-			cropName: cropName,
-			remedyAction: remedyAction,
-			image:image
-		};
+		formData.append('image', image);
+		formData.append('diseaseName', diseaseName);
+		formData.append('aboutDisease', aboutDisease);
+		formData.append('cropName', cropName);
+		formData.append('remedyAction', remedyAction);
+
 		return this.http
-			.post<any>('http://localhost:5000/api/crop/createDisease', newCropTip)
+			.post<any>('http://localhost:5000/api/crop/createDisease', formData)
 			.pipe(
 				take(1),
 				switchMap(data => {
@@ -178,8 +171,9 @@ export class HomeService {
 				map(data => {
 					return {
 						tipsId: data.tip.id,
-						name: data.tip.name,
-						type: data.tip.type,
+						name: data.tip.cropName,
+						// type: data.tip.type,
+
 						information: data.tip.information
 					};
 				})
@@ -204,7 +198,7 @@ export class HomeService {
 			);
 	}
 
-	updateTip(id: string, name: string, type: string, information: string) {
+	updateTip(id: string, name: string, information: string) {
 		let updatedtips: CropTips[];
 		return this.AllcropTips.pipe(
 			take(1),
@@ -224,7 +218,7 @@ export class HomeService {
 				updatedtips[index] = {
 					tipsId: id,
 					name: name,
-					type: type,
+
 					information: information
 				};
 
@@ -281,18 +275,16 @@ export class HomeService {
 	//   )
 	// }
 
-	CancelTip(id: string) {
+	DeleteTip(id: string) {
 		return this.http
-			.delete(
-				`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`
-			)
+			.delete('http://localhost:5000/api/crop/cropTips/delete/' + id)
 			.pipe(
 				take(1),
-				switchMap(() => {
+				switchMap(res => {
 					return this.AllcropTips;
 				}),
 				tap(tips => {
-					this._croptips.next(tips.filter(p => p.cropId !== id));
+					this._croptips.next(tips.filter(p => p.tipsId !== id));
 				})
 			);
 	}
@@ -304,7 +296,9 @@ export class HomeService {
 			)
 			.pipe(
 				take(1),
-				switchMap(() => {
+				switchMap((res) => {
+          console.log(res);
+
 					return this.AllDiseases;
 				}),
 				tap(tips => {

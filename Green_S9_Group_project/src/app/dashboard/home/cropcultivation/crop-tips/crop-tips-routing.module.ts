@@ -7,7 +7,12 @@ const routes: Routes = [
   {
     path: '',
     component: CropTipsPage
+  },
+  {
+    path: 'show-tips',
+    loadChildren: () => import('./show-tips/show-tips.module').then( m => m.ShowTipsPageModule)
   }
+
 ];
 
 @NgModule({
@@ -15,3 +20,4 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class CropTipsPageRoutingModule {}
+

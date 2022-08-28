@@ -19,19 +19,15 @@
 
     <ion-row>
       <ion-col class="img">
-        <ion-toolbar color="primary" class="sawbar">
-          <ion-title>Sowing Tips</ion-title>
-        </ion-toolbar>
-
         <ion-list *ngFor="let saw of cropTips ">
-          <ion-card *ngIf="saw.type === 'Sowing_tips'">
+          <ion-card [routerLink] = "['/dashboard','tabs','home',crop.name,'crop-tips',saw.tipsId]">
             <ion-card-content> {{saw.information}} </ion-card-content>
           </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="crop.name !== 'Paddy'">
+    <!-- <ion-row *ngIf="crop.name !== 'Paddy'">
       <ion-col class="img">
         <ion-toolbar color="danger" class="sawbar">
           <ion-title>Tips For Choosing What to Grow</ion-title>
@@ -41,8 +37,7 @@
             <ion-card-content> {{saw.information}} </ion-card-content>
           </ion-card>
         </ion-list>
-      </ion-col>
-    </ion-row>
+      </ion-col> -->
   </ion-grid>
 
   <ion-grid *ngIf="isLoading">

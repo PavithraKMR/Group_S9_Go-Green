@@ -1,49 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
 import { Crop } from 'src/app/models/crop.model';
-import { HomeService } from '../../HomeServices/home.service';
+import { HomeService } from '../../../../admin/service/home.service';
 
 @Component({
-  selector: 'app-crop-tips',
-  templateUrl: './crop-tips.page.html',
-  styleUrls: ['./crop-tips.page.scss'],
+	selector: 'app-crop-tips',
+	templateUrl: './crop-tips.page.html',
+	styleUrls: ['./crop-tips.page.scss']
 })
-export class CropTipsPage implements OnInit {
+export class CropTipsPage implements OnInit, OnDestroy {
+	constructor(
+		private homeService: HomeService,
+		private route: ActivatedRoute
+	) {}
 
-  constructor(private homeService: HomeService,private route: ActivatedRoute) { }
+	crop: Crop;
+	cropSub: Subscription;
+	paraSub: Subscription;
+	cropidSub: Subscription;
+	cropTips: CropTips[];
+	isLoading = false;
+	ngOnInit() {
+		this.paraSub = this.route.paramMap.subscribe(paramMap => {
+			if (!paramMap.has('cropId')) {
+				return;
+			}
 
-  crop:Crop;
-  saws = [];
-  cropSub:Subscription
-  cropTips:CropTips[];
-  isLoading  = false
-  ngOnInit() {
-    this.route.paramMap.subscribe(paramMap=>{
-      if(!paramMap.has('cropId'))
-      {
-        return
-      }
+			this.cropidSub = this.homeService
+				.getCrop(paramMap.get('cropId'))
+				.subscribe(crop => {
+					this.crop = crop;
+				});
+		});
 
-      this.cropSub = this.homeService.getCrop(paramMap.get('cropId')).subscribe(crop=>{
-        this.crop = crop
-      })
-    })
+		this.cropSub = this.homeService.AllcropTips.subscribe(cropTips => {
+			this.cropTips = cropTips;
+		});
+	}
 
-    this.cropSub = this.homeService.AllSawTips.subscribe(saws=>{
-      this.saws = saws
-    })
+	ionViewWillEnter() {
+		this.isLoading = true;
+		this.cropSub = this.homeService
+			.fetchAlltips(this.crop.name)
+			.subscribe(tips => {
+				this.cropTips = tips;
+				this.isLoading = false;
+			});
+	}
 
-  }
-
-  ionViewWillEnter()
-  {
-    this.isLoading = true
-    this.cropSub = this.homeService.fetchAlltips(this.crop.name).subscribe(tips=>{
-      this.cropTips = tips
-      this.isLoading = false
-    })
-  }
-
+	ngOnDestroy(): void {
+		if (this.cropSub || this.paraSub || this.cropidSub) {
+			this.cropSub.unsubscribe();
+			this.paraSub.unsubscribe();
+			this.cropidSub.unsubscribe();
+		}
+	}
 }

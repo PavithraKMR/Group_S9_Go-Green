@@ -62,8 +62,14 @@ export class LoginPage implements OnInit, OnDestroy {
 				this.authSub = this.authService.login(userName, password).subscribe(
 					resData => {
 						console.log(resData);
+<<<<<<< HEAD
 						
 						if (resData.data.role === 'farmer') {
+=======
+
+						if (resData.data.role === 'farmer') {
+
+>>>>>>> origin/master
 							this.router.navigateByUrl('/dashboard/tabs/home');
 						} else {
 							this.router.navigateByUrl('/admin/tabs/home');
@@ -77,13 +83,6 @@ export class LoginPage implements OnInit, OnDestroy {
 						console.log(errRes);
 						let message = 'Could not sign you in, please try again.';
 
-						// if (code === 'EMAIL_EXISTS') {
-						// 	message = 'This email address exists already!';
-						// } else if (code === 'EMAIL_NOT_FOUND') {
-						// 	message = 'The input Email is not found';
-						// } else if (code === 'INVALID_PASSWORD') {
-						// 	message = 'The Password is Not Valid';
-						// }
 
 						this.showAlert(message);
 					}

@@ -23,7 +23,7 @@
   <ion-grid *ngIf="!isLoading && message">
     <p>{{message}}</p>
   </ion-grid>
-  
+
   <ion-grid *ngIf="!isLoading && !message">
     <ion-row>
       <ion-col class="img">
@@ -34,27 +34,30 @@
     <ion-row>
       <ion-col class="img">
         <ion-toolbar color="primary" class="sawbar">
-          <ion-title>Sowing Tips</ion-title>
+
         </ion-toolbar>
 
         <ion-list *ngFor="let saw of cropTips ">
           <ion-item-sliding>
-
             <ion-card
-              *ngIf="saw.type === 'Sowing_tips'"
               [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','show',saw.tipsId]"
-            >
+              >
+
               <ion-card-content>
                 <ion-item href="#">
                   <p>{{saw.information}}</p>
                 </ion-item>
               </ion-card-content>
-
             </ion-card>
 
             <ion-item-options side="end">
-              <ion-item-option color="primary" >
-                <ion-icon name="create-outline" slot="icon-only" [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]"></ion-icon>
+              <ion-item-option color="primary">
+                <ion-icon
+                  name="create-outline"
+                  slot="icon-only"
+                  [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]"
+                ></ion-icon>
+
               </ion-item-option>
             </ion-item-options>
 
@@ -68,7 +71,8 @@
       </ion-col>
     </ion-row>
 
-    <ion-row *ngIf="crop.name !== 'Paddy' && crop.name !== 'Pottato'">
+    <!-- <ion-row *ngIf="crop.name !== 'Paddy' && crop.name !== 'Pottato'">
+
       <ion-col class="img">
         <ion-toolbar color="danger" class="sawbar">
           <ion-title>Tips For Choosing What to Grow</ion-title>
@@ -79,7 +83,8 @@
           </ion-card>
         </ion-list>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
+
   </ion-grid>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
