@@ -1,0 +1,32 @@
+{
+  "Dashboard": {
+    "Menu": {
+      "Home": "Home",
+      "Notification": "Notification",
+      "Card": "Card",
+      "Profile": "Profile",
+      "LogOut": "LogOut"
+    },
+    "Home": {
+      "title":"Home",
+      "Select_Your_Crops": "Select Your Crops",
+      "Onion": "Onion",
+      "Carrot": "Carrot",
+      "Ginger": "Ginger",
+      "Pottato": "Pottato",
+      "Turmeric": "Turmeric",
+      "Paddy": "Paddy",
+      "Today's_Report": "Today's Report",
+      "Sun": "Sun",
+      "Mon": "Mon",
+      "Wed": "Wed",
+      "Thu": "Thu",
+      "Fri": "Fri",
+      "Sat": "Sat",
+      "Maximum_Temp": "Maximum Temp",
+      "Manimum_Temp": "Manimum Temp",
+      "Humidity": "Humidity",
+      "Wind_Speed": "Wind Speed"
+    }
+  }
+}

@@ -1,22 +1,20 @@
-import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { HomePageRoutingModule } from './home-routing.module';
+import { PopoverPageRoutingModule } from './popover-routing.module';
 
-import { HomePage } from './home.page';
+import { PopoverPage } from './popover.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    HomePageRoutingModule,
-    TranslateModule
+    PopoverPageRoutingModule
   ],
-  declarations: [HomePage]
+  declarations: [PopoverPage]
 })
-export class HomePageModule {}
+export class PopoverPageModule {}

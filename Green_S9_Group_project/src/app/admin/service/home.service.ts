@@ -5,7 +5,8 @@ import { map, switchMap, take, tap } from 'rxjs/operators';
 import { Crop } from 'src/app/models/crop.model';
 import { Disease } from 'src/app/models/disease.model';
 import { CropTips } from '../models/croptips.models';
-
+// npm i @ngx-translate/core @ngx-translate/http-loader // translate library
+// npm i @ionic/storage
 @Injectable({
 	providedIn: 'root'
 })
@@ -296,8 +297,8 @@ export class HomeService {
 			)
 			.pipe(
 				take(1),
-				switchMap((res) => {
-          console.log(res);
+				switchMap(res => {
+					console.log(res);
 
 					return this.AllDiseases;
 				}),

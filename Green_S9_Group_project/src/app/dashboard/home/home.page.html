@@ -3,7 +3,12 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Home</ion-title>
+    <ion-title>{{"Dashboard.Home.title" | translate }}</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button  (click)="openLanguagePopover($event)">
+        <ion-icon name="more" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -14,7 +19,7 @@
      <ion-col>
       <ion-card class="cardStyle">
         <ion-item lines="none">
-          <p style="font-weight: 500; color:white; margin-top: 15px;" >Today's Report </p>
+          <p style="font-weight: 500; color:white; margin-top: 15px;" >{{"Dashboard.Home.Today's_Report" | translate}}</p>
           <ion-label id="date"  slot="end">{{ todayDate | date: "EEE dd MMM"}}</ion-label>
         </ion-item>
 
@@ -33,23 +38,23 @@
         </ion-item>
 
         <ion-item>
-          <span>Maximum Temp</span>
+          <span>{{"Dashboard.Home.Maximum_Temp" | translate}}</span>
           <span slot="end">{{(max_temp - 273.15).toFixed(0)}}℃</span>
         </ion-item>
 
         <ion-item>
-          <span>Manimum Temp</span>
+          <span>{{"Dashboard.Home.Minimun_Temp" | translate}}</span>
           <span slot="end">{{(min_temp - 273.15).toFixed(0)}}℃</span>
 
         </ion-item>
 
         <ion-item>
-          <span>Humidity</span>
+          <span>{{"Dashboard.Home.Humidity" | translate}}</span>
           <span slot="end">{{humidity}}%</span>
 
         </ion-item>
         <ion-item>
-          <span>Wind Speed</span>
+          <span>{{"Dashboard.Home.Wind_Speed" | translate}}</span>
           <span slot="end">{{windSpeed}}m/s</span>
 
         </ion-item>
@@ -59,7 +64,7 @@
 
     </ion-row>
     <ion-row>
-      <h2>Select Your Crops</h2>
+      <h2>{{"Dashboard.Home.Select_Your_Crops" | translate}}</h2>
     </ion-row>
     <ion-row class="crop-card-row">
       <ion-col size-sm="1" *ngFor="let crop of crops">
@@ -73,7 +78,7 @@
       </ion-col>
     </ion-row>
 
-    <ion-row>
+    <!-- <ion-row>
       <ion-col size="11.5">
         <ion-item>
           <ion-card class="doubts">
@@ -81,7 +86,10 @@
           </ion-card>
         </ion-item>
       </ion-col>
-    </ion-row>
+    </ion-row> -->
 
   </ion-grid>
 </ion-content>
+<!-- //phrase email and password
+// projectgreen151@gmail.com
+// @Project151 -->

@@ -131,7 +131,11 @@ const routes: Routes = [
 				pathMatch: 'full'
 			}
 		]
-	}
+	},
+  {
+    path: 'popover',
+    loadChildren: () => import('./popover/popover.module').then( m => m.PopoverPageModule)
+  }
 ];
 
 @NgModule({
