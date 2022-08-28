@@ -22,11 +22,9 @@ export class HomePage implements OnInit {
   cityName: any;
   weatherIcon: any;
   weatherDetails: any;
-  //extra add
   windSpeed: any;
 
   constructor(private homeService: HomeService, public httpClient: HttpClient) { 
-    this.loadData();
   }
 
   loadData(){
@@ -47,6 +45,7 @@ export class HomePage implements OnInit {
   cropsSub: Subscription;
 
   ngOnInit() {
+    this.loadData();
 
     this.cropsSub = this.homeService.Allcrops.subscribe(crops=>{
       this.crops = crops;

@@ -63,8 +63,9 @@ app.use((error, req, res, next) => {
 //connect mongodb
 mongoose
 	.connect(
-		'mongodb+srv://projectgreen:projectgreen@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
+		"mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority"
 	)
+
 	.then(() => {
 		console.log('connected to Database');
 		app.listen(5000); // start Node + Express server on port 5000

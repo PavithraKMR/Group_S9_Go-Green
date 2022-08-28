@@ -159,7 +159,7 @@ export class AuthService {
 		console.log(data);
 
 		localStorage.setItem('data', JSON.stringify(data));
-		// Plugins.Storage.set({ key: 'authData', value: data });
+		Plugins.Storage.set({ key: 'authData', value: data });
 	}
 
 	private setUserData(userData: AuthResponseData) {
