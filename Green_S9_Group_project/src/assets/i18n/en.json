@@ -26,7 +26,15 @@
       "Maximum_Temp": "Maximum Temp",
       "Manimum_Temp": "Manimum Temp",
       "Humidity": "Humidity",
-      "Wind_Speed": "Wind Speed"
+      "Wind_Speed": "Wind Speed",
+      "Crops":{
+        "Onion": "Onion",
+        "Carrot": "Carrot",
+        "Ginger": "Ginger",
+        "Pottato": "Pottato",
+        "Turmeric": "Turmeric",
+        "Paddy": "Paddy"
+      }
     }
   }
 }

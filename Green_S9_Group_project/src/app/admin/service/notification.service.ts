@@ -2,6 +2,7 @@ import { take, map, tap, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { Notification } from 'src/app/models/notificaiton';
 
 @Injectable({
 	providedIn: 'root'
@@ -17,17 +18,16 @@ export class NotificationService {
 
 	getNotification(id: string) {
 		return this.http
-			.get<Notification>(
-				'http://localhost:5000/api/crop/Notification/notification' + id
-			)
+			.get<any>('http://localhost:5000/api/Notification/notification/' + id)
 			.pipe(
 				take(1),
 				map(res => {
 					return {
-						id: res.data.id,
-						message: res.data.message,
-						type: res.data.type,
-						date: res.data.date
+						notificationId: res['id'],
+						message: res['message'],
+						reply: res['reply'],
+						date: res['date'],
+						userId: res['userId']
 					};
 				})
 			);
@@ -35,31 +35,44 @@ export class NotificationService {
 
 	deleteNotification(id: string) {
 		return this.http
-			.delete<any>('http://localhost:5000/api/crop/Notification/delete' + id)
+			.delete<any>('http://localhost:5000/api/Notification/delete/' + id)
 			.pipe(
 				take(1),
 				switchMap(() => {
 					return this.AllNotification;
 				}),
 				tap(notifications => {
-					this._notification.next(notifications);
+					this._notification.next(
+						notifications.filter(p => p.notificationId !== id)
+					);
 				})
 			);
 	}
 
-	// updateNotifiction(id: string) {
-	// 	return this.http
-	// 		.put<any>('http://localhost:5000/api/crop/Notification/update' + id)
-	// 		.pipe(
-	// 			take(1),
-	// 			switchMap(res => {
-	// 				return this.AllNotification;
-	// 			}),
-	// 			tap(res => {
-	// 				this._notification.next(res);
-	// 			})
-	// 		);
-	// }
+	updateNotifiction(
+		notificationId: string,
+		message: string,
+		userId: string
+	) {
+
+    const newNotification = {
+      notificationId:notificationId,
+      message:message,
+      userId:userId
+    }
+
+		return this.http
+			.patch<any>('http://localhost:5000/api/Notification/update', newNotification)
+			.pipe(
+				take(1),
+				switchMap(res => {
+					return this.AllNotification;
+				}),
+				tap(res => {
+					this._notification.next(res);
+				})
+			);
+	}
 
 	createNotification(message: string, userId: string) {
 		const newNotification = {
@@ -70,7 +83,10 @@ export class NotificationService {
 		};
 
 		return this.http
-			.post<any>('http://localhost:5000/api/Notification', newNotification)
+			.post<any>(
+				'http://localhost:5000/api/Notification/create',
+				newNotification
+			)
 			.pipe(
 				take(1),
 				switchMap(res => {
@@ -112,11 +128,8 @@ export class NotificationService {
 		return this.http.get<any>('http://localhost:5000/api/Notification').pipe(
 			take(1),
 			map(res => {
-
-
 				const notifications = [];
 				for (var notification of res.notifications) {
-
 					notifications.push({
 						notificationId: notification.id,
 						date: notification.date,
@@ -132,5 +145,4 @@ export class NotificationService {
 			})
 		);
 	}
-
 }

@@ -93,14 +93,14 @@ const routes: Routes = [
 							import('./notification/add/add.module').then(m => m.AddPageModule)
 					},
 					{
-						path: 'view/:id',
+						path: 'view/:notificationId',
 						loadChildren: () =>
 							import('./notification/view/view.module').then(
 								m => m.ViewPageModule
 							)
 					},
 					{
-						path: 'edit/:id',
+						path: 'edit/:notificationId',
 						loadChildren: () =>
 							import('./notification/edit/edit.module').then(
 								m => m.EditPageModule

@@ -63,6 +63,11 @@ export class HomePage implements OnInit {
 
 		this.cropsSub = this.homeService.Allcrops.subscribe(crops => {
 			this.crops = crops;
+
+      // for(let crop of crops){
+         // console.log(crop.name | );
+
+      // }
 		});
 	}
 

@@ -1,7 +1,8 @@
 export class Notification {
-	id: string;
-	date: Date;
+	notificationId: string;
+	date: string;
 	message: string;
 	reply: boolean;
 	userId: string;
 }
+

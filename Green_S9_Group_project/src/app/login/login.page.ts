@@ -27,18 +27,6 @@ export class LoginPage implements OnInit, OnDestroy {
 	authSub: Subscription;
 	ngOnInit() {}
 
-	// submittedForm(form:NgForm)
-	// {
-	//   if(!form.valid)
-	//   {
-	//     return;
-	//   }
-
-	//     const email = form.value.email;
-	//     const password = form.value.password;
-	//     this.router.navigateByUrl('');
-	// }
-
 	submittedForm(form: NgForm) {
 		if (!form.valid) {
 			return;
@@ -57,14 +45,9 @@ export class LoginPage implements OnInit, OnDestroy {
 			.then(loadingEl => {
 				loadingEl.present();
 
-				// let authObs: Observable<AuthResponseData>; // it observe singup and login
-
 				this.authSub = this.authService.login(userName, password).subscribe(
 					resData => {
-						console.log(resData);
-
 						if (resData.data.role === 'farmer') {
-
 							this.router.navigateByUrl('/dashboard/tabs/home');
 						} else {
 							this.router.navigateByUrl('/admin/tabs/home');
@@ -75,9 +58,7 @@ export class LoginPage implements OnInit, OnDestroy {
 					errRes => {
 						loadingEl.dismiss();
 
-						console.log(errRes);
 						let message = 'Could not sign you in, please try again.';
-
 
 						this.showAlert(message);
 					}

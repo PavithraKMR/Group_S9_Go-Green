@@ -1,42 +1,139 @@
+import { take, map, tap, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { BehaviorSubject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { Customer } from '../models/customer.model';
 
-import { environment } from 'src/environments/environment.dev';
 @Injectable({
 	providedIn: 'root'
 })
 export class NotificationService {
 	constructor(private http: HttpClient) {}
 
-	getAllCustomers() {
-		const url =
-			environment.CUSTOMER_BASE_URL + environment.CUSTOMER.GET_ALL_CUSTOMERS;
-		return this.http.get(url);
+	private _notification = new BehaviorSubject([]);
+
+	get AllNotification() {
+		return this._notification.asObservable();
 	}
 
-	getACustomer(id: string) {
-		const url =
-			environment.CUSTOMER_BASE_URL + environment.CUSTOMER.GET_CUSTOMER + id;
-		return this.http.get(url);
+	getNotification(id: string) {
+		return this.http
+			.get<Notification>(
+				'http://localhost:5000/api/crop/Notification/notification' + id
+			)
+			.pipe(
+				take(1),
+				map(res => {
+
+          console.log(res);
+
+					return {
+						notificationId: res.data.id,
+						message: res.data.message,
+						type: res.data.type,
+						date: res.data.date
+					};
+				})
+			);
 	}
 
-	cancelCustomer(id: string) {
-		const url =
-			environment.CUSTOMER_BASE_URL + environment.CUSTOMER.DELETE_CUSTOMER + id;
-		return this.http.get(url);
+	deleteNotification(id: string) {
+		return this.http
+			.delete<any>('http://localhost:5000/api/Notification/delete/' + id)
+			.pipe(
+				take(1),
+				switchMap(() => {
+					return this.AllNotification;
+				}),
+				tap(notifications => {
+					this._notification.next(notifications.filter(p=>p.notificationId !== id));
+				})
+			);
 	}
 
-	createCustomer(firstname: string, lastname: string, email: string) {
-		const newcustomer = {
-			firstname,
-			lastname,
-			email,
-			password: '123456789'
+	// updateNotifiction(id: string) {
+	// 	return this.http
+	// 		.put<any>('http://localhost:5000/api/crop/Notification/update' + id)
+	// 		.pipe(
+	// 			take(1),
+	// 			switchMap(res => {
+	// 				return this.AllNotification;
+	// 			}),
+	// 			tap(res => {
+	// 				this._notification.next(res);
+	// 			})
+	// 		);
+	// }
+
+	createNotification(message: string, userId: string) {
+		const newNotification = {
+			message: message,
+			userId: userId,
+			reply: false,
+			date: JSON.stringify(new Date())
 		};
 
-		const url =
-			environment.CUSTOMER_BASE_URL + environment.CUSTOMER.CREATE_CUSTOMER;
-		return this.http.post(url, newcustomer);
+		return this.http
+			.post<any>('http://localhost:5000/api/Notification/create', newNotification)
+			.pipe(
+				take(1),
+				switchMap(res => {
+					return this.AllNotification;
+				}),
+				tap(res => {
+					this._notification.next(res);
+				})
+			);
 	}
+
+	getAllUserNotification(userId: string) {
+		return this.http
+			.post<any>('http://localhost:5000/api/Notification', {
+				userId
+			})
+			.pipe(
+				take(1),
+				map(res => {
+					const notifications = [];
+					for (var notification in res) {
+						notifications.push({
+							notificationId: res[notification].id,
+							date: res[notification].date,
+							message: res[notification].message,
+							reply: res[notification].reply
+						});
+					}
+
+					return notifications;
+				}),
+				tap(data => {
+					this._notification.next(data);
+				})
+			);
+	}
+
+	fetchAllNotifications() {
+		return this.http.get<any>('http://localhost:5000/api/Notification').pipe(
+			take(1),
+			map(res => {
+
+
+				const notifications = [];
+				for (var notification of res.notifications) {
+
+					notifications.push({
+						notificationId: notification.id,
+						date: notification.date,
+						message: notification.message,
+						reply: notification.reply
+					});
+				}
+
+				return notifications;
+			}),
+			tap(data => {
+				this._notification.next(data);
+			})
+		);
+	}
+
 }
