@@ -1,9 +1,16 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-buttons  slot="start">
-      <ion-back-button [defaultHref]="['/dashboard','tabs','home']"></ion-back-button>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="['/dashboard','tabs','home']"
+      ></ion-back-button>
     </ion-buttons>
-    <ion-title>{{crop.name}}</ion-title>
+    <ion-title>{{"Dashboard.CropCultivation.title" | translate }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openLanguagePopover($event)">
+        <ion-icon name="more" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -23,7 +30,9 @@
           <ion-img
             src="assets//project_images/fertilizer_calculator.png"
           ></ion-img>
-          <ion-card-title> Fertilizer Calculator </ion-card-title>
+          <ion-card-title>
+            {{"Dashboard.CropCultivation.Fertilizer_Calculator"|translate}}</ion-card-title
+          >
         </ion-card>
       </ion-col>
 
@@ -32,7 +41,7 @@
           [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips']"
         >
           <ion-img src="assets//project_images/croptips.jfif"></ion-img>
-          <ion-card-title> Crop Tips </ion-card-title>
+          <ion-card-title>   {{"Dashboard.CropCultivation.Crop_Tips"|translate}}</ion-card-title>
         </ion-card>
       </ion-col>
 
@@ -41,7 +50,7 @@
           [routerLink]="['/dashboard','tabs','home',crop.name,'diseases']"
         >
           <ion-img src="assets//project_images/disease.jfif"></ion-img>
-          <ion-card-title> Diseases </ion-card-title>
+          <ion-card-title>   {{"Dashboard.CropCultivation.Diseases"|translate}}</ion-card-title>
         </ion-card>
       </ion-col>
 
@@ -52,7 +61,7 @@
           <ion-img
             src="assets//project_images/animal_intervention.jfif"
           ></ion-img>
-          <ion-card-title> Animal Intervention </ion-card-title>
+          <ion-card-title>   {{"Dashboard.CropCultivation.Animal_Intervention"|translate}} </ion-card-title>
         </ion-card>
       </ion-col>
     </ion-row>
