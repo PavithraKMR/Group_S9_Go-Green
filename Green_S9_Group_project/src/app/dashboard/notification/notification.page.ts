@@ -24,19 +24,20 @@ export class NotificationPage implements OnInit, OnDestroy {
 	notifications: Notification[];
 	notiSub: Subscription;
 	isLoading = false;
+	deleteSub: Subscription;
 
-  userIcons = [
-    'assets/UserIcons/avatar.png',
-    'assets/UserIcons/girl.png',
-    'assets/UserIcons/man1.png',
-    'assets/UserIcons/man2.png',
-    'assets/UserIcons/man3.png',
-    'assets/UserIcons/user1.png',
-    'assets/UserIcons/man.png',
-    'assets/UserIcons/user.png',
-    'assets/UserIcons/woman.png',
-    'assets/UserIcons/profile.png',
-  ]
+	userIcons = [
+		'assets/UserIcons/avatar.png',
+		'assets/UserIcons/girl.png',
+		'assets/UserIcons/man1.png',
+		'assets/UserIcons/man2.png',
+		'assets/UserIcons/man3.png',
+		'assets/UserIcons/user1.png',
+		'assets/UserIcons/man.png',
+		'assets/UserIcons/user.png',
+		'assets/UserIcons/woman.png',
+		'assets/UserIcons/profile.png'
+	];
 	ngOnInit() {
 		this.isLoading = true;
 		this.notiSub = this.notificationService.AllNotification.subscribe(
@@ -61,7 +62,6 @@ export class NotificationPage implements OnInit, OnDestroy {
 	edit(id: string) {
 		console.log(id);
 	}
-	deleteSub: Subscription;
 
 	delete(id: string, item: IonItemSliding) {
 		this.alertCtrl

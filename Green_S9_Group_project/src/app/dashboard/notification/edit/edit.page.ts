@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { Notification } from 'src/app/models/notificaiton';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -14,7 +15,8 @@ export class EditPage implements OnInit, OnDestroy {
 	constructor(
 		private notificationService: NotificationService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private loadCtrl: LoadingController
 	) {}
 	reactiveform: FormGroup;
 	isLoading = false;
@@ -52,22 +54,35 @@ export class EditPage implements OnInit, OnDestroy {
 			return;
 		}
 
-		this.authSub = this.notificationService
-			.updateNotifiction(
-				this.notification.notificationId,
-				this.reactiveform.value.message,
-				this.notification.userId
-			)
-			.subscribe(() => {
-				this.reactiveform.reset();
-				this.router.navigateByUrl('/dashboard/tabs/notification');
+		this.loadCtrl
+			.create({
+				message: 'Updated..',
+				spinner: 'bubbles',
+				animated: true,
+				duration: 400
+			})
+			.then(el => {
+				el.present();
+				this.authSub = this.notificationService
+					.updateNotifiction(
+						this.notification.notificationId,
+						this.reactiveform.value.message,
+						this.notification.userId
+					)
+					.subscribe(() => {
+						this.reactiveform.reset();
+            this.router.navigateByUrl('/dashboard/tabs/notification');
+						el.dismiss();
+					});
+
 			});
 	}
 
 	ngOnDestroy(): void {
-		if (this.paraSub || this.notiSub) {
+		if (this.paraSub || this.notiSub || this.authSub) {
 			this.paraSub.unsubscribe();
 			this.notiSub.unsubscribe();
+			this.authSub.unsubscribe();
 		}
 	}
 }

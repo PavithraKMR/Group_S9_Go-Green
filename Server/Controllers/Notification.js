@@ -116,6 +116,7 @@ const updateNotification = async (req, res, next) => {
 		return next(error);
 	}
 
+	console.log(notification);
 	res
 		.status(201)
 		.json({ notification: notification.toObject({ getters: true }) });
