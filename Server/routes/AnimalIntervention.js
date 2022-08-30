@@ -2,7 +2,7 @@ const express = require('express');
 var router = express.Router();
 var TipController = require('../Controllers/Tip');
 var diseaseController = require('../Controllers/Disease');
-var fileUpload = require('../Middleware/file-upload');
+var fileUpload = require('../Middleware/interventionFile-upload');
 const multer = require('multer');
 
 router.get('/Interventions/:interventionId', TipController.getTip);
