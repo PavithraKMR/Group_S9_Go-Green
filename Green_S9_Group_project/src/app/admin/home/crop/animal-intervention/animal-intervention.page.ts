@@ -49,19 +49,25 @@ export class AnimalInterventionPage implements OnInit {
 
 	ionViewWillEnter() {
 		this.isLoading = true;
-		this.tipSub = this.homeService
-			.fetchAlltips(this.crop.name)
-			.subscribe(tips => {
-				this.cropTips = tips;
-				this.isLoading = false;
-			});
+		this.paramSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('cropId')) {
+				return;
+			}
+
+			this.cropSub = this.homeService
+				.getCrop(paraMap.get('cropId'))
+				.subscribe(crop => {
+					this.crop = crop;
+					this.isLoading = false;
+				});
+		});
 	}
 
 	addCropTips() {}
 
 	ngOnDestroy() {
-		if (this.tipSub || this.paramSub) {
-			this.tipSub.unsubscribe();
+		if (this.paramSub || this.cropSub) {
+			this.cropSub.unsubscribe();
 			this.paramSub.unsubscribe();
 		}
 	}

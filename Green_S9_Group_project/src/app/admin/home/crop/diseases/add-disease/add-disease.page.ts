@@ -45,7 +45,7 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 		});
 
 		this.form = new FormGroup({
-			diseaseName: new FormControl(null, {
+			interventionName: new FormControl(null, {
 				validators: [Validators.required, Validators.minLength(3)]
 			}),
 			about: new FormControl(null, {
@@ -99,7 +99,7 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 	}
 
 
-		
+
 
 	ngOnDestroy(): void {
 		if (this.cropSub || this.paramSub) {
