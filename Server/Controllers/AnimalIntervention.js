@@ -88,21 +88,29 @@ const getIntrevention = async (req, res, next) => {
 	}
 };
 
-const updateDiseaseByCropName = async (req, res, next) => {
+const updateInterventionByCropName = async (req, res, next) => {
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
 
-	// const { name, age } = req.body;
-	const { about, remedyAction, cropName, image, diseaseName } = req.body;
+	const {
+		interventionId,
+		about,
+		whyIsImportant,
+		cropName,
+		image,
+		interventionName,
+		whatIdDoes,
+		whyAndWhereItOccours,
+		howToIdentify,
+		howToManage
+	} = req.body;
 
-	const diseaseId = req.params.diseaseId;
-
-	let disease;
+	let intevention;
 	try {
-		disease = await Disease.findById(diseaseId);
+		intevention = await AnimalIntervention.findById(interventionId);
 	} catch (err) {
 		const error = new HttpError(
 			'Something went Wrong,Could not update Place',
@@ -158,5 +166,5 @@ const deleteDiseaseByCropName = async (req, res, next) => {
 exports.getInterventionByCropName = getInterventionByCropName;
 exports.getIntrevention = getIntrevention;
 exports.deleteDiseaseByCropName = deleteDiseaseByCropName;
-exports.updateDiseaseByCropName = updateDiseaseByCropName;
+exports.updateInterventionByCropName = updateInterventionByCropName;
 exports.createIntervention = createIntervention;
