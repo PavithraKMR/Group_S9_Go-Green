@@ -1,6 +1,6 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
-const Disease = require('../models/AnimalIntervention');
+const AnimalIntervention = require('../models/AnimalIntervention');
 
 const createIntervention = async (req, res, next) => {
 	const errors = validationResult(req);
@@ -12,7 +12,7 @@ const createIntervention = async (req, res, next) => {
 	console.log(req.body);
 	const url = req.protocol + '://' + req.get('host');
 
-	const newIntervention = new Disease({
+	const newIntervention = new AnimalIntervention({
 		cropName: req.body.cropName,
 		interventionName: req.body.interventionName,
 		image: url + '/uploads/Intervention/' + req.file.filename,
@@ -45,21 +45,21 @@ const getInterventionByCropName = async (req, res, next) => {
 
 	const cropName = req.params.cropName;
 
-	let cropDiseases;
+	let cropInteventions;
 
 	try {
-		cropDiseases = await Disease.find({ cropName: cropName }); // only get email and name
+		cropInteventions = await AnimalIntervention.find({ cropName: cropName }); // only get email and name
 	} catch (err) {
 		const error = new HttpError('signing up failed could not save ', 500);
 		return next(error);
 	}
 
-	if (!cropDiseases || cropDiseases.length === 0) {
+	if (!cropInteventions || cropInteventions.length === 0) {
 		res.status(201).json({ message: 'There is no Diseases' });
 	} else {
 		res.status(200).json({
-			cropDiseases: cropDiseases.map((disease) =>
-				disease.toObject({ getters: true })
+			cropInteventions: cropInteventions.map((disease) =>
+				cropIntevention.toObject({ getters: true })
 			)
 		});
 	}
