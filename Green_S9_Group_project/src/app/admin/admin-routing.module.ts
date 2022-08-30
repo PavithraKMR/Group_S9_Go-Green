@@ -40,8 +40,8 @@ const routes: Routes = [
 											import('./home/crop/crop-tips/show-tip/show-tip.module').then(
 												m => m.ShowTipPageModule
 											)
-									},
-                  // {
+									}
+									// {
 									// 	path: 'edit/:tipId',
 									// 	loadChildren: () =>
 									// 		import('../admin/home/crop/crop-tips/edit-tip/edit-tip.module').then(
@@ -78,10 +78,22 @@ const routes: Routes = [
 							},
 							{
 								path: 'animal-intervention',
-								loadChildren: () =>
-									import('./home/crop/animal-intervention/animal-intervention.module').then(
-										m => m.AnimalInterventionPageModule
-									)
+								children: [
+									{
+										path: '',
+										loadChildren: () =>
+											import('./home/crop/animal-intervention/animal-intervention.module').then(
+												m => m.AnimalInterventionPageModule
+											)
+									},
+									{
+										path: 'add-intervention',
+										loadChildren: () =>
+											import('./home/crop/animal-intervention/add-intervention/add-intervention.module').then(
+												m => m.AddInterventionPageModule
+											)
+									}
+								]
 							},
 							{
 								path: 'add-tips',

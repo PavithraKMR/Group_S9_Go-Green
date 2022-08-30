@@ -9,7 +9,7 @@ router.get(
 	interventionController.getIntrevention
 );
 router.get(
-	'/getInterventions/:cropName',
+	'/:cropName',
 	interventionController.getInterventionByCropName
 );
 

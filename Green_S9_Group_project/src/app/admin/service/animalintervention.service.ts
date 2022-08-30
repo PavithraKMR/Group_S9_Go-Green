@@ -17,115 +17,124 @@ export class AnimalinterventionService {
 
 	fetchInterventions(name: string) {
 		return this.http
-			.get<any>('http://localhost:5000/api/crop/getTips/' + name)
+			.get<any>('http://localhost:5000/api/Intervention/' + name)
 			.pipe(
 				take(1),
 				map(data => {
 					if (data.message) {
 						return data;
 					} else {
-						const tips = [];
-						for (var tip of data.cropTips) {
-							tips.push({
-								tipsId: tip.id,
-								name: tip.name,
-
-								information: tip.information
+						const intervetions = [];
+						for (var intervention of data.cropInteventions) {
+							intervetions.push({
+								interventionId: intervention.interventionId,
+                about: intervention.about,
+                whyIsImportant: intervention.whyIsImportant,
+                cropName: intervention.cropName,
+                image: intervention.image,
+                interventionName: intervention.interventionName,
+                whatIdDoes: intervention.whatIdDoes,
+                whyAndWhereItOccours: intervention.whyAndWhereItOccours,
+                howToIdentify: intervention.howToIdentify,
+                howToManage: intervention.howToManage,
 							});
+
+
 						}
 
-						return tips;
+						return intervetions;
 					}
 				}),
 				tap(data => {
-					this._croptips.next(data);
+          console.log(data),
+					this._intervention.next(data);
 				})
 			);
 	}
 
-	addIntervention(name: string, information: string) {
-		let genId: string;
-		const newCropTip = {
-			cropName: name,
+	// addIntervention(name: string, information: string) {
+	// 	let genId: string;
+	// 	const newCropTip = {
+	// 		cropName: name,
 
-			information: information
-		};
-		return this.http
-			.post<any>('http://localhost:5000/api/crop/createTip', newCropTip)
-			.pipe(
-				take(1),
-				switchMap(data => {
-					return this.AllcropTips;
-				}),
-				tap(tips => {
-					this._croptips.next(tips);
-				})
-			);
-	}
+	// 		information: information
+	// 	};
+	// 	return this.http
+	// 		.post<any>('http://localhost:5000/api/crop/createTip', newCropTip)
+	// 		.pipe(
+	// 			take(1),
+	// 			switchMap(data => {
+	// 				return this.AllcropTips;
+	// 			}),
+	// 			tap(tips => {
+	// 				this._croptips.next(tips);
+	// 			})
+	// 		);
+	// }
 
-	getIntervention(tipId: string) {
-		return this.http
-			.get<any>('http://localhost:5000/api/crop/cropTips/' + tipId)
-			.pipe(
-				take(1),
-				map(data => {
-					return {
-						tipsId: data.tip.id,
-						name: data.tip.cropName,
-						// type: data.tip.type,
+	// getIntervention(tipId: string) {
+	// 	return this.http
+	// 		.get<any>('http://localhost:5000/api/crop/cropTips/' + tipId)
+	// 		.pipe(
+	// 			take(1),
+	// 			map(data => {
+	// 				return {
+	// 					tipsId: data.tip.id,
+	// 					name: data.tip.cropName,
+	// 					// type: data.tip.type,
 
-						information: data.tip.information
-					};
-				})
-			);
-	}
+	// 					information: data.tip.information
+	// 				};
+	// 			})
+	// 		);
+	// }
 
-	updateIntervention(id: string, name: string, information: string) {
-		let updatedtips: CropTips[];
-		return this.AllcropTips.pipe(
-			take(1),
-			switchMap(tips => {
-				if (!tips || tips.length <= 0) {
-					return this.fetchAlltips(name);
-				} else {
-					return of(tips);
-				}
-			}),
-			switchMap(tips => {
-				const index = tips.findIndex(p => p.tipsId === id);
-				const oldtip = tips[index];
+	// updateIntervention(id: string, name: string, information: string) {
+	// 	let updatedtips: CropTips[];
+	// 	return this.AllcropTips.pipe(
+	// 		take(1),
+	// 		switchMap(tips => {
+	// 			if (!tips || tips.length <= 0) {
+	// 				return this.fetchAlltips(name);
+	// 			} else {
+	// 				return of(tips);
+	// 			}
+	// 		}),
+	// 		switchMap(tips => {
+	// 			const index = tips.findIndex(p => p.tipsId === id);
+	// 			const oldtip = tips[index];
 
-				updatedtips = [...tips];
+	// 			updatedtips = [...tips];
 
-				updatedtips[index] = {
-					tipsId: id,
-					name: name,
+	// 			updatedtips[index] = {
+	// 				tipsId: id,
+	// 				name: name,
 
-					information: information
-				};
+	// 				information: information
+	// 			};
 
-				return this.http.put(
-					`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`,
-					{ ...updatedtips[index], tipsId: null }
-				);
-			}),
-			tap(() => {
-				this._croptips.next(updatedtips);
-			})
-		);
-	}
+	// 			return this.http.put(
+	// 				`https://greenproject-6f3b9-default-rtdb.firebaseio.com/croptips/${id}.json`,
+	// 				{ ...updatedtips[index], tipsId: null }
+	// 			);
+	// 		}),
+	// 		tap(() => {
+	// 			this._croptips.next(updatedtips);
+	// 		})
+	// 	);
+	// }
 
-	DeleteIntervention(id: string) {
-		return this.http
-			.delete('http://localhost:5000/api/crop/cropTips/delete/' + id)
-			.pipe(
-				take(1),
-				switchMap(res => {
-					return this.AllcropTips;
-				}),
-				tap(tips => {
-					this._croptips.next(tips.filter(p => p.tipsId !== id));
-				})
-			);
-	}
+	// DeleteIntervention(id: string) {
+	// 	return this.http
+	// 		.delete('http://localhost:5000/api/crop/cropTips/delete/' + id)
+	// 		.pipe(
+	// 			take(1),
+	// 			switchMap(res => {
+	// 				return this.AllcropTips;
+	// 			}),
+	// 			tap(tips => {
+	// 				this._croptips.next(tips.filter(p => p.tipsId !== id));
+	// 			})
+	// 		);
+	// }
 }

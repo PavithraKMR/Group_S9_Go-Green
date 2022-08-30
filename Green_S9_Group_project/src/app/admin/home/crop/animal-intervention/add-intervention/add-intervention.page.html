@@ -1,9 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-intervention</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [defaultHref]="['/admin','tabs','home',crop.name,'animal-intervention']"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="!isLoading">Add {{crop.name}} Intervention</ion-title>
+    <ion-title *ngIf="isLoading"><ion-spinner></ion-spinner></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-</ion-content>
+<ion-content> </ion-content>

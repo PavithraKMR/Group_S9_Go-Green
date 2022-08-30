@@ -55,7 +55,7 @@ const getInterventionByCropName = async (req, res, next) => {
 	}
 
 	if (!cropInteventions || cropInteventions.length === 0) {
-		res.status(201).json({ message: 'There is no Diseases' });
+		res.status(201).json({ message: 'There is no intervetions' });
 	} else {
 		res.status(200).json({
 			cropInteventions: cropInteventions.map((disease) =>
