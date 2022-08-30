@@ -119,14 +119,18 @@ const updateInterventionByCropName = async (req, res, next) => {
 		return next(error);
 	}
 
-	disease.about = about;
-	disease.remedyAction = remedyAction;
-	disease.cropName = cropName;
-	disease.image = image;
-	disease.diseaseName = diseaseName;
+	intevention.about = about;
+	intevention.whyIsImportant = whyIsImportant;
+	intevention.cropName = cropName;
+	intevention.image = image;
+	intevention.interventionName = interventionName;
+	intevention.howToManage = howToManage;
+	intevention.howToIdentify = howToIdentify;
+	intevention.whyAndWhereItOccours = whyAndWhereItOccours;
+	intevention.whatIdDoes = whatIdDoes;
 
 	try {
-		await disease.save();
+		await intevention.save();
 	} catch (err) {
 		const error = new HttpError(
 			'Something went Wrong,Could not update Place',
@@ -135,14 +139,14 @@ const updateInterventionByCropName = async (req, res, next) => {
 		return next(error);
 	}
 
-	res.status(201).json({ disease: disease.toObject({ getters: true }) });
+	res.status(201).json({ intevention: intevention.toObject({ getters: true }) });
 };
 
-const deleteDiseaseByCropName = async (req, res, next) => {
-	const diseaseId = req.params.diseaseId;
-	let disease;
+const deleteInterventionByCropName = async (req, res, next) => {
+	const interventionId = req.params.interventionId;
+	let intervention;
 	try {
-		disease = await Disease.findById(diseaseId);
+		intervention = await AnimalIntervention.findById(interventionId);
 	} catch (err) {
 		const error = new HttpError(
 			'Something went wrong, could not delete user',
@@ -152,7 +156,7 @@ const deleteDiseaseByCropName = async (req, res, next) => {
 	}
 
 	try {
-		await disease.remove();
+		await intervention.remove();
 	} catch (err) {
 		const error = new HttpError(
 			'Something went wrong, could not delete user',
@@ -165,6 +169,6 @@ const deleteDiseaseByCropName = async (req, res, next) => {
 
 exports.getInterventionByCropName = getInterventionByCropName;
 exports.getIntrevention = getIntrevention;
-exports.deleteDiseaseByCropName = deleteDiseaseByCropName;
+exports.deleteInterventionByCropName = deleteInterventionByCropName;
 exports.updateInterventionByCropName = updateInterventionByCropName;
 exports.createIntervention = createIntervention;
