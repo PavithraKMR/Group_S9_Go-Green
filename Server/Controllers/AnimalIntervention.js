@@ -1,6 +1,6 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
-const Disease = require('../models/CropDisease');
+const Disease = require('../models/AnimalIntervention');
 
 const createIntervention = async (req, res, next) => {
 	const errors = validationResult(req);
@@ -13,14 +13,19 @@ const createIntervention = async (req, res, next) => {
 	const url = req.protocol + '://' + req.get('host');
 
 	const newIntervention = new Disease({
-		about: req.body.aboutDisease,
 		cropName: req.body.cropName,
-		diseaseName: req.body.diseaseName,
-		image: url + '/uploads/Diseases/' + req.file.filename,
+		interventionName: req.body.interventionName,
+		image: url + '/uploads/Intervention/' + req.file.filename,
 
-		remedyAction: req.body.remedyAction
+		whyIsImportant: req.body.whyIsImportant,
+		whatIdDoes: req.body.whatIdDoes,
+		whyAndWhereItOccours: req.body.whyAndWhereItOccours,
+		howToIdentify: req.body.howToIdentify,
+		howToManage: req.body.howToManage,
+
+		about: req.body.aboutIntervention
 	});
-	console.log(newDisease);
+	console.log(newIntervention);
 
 	try {
 		await newIntervention.save();
@@ -154,4 +159,4 @@ exports.getDiseasesByCropName = getDiseasesByCropName;
 exports.getDisease = getDisease;
 exports.deleteDiseaseByCropName = deleteDiseaseByCropName;
 exports.updateDiseaseByCropName = updateDiseaseByCropName;
-exports.createDisease = createDisease;
+exports.createIntervention = createIntervention;
