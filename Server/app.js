@@ -19,6 +19,7 @@ const adminRouter = require('./routes/Admin');
 const authRouter = require('./routes/Auth');
 const notificationRouter = require('./routes/Notification');
 const userRouter = require('./routes/users');
+const interventionRouter = require('./routes/AnimalIntervention');
 
 app.use(bodyParser.json()); // to get body ,this should be used before routers
 
@@ -43,13 +44,14 @@ app.use('/api/crop', adminRouter);
 app.use('/api/GreenLive', authRouter);
 app.use('/api/Notification', notificationRouter);
 app.use('/api/user', userRouter);
+app.use('/api/Intervention', interventionRouter);
 
 // for unsupported router error handler
 app.use((req, res, next) => {
 	const error = new HttpError('could not find this route..');
 	throw error;
 });
- 
+
 //after using all routes
 app.use((error, req, res, next) => {
 	if (res.sendHeader) {

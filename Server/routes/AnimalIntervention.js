@@ -1,27 +1,31 @@
 const express = require('express');
 var router = express.Router();
-var TipController = require('../Controllers/Tip');
-var diseaseController = require('../Controllers/Disease');
+var interventionController = require('../Controllers/AnimalIntervention');
 var fileUpload = require('../Middleware/interventionFile-upload');
 const multer = require('multer');
 
-router.get('/Interventions/:interventionId', TipController.getTip);
-router.get('/getInterventions/:cropName', TipController.getTipsByCropName);
+router.get(
+	'/interventions/:interventionId',
+	interventionController.getIntrevention
+);
+router.get(
+	'/getInterventions/:cropName',
+	interventionController.getInterventionByCropName
+);
 
-router.post('/createIntervention', TipController.createTip);
 router.patch(
 	'/cropInterventions/update/:interventionId',
-	TipController.updateTipsByCropName
+	interventionController.updateInterventionByCropName
 );
 router.delete(
 	'/cropInterventions/delete/:interventionId',
-	TipController.deleteTipByCropName
+	interventionController.deleteInterventionByCropName
 );
 
 router.post(
 	'/createIntervention',
 	fileUpload.single('image'),
-	diseaseController.createDisease
+	interventionController.createIntervention
 );
 
 module.exports = router;
