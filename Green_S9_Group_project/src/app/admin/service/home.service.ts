@@ -145,6 +145,7 @@ export class HomeService {
 	) {
 		const formData = new FormData();
 
+
 		formData.append('image', image);
 		formData.append('diseaseName', diseaseName);
 		formData.append('aboutDisease', aboutDisease);

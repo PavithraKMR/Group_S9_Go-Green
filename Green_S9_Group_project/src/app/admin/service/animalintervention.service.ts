@@ -28,49 +28,67 @@ export class AnimalinterventionService {
 						for (var intervention of data.cropInteventions) {
 							intervetions.push({
 								interventionId: intervention.interventionId,
-                about: intervention.about,
-                whyIsImportant: intervention.whyIsImportant,
-                cropName: intervention.cropName,
-                image: intervention.image,
-                interventionName: intervention.interventionName,
-                whatIdDoes: intervention.whatIdDoes,
-                whyAndWhereItOccours: intervention.whyAndWhereItOccours,
-                howToIdentify: intervention.howToIdentify,
-                howToManage: intervention.howToManage,
+								about: intervention.about,
+								whyIsImportant: intervention.whyIsImportant,
+								cropName: intervention.cropName,
+								image: intervention.image,
+								interventionName: intervention.interventionName,
+								whatIdDoes: intervention.whatIdDoes,
+								whyAndWhereItOccours: intervention.whyAndWhereItOccours,
+								howToIdentify: intervention.howToIdentify,
+								howToManage: intervention.howToManage
 							});
-
-
 						}
 
 						return intervetions;
 					}
 				}),
 				tap(data => {
-          console.log(data),
-					this._intervention.next(data);
+					console.log(data), this._intervention.next(data);
 				})
 			);
 	}
 
-	// addIntervention(name: string, information: string) {
-	// 	let genId: string;
-	// 	const newCropTip = {
-	// 		cropName: name,
+	addIntervention(
+		about: string,
+		cropName: string,
+		interventionName: string,
+		image: File,
+		whyIsImportant: string,
+		whatIdDoes: string,
+		whyAndWhereItOccours: string,
+		howToIdentify: string,
+		howToManage: string
+	) {
 
-	// 		information: information
-	// 	};
-	// 	return this.http
-	// 		.post<any>('http://localhost:5000/api/crop/createTip', newCropTip)
-	// 		.pipe(
-	// 			take(1),
-	// 			switchMap(data => {
-	// 				return this.AllcropTips;
-	// 			}),
-	// 			tap(tips => {
-	// 				this._croptips.next(tips);
-	// 			})
-	// 		);
-	// }
+
+		const formData = new FormData();
+		formData.append('image', image);
+		formData.append('about', about);
+		formData.append('interventionName', interventionName);
+		formData.append('whyIsImportant', whyIsImportant);
+		formData.append('cropName', cropName);
+		formData.append('whatIdDoes', whatIdDoes);
+		formData.append('whyAndWhereItOccours', whyAndWhereItOccours);
+		formData.append('howToIdentify', howToIdentify);
+		formData.append('howToManage', howToManage);
+
+
+		return this.http
+			.post<any>(
+				'http://localhost:5000/api/Intervention/createIntervention',
+				formData
+			)
+			.pipe(
+				take(1),
+				switchMap(data => {
+					return this.AllInterventions;
+				}),
+				tap(interventions => {
+					this._intervention.next(interventions);
+				})
+			);
+	}
 
 	// getIntervention(tipId: string) {
 	// 	return this.http

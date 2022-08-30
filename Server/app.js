@@ -85,3 +85,7 @@ app.use(
 	'/uploads/Diseases',
 	express.static(path.join('Server/uploads/Diseases'))
 );
+app.use(
+	'/uploads/Intervention',
+	express.static(path.join('Server/uploads/Intervention'))
+);

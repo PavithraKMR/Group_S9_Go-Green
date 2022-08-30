@@ -16,14 +16,12 @@ const createIntervention = async (req, res, next) => {
 		cropName: req.body.cropName,
 		interventionName: req.body.interventionName,
 		image: url + '/uploads/Intervention/' + req.file.filename,
-
+		about: req.body.about,
 		whyIsImportant: req.body.whyIsImportant,
 		whatIdDoes: req.body.whatIdDoes,
 		whyAndWhereItOccours: req.body.whyAndWhereItOccours,
 		howToIdentify: req.body.howToIdentify,
-		howToManage: req.body.howToManage,
-
-		about: req.body.aboutIntervention
+		howToManage: req.body.howToManage
 	});
 	console.log(newIntervention);
 
@@ -139,7 +137,9 @@ const updateInterventionByCropName = async (req, res, next) => {
 		return next(error);
 	}
 
-	res.status(201).json({ intevention: intevention.toObject({ getters: true }) });
+	res
+		.status(201)
+		.json({ intevention: intevention.toObject({ getters: true }) });
 };
 
 const deleteInterventionByCropName = async (req, res, next) => {

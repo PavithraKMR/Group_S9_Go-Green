@@ -31,11 +31,12 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
+		this.isLoading = true;
+
 		this.paramSub = this.route.paramMap.subscribe(paramMap => {
 			if (!paramMap.has('cropId')) {
 				return;
 			}
-			this.isLoading = true;
 			this.cropSub = this.homeService
 				.getCrop(paramMap.get('cropId'))
 				.subscribe(crop => {
@@ -45,7 +46,7 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 		});
 
 		this.form = new FormGroup({
-			interventionName: new FormControl(null, {
+			diseaseName: new FormControl(null, {
 				validators: [Validators.required, Validators.minLength(3)]
 			}),
 			about: new FormControl(null, {
@@ -86,20 +87,17 @@ export class AddDiseasePage implements OnInit, OnDestroy {
 				)
 				.subscribe();
 
-        this.router.navigate([
-          '/admin',
-          'tabs',
-          'home',
-          this.crop.name,
-          'diseases'
-        ]);
+			this.router.navigate([
+				'/admin',
+				'tabs',
+				'home',
+				this.crop.name,
+				'diseases'
+			]);
 		}
 
 		this.form.reset();
 	}
-
-
-
 
 	ngOnDestroy(): void {
 		if (this.cropSub || this.paramSub) {

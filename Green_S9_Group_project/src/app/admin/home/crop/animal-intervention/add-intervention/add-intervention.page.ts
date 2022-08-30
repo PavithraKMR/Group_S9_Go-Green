@@ -1,11 +1,8 @@
+import { AnimalinterventionService } from 'src/app/admin/service/animalintervention.service';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-	AnimationController,
-	LoadingController,
-	ModalController
-} from '@ionic/angular';
+import { LoadingController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 import { CropTips } from 'src/app/admin/models/croptips.models';
 import { HomeService } from 'src/app/admin/service/home.service';
@@ -16,7 +13,7 @@ import { Crop } from 'src/app/models/crop.model';
 	styleUrls: ['./add-intervention.page.scss']
 })
 export class AddInterventionPage implements OnInit {
-	tipSub: Subscription;
+	interventionSub: Subscription;
 	cropTips: CropTips[];
 	form: FormGroup;
 	crop: Crop;
@@ -29,7 +26,8 @@ export class AddInterventionPage implements OnInit {
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private animalIntervention: AnimalinterventionService
 	) {}
 
 	ngOnInit() {
@@ -55,9 +53,6 @@ export class AddInterventionPage implements OnInit {
 				validators: [Validators.required, Validators.minLength(3)]
 			}),
 			whyIsImportant: new FormControl(null, {
-				validators: [Validators.required, Validators.minLength(3)]
-			}),
-			cropName: new FormControl(null, {
 				validators: [Validators.required, Validators.minLength(3)]
 			}),
 			whatIdDoes: new FormControl(null, {
@@ -92,22 +87,47 @@ export class AddInterventionPage implements OnInit {
 			console.log('invalid');
 			return;
 		} else {
-			console.log(this.form.value);
+			// this.loadCtrl
+			// 	.create({
+			// 		message: 'Creating...',
+			// 		spinner: 'circular',
+			// 		animated: true,
+			// 		duration: 1000
+			// 	})
+			// 	.then(el => {
+			// 		el.present();
+			this.interventionSub = this.animalIntervention
+				.addIntervention(
+					this.form.value.about,
+					this.crop.name,
+					this.form.value.interventionName,
+					this.form.value.image,
+					this.form.value.whyIsImportant,
+					this.form.value.whatIdDoes,
+					this.form.value.whyAndWhereItOccours,
+					this.form.value.howToIdentify,
+					this.form.value.howToManage
+				)
+				.subscribe(() => {
+					// el.dismiss();
+					// });
+				});
 
 			this.router.navigate([
 				'/admin',
 				'tabs',
 				'home',
 				this.crop.name,
-				'diseases'
+				'animal-intervention'
 			]);
 		}
 		this.form.reset();
 	}
 
 	ngOnDestroy() {
-		if (this.cropSub || this.paramSub) {
+		if (this.cropSub || this.paramSub || this.interventionSub) {
 			this.cropSub.unsubscribe();
+			this.interventionSub.unsubscribe();
 			this.paramSub.unsubscribe();
 		}
 	}
