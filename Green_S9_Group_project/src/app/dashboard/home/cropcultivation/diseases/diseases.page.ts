@@ -64,9 +64,10 @@ export class DiseasesPage implements OnInit, OnDestroy {
 
   ngOnDestroy()
   {
-    if(this.tipSub ||this.idSub)
+    if(this.tipSub ||this.idSub ||this.cropSub)
     {
       this.tipSub.unsubscribe()
+      this.cropSub.unsubscribe()
       this.idSub.unsubscribe()
     }
   }

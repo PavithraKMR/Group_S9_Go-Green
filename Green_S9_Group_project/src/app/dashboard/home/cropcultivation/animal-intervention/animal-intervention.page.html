@@ -15,17 +15,17 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <ion-list *ngFor="let disease of diseases" class="content">
+        <ion-list *ngFor="let intervention of interventions" class="content">
           <ion-card>
-            <ion-item class="image" *ngIf="disease.image">
-              <ion-img [src]="disease.image"></ion-img>
+            <ion-item class="image" *ngIf="intervention.image">
+              <ion-img [src]="intervention.image"></ion-img>
             </ion-item>
 
             <ion-item class="title">
               <ion-card-header>
                 <ion-card-title>
                   <h1>
-                    {{"Dashboard.CropDiseases.DiseaseName."+disease.diseaseName
+                    {{"Dashboard.CropDiseases.DiseaseName."+intervention.interventionName
                     | translate}}
                   </h1>
                 </ion-card-title>
@@ -34,10 +34,10 @@
 
             <ion-item class="btns">
               <ion-buttons>
-                <ion-button class="about" (click)="about(disease.diseaseId)"
+                <ion-button class="about" (click)="about(intervention.interventionId)"
                   >{{"Dashboard.CropDiseases.About" | translate}}</ion-button
                 >
-                <ion-button class="remedy" (click)="remedy(disease.diseaseId)"
+                <ion-button class="remedy" (click)="remedy(intervention.interventionId)"
                   >{{"Dashboard.CropDiseases.Remedy" | translate}}</ion-button
                 >
               </ion-buttons>

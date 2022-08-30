@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
-import { Crop } from 'src/app/models/crop.model';
-import { Disease } from 'src/app/models/disease.model';
-import { CropTips } from '../models/croptips.models';
+
 @Injectable({
 	providedIn: 'root'
 })

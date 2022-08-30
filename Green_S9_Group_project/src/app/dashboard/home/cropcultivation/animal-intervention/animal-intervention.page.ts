@@ -9,6 +9,8 @@ import {
 import { Subscription } from 'rxjs';
 import { Disease } from 'src/app/models/disease.model';
 import { Crop } from 'src/app/models/crop.model';
+import { Intervention } from 'src/app/models/intervention.model';
+import { AnimalinterventionService } from 'src/app/admin/service/animalintervention.service';
 
 @Component({
 	selector: 'app-animal-intervention',
@@ -19,15 +21,16 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 	constructor(
 		private homeService: HomeService,
 		private route: ActivatedRoute,
-		private router: Router
+		private router: Router,
+		private animalIntervention: AnimalinterventionService
 	) {}
 
 	tipSub: Subscription;
 	idSub: Subscription;
-	diseases: Disease[];
 	crop: Crop;
 	isLoading = false;
 	cropSub: Subscription;
+	interventions: Intervention[];
 
 	ngOnInit() {
 		this.isLoading = true;
@@ -47,11 +50,11 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 
 	ionViewWillEnter() {
 		this.isLoading = true;
-		this.tipSub = this.homeService
-			.fetchAllDisease(this.crop.name)
-			.subscribe(diseases => {
-				this.diseases = diseases;
-				console.log(this.crop.name);
+		this.tipSub = this.animalIntervention
+			.fetchInterventions(this.crop.name)
+			.subscribe(interventions => {
+				this.interventions = interventions;
+				console.log(this.interventions);
 
 				this.isLoading = false;
 			});
@@ -82,8 +85,9 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.tipSub || this.idSub) {
+		if (this.tipSub || this.idSub || this.cropSub) {
 			this.tipSub.unsubscribe();
+			this.cropSub.unsubscribe();
 			this.idSub.unsubscribe();
 		}
 	}
