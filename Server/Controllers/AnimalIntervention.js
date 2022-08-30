@@ -65,26 +65,26 @@ const getInterventionByCropName = async (req, res, next) => {
 	}
 };
 
-const getDisease = async (req, res, next) => {
+const getIntrevention = async (req, res, next) => {
 	const errors = validationResult(req);
 
 	if (!errors.isEmpty()) {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
 
-	const { diseaseId } = req.params;
-	let disease;
+	const { interventionId } = req.params;
+	let intervention;
 	try {
-		disease = await Disease.findById(diseaseId);
+		intervention = await AnimalIntervention.findById(interventionId);
 	} catch (err) {
 		const error = new HttpError('finding user failed bt id,try again', 500);
 		return next(error);
 	}
 
-	if (!disease) {
-		res.status(201).json({ message: 'There is no Disease ' });
+	if (!intervention) {
+		res.status(201).json({ message: 'There is no Intervention ' });
 	} else {
-		return res.status(201).json(disease.toObject({ getters: true }));
+		return res.status(201).json(intervention.toObject({ getters: true }));
 	}
 };
 
@@ -155,8 +155,8 @@ const deleteDiseaseByCropName = async (req, res, next) => {
 	res.status(200).json({ message: 'Deleted User' });
 };
 
-exports.getDiseasesByCropName = getDiseasesByCropName;
-exports.getDisease = getDisease;
+exports.getInterventionByCropName = getInterventionByCropName;
+exports.getIntrevention = getIntrevention;
 exports.deleteDiseaseByCropName = deleteDiseaseByCropName;
 exports.updateDiseaseByCropName = updateDiseaseByCropName;
 exports.createIntervention = createIntervention;
