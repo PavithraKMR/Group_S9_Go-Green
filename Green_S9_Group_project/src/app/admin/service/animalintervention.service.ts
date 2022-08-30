@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, of } from 'rxjs';
 import { map, switchMap, take, tap } from 'rxjs/operators';
+import { Intervention } from 'src/app/models/intervention.model';
 
 @Injectable({
 	providedIn: 'root'
@@ -9,7 +10,7 @@ import { map, switchMap, take, tap } from 'rxjs/operators';
 export class AnimalinterventionService {
 	constructor(private http: HttpClient) {}
 
-	private _intervention = new BehaviorSubject([]);
+	private _intervention = new BehaviorSubject<Intervention[]>([]);
 
 	get AllInterventions() {
 		return this._intervention.asObservable();
@@ -44,7 +45,7 @@ export class AnimalinterventionService {
 					}
 				}),
 				tap(data => {
-					console.log(data), this._intervention.next(data);
+					this._intervention.next(data);
 				})
 			);
 	}
@@ -60,8 +61,6 @@ export class AnimalinterventionService {
 		howToIdentify: string,
 		howToManage: string
 	) {
-
-
 		const formData = new FormData();
 		formData.append('image', image);
 		formData.append('about', about);
@@ -73,7 +72,6 @@ export class AnimalinterventionService {
 		formData.append('howToIdentify', howToIdentify);
 		formData.append('howToManage', howToManage);
 
-
 		return this.http
 			.post<any>(
 				'http://localhost:5000/api/Intervention/createIntervention',
@@ -81,7 +79,7 @@ export class AnimalinterventionService {
 			)
 			.pipe(
 				take(1),
-				switchMap(data => {
+				switchMap(() => {
 					return this.AllInterventions;
 				}),
 				tap(interventions => {

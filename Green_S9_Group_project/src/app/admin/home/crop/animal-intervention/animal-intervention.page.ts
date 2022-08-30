@@ -1,3 +1,5 @@
+import { AnimalinterventionService } from './../../../service/animalintervention.service';
+import { Intervention } from './../../../../models/intervention.model';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -21,7 +23,8 @@ export class AnimalInterventionPage implements OnInit {
 		private loadCtrl: LoadingController,
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private interventionService: AnimalinterventionService
 	) {}
 
 	tipSub: Subscription;
@@ -30,7 +33,8 @@ export class AnimalInterventionPage implements OnInit {
 	isLoading = false;
 	cropSub: Subscription;
 	paramSub: Subscription;
-
+	interventions: Intervention[];
+	interventionSub: Subscription;
 	ngOnInit() {
 		this.isLoading = true;
 		this.paramSub = this.route.paramMap.subscribe(paraMap => {
@@ -45,6 +49,13 @@ export class AnimalInterventionPage implements OnInit {
 					this.isLoading = false;
 				});
 		});
+
+		this.interventionSub = this.interventionService.AllInterventions.subscribe(
+			interventions => {
+				this.interventions = interventions;
+				console.log(this.interventions);
+			}
+		);
 	}
 
 	ionViewWillEnter() {
@@ -61,6 +72,13 @@ export class AnimalInterventionPage implements OnInit {
 					this.isLoading = false;
 				});
 		});
+
+		this.interventionSub = this.interventionService
+			.fetchInterventions(this.crop.name)
+			.subscribe(interventions => {
+				this.interventions = interventions;
+				console.log(this.interventions);
+			});
 	}
 
 	addCropTips() {}

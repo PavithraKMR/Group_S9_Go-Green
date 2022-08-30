@@ -1,5 +1,5 @@
 import { AnimalinterventionService } from 'src/app/admin/service/animalintervention.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { LoadingController, ModalController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { Crop } from 'src/app/models/crop.model';
 	templateUrl: './add-intervention.page.html',
 	styleUrls: ['./add-intervention.page.scss']
 })
-export class AddInterventionPage implements OnInit {
+export class AddInterventionPage implements OnInit,OnDestroy {
 	interventionSub: Subscription;
 	cropTips: CropTips[];
 	form: FormGroup;
