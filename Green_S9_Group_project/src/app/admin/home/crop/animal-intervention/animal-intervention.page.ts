@@ -46,14 +46,13 @@ export class AnimalInterventionPage implements OnInit {
 				.getCrop(paraMap.get('cropId'))
 				.subscribe(crop => {
 					this.crop = crop;
-					this.isLoading = false;
 				});
 		});
 
 		this.interventionSub = this.interventionService.AllInterventions.subscribe(
 			interventions => {
 				this.interventions = interventions;
-				console.log(this.interventions);
+				this.isLoading = false;
 			}
 		);
 	}
@@ -69,7 +68,6 @@ export class AnimalInterventionPage implements OnInit {
 				.getCrop(paraMap.get('cropId'))
 				.subscribe(crop => {
 					this.crop = crop;
-					this.isLoading = false;
 				});
 		});
 
@@ -77,16 +75,17 @@ export class AnimalInterventionPage implements OnInit {
 			.fetchInterventions(this.crop.name)
 			.subscribe(interventions => {
 				this.interventions = interventions;
-				console.log(this.interventions);
+				this.isLoading = false;
 			});
 	}
 
 	addCropTips() {}
 
 	ngOnDestroy() {
-		if (this.paramSub || this.cropSub) {
+		if (this.paramSub || this.cropSub || this.interventionSub) {
 			this.cropSub.unsubscribe();
 			this.paramSub.unsubscribe();
+			this.interventionSub.unsubscribe();
 		}
 	}
 }

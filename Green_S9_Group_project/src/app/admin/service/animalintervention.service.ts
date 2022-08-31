@@ -96,15 +96,15 @@ export class AnimalinterventionService {
 	// 			map(data => {
 	// 				return {
 	// 					     interventionId: intervention.interventionId,
-								// about: intervention.about,
-								// whyIsImportant: intervention.whyIsImportant,
-								// cropName: intervention.cropName,
-								// image: intervention.image,
-								// interventionName: intervention.interventionName,
-								// whatIdDoes: intervention.whatIdDoes,
-								// whyAndWhereItOccours: intervention.whyAndWhereItOccours,
-								// howToIdentify: intervention.howToIdentify,
-								// howToManage: intervention.howToManage
+	// about: intervention.about,
+	// whyIsImportant: intervention.whyIsImportant,
+	// cropName: intervention.cropName,
+	// image: intervention.image,
+	// interventionName: intervention.interventionName,
+	// whatIdDoes: intervention.whatIdDoes,
+	// whyAndWhereItOccours: intervention.whyAndWhereItOccours,
+	// howToIdentify: intervention.howToIdentify,
+	// howToManage: intervention.howToManage
 	// 				};
 	// 			})
 	// 		);
@@ -147,14 +147,18 @@ export class AnimalinterventionService {
 
 	DeleteIntervention(id: string) {
 		return this.http
-			.delete('http://localhost:5000/api/Intervention/cropInterventions/delete/' + id)
+			.delete(
+				'http://localhost:5000/api/Intervention/cropInterventions/delete/' + id
+			)
 			.pipe(
 				take(1),
 				switchMap(res => {
 					return this._intervention;
 				}),
 				tap(interventions => {
-					this._intervention.next(interventions.filter(p => p.interventionId !== id));
+					this._intervention.next(
+						interventions.filter(p => p.interventionId !== id)
+					);
 				})
 			);
 	}

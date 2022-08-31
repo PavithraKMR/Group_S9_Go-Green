@@ -46,7 +46,7 @@ const getInterventionByCropName = async (req, res, next) => {
 	let cropInteventions;
 
 	try {
-		cropInteventions = await AnimalIntervention.find({ cropName: cropName }); // only get email and name
+		cropInteventions = await AnimalIntervention.find({ cropName: cropName });
 	} catch (err) {
 		const error = new HttpError('signing up failed could not save ', 500);
 		return next(error);
