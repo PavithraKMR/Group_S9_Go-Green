@@ -95,11 +95,16 @@ export class AnimalinterventionService {
 	// 			take(1),
 	// 			map(data => {
 	// 				return {
-	// 					tipsId: data.tip.id,
-	// 					name: data.tip.cropName,
-	// 					// type: data.tip.type,
-
-	// 					information: data.tip.information
+	// 					     interventionId: intervention.interventionId,
+								// about: intervention.about,
+								// whyIsImportant: intervention.whyIsImportant,
+								// cropName: intervention.cropName,
+								// image: intervention.image,
+								// interventionName: intervention.interventionName,
+								// whatIdDoes: intervention.whatIdDoes,
+								// whyAndWhereItOccours: intervention.whyAndWhereItOccours,
+								// howToIdentify: intervention.howToIdentify,
+								// howToManage: intervention.howToManage
 	// 				};
 	// 			})
 	// 		);
@@ -140,17 +145,17 @@ export class AnimalinterventionService {
 	// 	);
 	// }
 
-	// DeleteIntervention(id: string) {
-	// 	return this.http
-	// 		.delete('http://localhost:5000/api/crop/cropTips/delete/' + id)
-	// 		.pipe(
-	// 			take(1),
-	// 			switchMap(res => {
-	// 				return this.AllcropTips;
-	// 			}),
-	// 			tap(tips => {
-	// 				this._croptips.next(tips.filter(p => p.tipsId !== id));
-	// 			})
-	// 		);
-	// }
+	DeleteIntervention(id: string) {
+		return this.http
+			.delete('http://localhost:5000/api/Intervention/cropInterventions/delete/' + id)
+			.pipe(
+				take(1),
+				switchMap(res => {
+					return this._intervention;
+				}),
+				tap(interventions => {
+					this._intervention.next(interventions.filter(p => p.interventionId !== id));
+				})
+			);
+	}
 }
