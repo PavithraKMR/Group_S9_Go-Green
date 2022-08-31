@@ -92,6 +92,20 @@ const routes: Routes = [
 											import('./home/crop/animal-intervention/add-intervention/add-intervention.module').then(
 												m => m.AddInterventionPageModule
 											)
+									},
+                  {
+										path: 'edit/:interventionId',
+										loadChildren: () =>
+											import('./home/crop/animal-intervention/edit/edit.module').then(
+												m => m.EditPageModule
+											)
+									},
+                  {
+										path: 'view/:interventionId',
+										loadChildren: () =>
+											import('./home/crop/animal-intervention/view/view.module').then(
+												m => m.ViewPageModule
+											)
 									}
 								]
 							},

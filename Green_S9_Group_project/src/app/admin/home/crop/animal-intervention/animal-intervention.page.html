@@ -30,7 +30,7 @@
 
     <ion-row>
       <ion-col>
-        <ion-list>
+        <ion-list *ngIf="interventions && interventions.length >= 0">
           <ion-item-sliding *ngFor="let intervention of interventions">
             <ion-item >
               <ion-label>{{intervention.interventionName}}</ion-label>
