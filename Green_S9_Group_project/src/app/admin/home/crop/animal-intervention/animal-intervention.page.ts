@@ -1,9 +1,10 @@
 import { AnimalinterventionService } from './../../../service/animalintervention.service';
 import { Intervention } from './../../../../models/intervention.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
-	AnimationController,
+	AlertController,
+	IonItemSliding,
 	LoadingController,
 	ModalController
 } from '@ionic/angular';
@@ -23,7 +24,9 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
 		private route: ActivatedRoute,
-		private interventionService: AnimalinterventionService
+		private interventionService: AnimalinterventionService,
+		private alertCtrl: AlertController,
+		private router: Router
 	) {}
 
 	tipSub: Subscription;
@@ -34,6 +37,7 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 	paramSub: Subscription;
 	interventions: Intervention[];
 	interventionSub: Subscription;
+	deleteSub: Subscription;
 	ngOnInit() {
 		this.isLoading = true;
 		this.paramSub = this.route.paramMap.subscribe(paraMap => {
@@ -79,8 +83,44 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 			});
 	}
 
-	delete(id: string) {
-		console.log('delete');
+	delete(id: string, item: IonItemSliding) {
+		this.alertCtrl
+			.create({
+				header: 'Delete Animal Intervention',
+				message: 'Are You Sure',
+				buttons: [
+					{
+						text: 'OK',
+						handler: () => {
+							this.loadCtrl
+								.create({
+									message: 'Deleting...',
+									spinner: 'crescent',
+									animated: true,
+									duration: 500
+								})
+								.then(e => {
+									e.present();
+									item.close();
+									this.deleteSub = this.interventionService
+										.DeleteIntervention(id)
+										.subscribe(data => {
+											e.dismiss();
+										});
+								});
+						}
+					},
+					{
+						text: 'Cancel',
+						handler: () => {
+							item.close();
+						}
+					}
+				]
+			})
+			.then(el => {
+				el.present();
+			});
 	}
 
 	ngOnDestroy() {

@@ -1,5 +1,6 @@
-import { AnimalinterventionService } from './../../../../admin/service/animalintervention.service';
-import { Intervention } from './../../../../models/intervention.model';
+import { AnimalinterventionService } from './../../../../../admin/service/animalintervention.service';
+
+import { Intervention } from './../../../../../models/intervention.model';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -13,12 +14,12 @@ import { HomeService } from 'src/app/admin/service/home.service';
 import { Crop } from 'src/app/models/crop.model';
 
 @Component({
-	selector: 'app-animal-intervention',
-	templateUrl: './animal-intervention.page.html',
-	styleUrls: ['./animal-intervention.page.scss']
+	selector: 'app-view',
+	templateUrl: './view.page.html',
+	styleUrls: ['./view.page.scss']
 })
-export class AnimalInterventionPage implements OnInit, OnDestroy {
-  constructor(
+export class ViewPage implements OnInit, OnDestroy {
+	constructor(
 		private loadCtrl: LoadingController,
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
@@ -32,7 +33,8 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 	isLoading = false;
 	cropSub: Subscription;
 	paramSub: Subscription;
-	interventions: Intervention[];
+	paraminterSub: Subscription;
+	intervention: any;
 	interventionSub: Subscription;
 	ngOnInit() {
 		this.isLoading = true;
@@ -48,13 +50,19 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 				});
 		});
 
-		this.interventionSub = this.interventionService.AllInterventions.subscribe(
-			interventions => {
-				this.interventions = interventions;
-
-				this.isLoading = false;
+		this.paraminterSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('interventionId')) {
+				return;
 			}
-		);
+
+			this.interventionSub = this.interventionService
+				.getIntervention(paraMap.get('interventionId'))
+				.subscribe(intervention => {
+					this.intervention = intervention;
+
+					this.isLoading = false;
+				});
+		});
 	}
 
 	ionViewWillEnter() {
@@ -71,23 +79,32 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 				});
 		});
 
-		this.interventionSub = this.interventionService
-			.fetchInterventions(this.crop.name)
-			.subscribe(interventions => {
-				this.interventions = interventions;
-				this.isLoading = false;
-			});
-	}
+		this.paraminterSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('interventionId')) {
+				return;
+			}
 
-	delete(id: string) {
-		console.log('delete');
+			this.interventionSub = this.interventionService
+				.getIntervention(paraMap.get('interventionId'))
+				.subscribe(intervention => {
+					this.intervention = intervention;
+
+					this.isLoading = false;
+				});
+		});
 	}
 
 	ngOnDestroy() {
-		if (this.paramSub || this.cropSub || this.interventionSub) {
+		if (
+			this.paramSub ||
+			this.cropSub ||
+			this.interventionSub ||
+			this.paraminterSub
+		) {
 			this.cropSub.unsubscribe();
 			this.paramSub.unsubscribe();
 			this.interventionSub.unsubscribe();
+			this.paraminterSub.unsubscribe();
 		}
 	}
 }
