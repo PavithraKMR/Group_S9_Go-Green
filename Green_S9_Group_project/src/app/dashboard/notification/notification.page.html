@@ -1,15 +1,13 @@
 <ion-header>
   <ion-toolbar color="primary">
-
-    <ion-buttons slot="start" >
-      <ion-menu-button ></ion-menu-button>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>Notification</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
   <ion-grid *ngIf="!isLoading && notifications.length === 0">
     <p>There is no Notifications</p>
   </ion-grid>
@@ -21,26 +19,246 @@
   <ion-grid *ngIf="!isLoading && notifications.length >0">
     <ion-row>
       <ion-col>
-        <ion-list *ngFor="let notification of notifications">
-          <ion-item >
-            <ion-label >
-              <ion-text class="date"> {{notification.date}} </ion-text>
+        <ion-list>
+          <ion-item-sliding
+            #item
+            *ngFor="let notification of notifications; let i=index"
+          >
+            <ion-item
+              [routerLink]="['/dashboard','tabs','notification','view',notification.notificationId]"
+            >
+              <ion-avatar slot="start">
+                <ion-img [src]="userIcons[i]"></ion-img>
+              </ion-avatar>
+              <div class="div">
+                <label class="date">
+                  <ion-note
+                    >{{notification.date | date: "EEE dd MMM"}}</ion-note
+                  >
+                </label>
 
-              <ion-text class="message"> {{notification.message}} </ion-text>
-            </ion-label>
-          </ion-item>
+                <label class="message">
+                  <p>{{notification.message}}</p>
+                </label>
+
+                <label class="user"></label>
+              </div>
+            </ion-item>
+
+            <ion-item-options >
+              <ion-item-option color="primary" [routerLink]="['/dashboard','tabs','notification','edit',notification.notificationId]">
+                <ion-icon
+                  slot="start"
+                  name="create"
+                  slot="icon-only"
+                ></ion-icon>
+              </ion-item-option>
+
+              <ion-item-option
+                color="danger"
+                (click)="delete(notification.notificationId,item)"
+              >
+                <ion-icon slot="end" name="trash" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding>
+          <!--
+          <ion-item-sliding *ngFor="let product of products  | filter:searchTerm" #item>
+            <ion-item [routerLink]="['/owner','tabs','products',product.productId]" detail>
+              <ion-thumbnail slot="start">
+                <ion-img [src]="product.image"></ion-img>
+              </ion-thumbnail>
+              <ion-label>
+                <h3>
+                  <b>{{product.name}}</b>
+                </h3>
+                <p>
+                  Price : <b>{{product.price}}</b>
+                </p>
+                <p>
+                  Category: <b>{{product.category}}</b>
+                </p>
+              </ion-label>
+            </ion-item>
+
+            <ion-item-options>
+              <ion-item-option color="primary" (click)="EditProduct(product.productId,item)">
+                <ion-icon name="create" slot="icon-only"></ion-icon>
+              </ion-item-option>
+            </ion-item-options>
+          </ion-item-sliding> -->
         </ion-list>
-
-
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <ion-fab vertical="bottom"  horizontal="end" slot="fixed" >
-    <ion-fab-button color="primary" routerLink="/dashboard/tabs/notification/add">
+  <ion-grid *ngIf="isLoading">
+    <ion-list-header>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar>
+      <ion-label>
+        <h3>
+          <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+        </h3>
+        <p>
+          <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+        </p>
+        <p>
+          <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-grid>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button
+      color="primary"
+      routerLink="/dashboard/tabs/notification/add"
+    >
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-
-
 </ion-content>

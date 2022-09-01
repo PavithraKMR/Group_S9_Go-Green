@@ -27,7 +27,6 @@ export class AuthService {
 
 	private _user = new BehaviorSubject<User>(null);
 
-
 	get isAuthenticated() {
 		return this._user.asObservable().pipe(
 			map(user => {
@@ -39,7 +38,6 @@ export class AuthService {
 			})
 		);
 	}
-
 
 	get getUserId() {
 		return this._user.asObservable().pipe(
@@ -64,7 +62,6 @@ export class AuthService {
 		this._user.next(null);
 
 		Preferences.remove({ key: 'userData' });
-
 	}
 
 	signup(
@@ -113,7 +110,6 @@ export class AuthService {
 		// localStorage.setItem('data', data);
 		// Preferences.Storage.set({ key: 'authData', value: data });
 		Preferences.set({ key: 'userData', value: data });
-
 	}
 
 	private setUserData(userData: AuthResponseData) {
@@ -142,19 +138,18 @@ export class AuthService {
 	getUser(userId: string) {
 		let user = [];
 
-		return this.http.get<any>('http://localhost:5000/api/user/'+ userId).pipe(
+		return this.http.get<any>('http://localhost:5000/api/user/' + userId).pipe(
 			take(1),
 			map(resData => {
-
-        return {
-          userId:resData.data.user.id,
-          userName:resData.data.user.username,
-          yourName:resData.data.user.yourname,
-          mobile:resData.data.user.mobile,
-          nic:resData.data.user.nic,
-          address:resData.data.user.address,
-          zone:resData.data.user.zone
-        }
+				return {
+					userId: userId,
+					userName: resData.data.user.username,
+					yourName: resData.data.user.yourname,
+					mobile: resData.data.user.mobile,
+					nic: resData.data.user.nic,
+					address: resData.data.user.address,
+					zone: resData.data.user.zone
+				};
 			})
 		);
 	}
@@ -163,11 +158,9 @@ export class AuthService {
 		return from(Preferences.get({ key: 'userData' })).pipe(
 			map(storeData => {
 				if (!storeData || !storeData.value) {
-					// if (!storeData) {
 					return null;
 				}
 
-				// const parsedData = JSON.parse(storeData) as {
 				const parsedData = JSON.parse(storeData.value) as {
 					localId: string;
 					idToken: string;
@@ -201,10 +194,50 @@ export class AuthService {
 		);
 	}
 
+	farmerAutoLogin() {
+		return from(Preferences.get({ key: 'userData' })).pipe(
+			map(storeData => {
+				if (!storeData || !storeData.value) {
+					return null;
+				}
+
+				const parsedData = JSON.parse(storeData.value) as {
+					localId: string;
+					idToken: string;
+					role: string;
+					username: string;
+					tokenExpirationDate: string;
+				};
+				console.log(parsedData);
+
+				const expirationTime = new Date(parsedData.tokenExpirationDate);
+
+				if (expirationTime <= new Date()) {
+					return null;
+				}
+
+				const user = new User(
+					parsedData.role,
+					parsedData.localId,
+					parsedData.username,
+					parsedData.idToken,
+					expirationTime
+				);
+
+				return user;
+			}),
+			tap(user => {
+				this._user.next(user);
+			}),
+			map(user => {
+				return !!user;
+			})
+		);
+	}
+
 	ngOnDestroy() {
 		if (this.authSub) {
 			this.authSub.unsubscribe();
 		}
 	}
-
 }

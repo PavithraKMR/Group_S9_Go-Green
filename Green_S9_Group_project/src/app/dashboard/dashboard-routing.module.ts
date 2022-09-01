@@ -56,23 +56,40 @@ const routes: Routes = [
 											)
 									},
 									{
-									  path:'about-disease/:diseaseId',
-									  loadChildren: () => import('./home/cropcultivation/diseases/about-disease/about-disease.module').then( m => m.AboutDiseasePageModule)
+										path: 'about-disease/:diseaseId',
+										loadChildren: () =>
+											import('./home/cropcultivation/diseases/about-disease/about-disease.module').then(
+												m => m.AboutDiseasePageModule
+											)
 									},
 									{
-									  path:'remedy-disease/:diseaseId',
-									  loadChildren: () => import('./home/cropcultivation/diseases/remedy-disease/remedy-disease.module').then( m => m.RemedyDiseasePageModule)
+										path: 'remedy-disease/:diseaseId',
+										loadChildren: () =>
+											import('./home/cropcultivation/diseases/remedy-disease/remedy-disease.module').then(
+												m => m.RemedyDiseasePageModule
+											)
 									}
 								]
 							},
 							{
 								path: 'animal-intervention',
-								loadChildren: () =>
-									import('./home/cropcultivation/animal-intervention/animal-intervention.module').then(
-										m => m.AnimalInterventionPageModule
-									)
+								children: [
+									{
+										path: '',
+										loadChildren: () =>
+											import('./home/cropcultivation/animal-intervention/animal-intervention.module').then(
+												m => m.AnimalInterventionPageModule
+											)
+									},
+									{
+										path: 'view/:interventionId',
+										loadChildren: () =>
+											import('./home/cropcultivation/animal-intervention/view/view.module').then(
+												m => m.ViewPageModule
+											)
+									}
+								]
 							}
-
 						]
 					}
 				]
@@ -93,14 +110,14 @@ const routes: Routes = [
 							import('./notification/add/add.module').then(m => m.AddPageModule)
 					},
 					{
-						path: 'view/:id',
+						path: 'view/:notificationId',
 						loadChildren: () =>
 							import('./notification/view/view.module').then(
 								m => m.ViewPageModule
 							)
 					},
 					{
-						path: 'edit/:id',
+						path: 'edit/:notificationId',
 						loadChildren: () =>
 							import('./notification/edit/edit.module').then(
 								m => m.EditPageModule
@@ -131,6 +148,11 @@ const routes: Routes = [
 				pathMatch: 'full'
 			}
 		]
+	},
+	{
+		path: 'popover',
+		loadChildren: () =>
+			import('./popover/popover.module').then(m => m.PopoverPageModule)
 	}
 ];
 

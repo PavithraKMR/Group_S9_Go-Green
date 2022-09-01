@@ -8,15 +8,12 @@ const createNotification = async (req, res, next) => {
 	if (!errors.isEmpty()) {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
-
-	console.log(req.body);
 	const newNotification = new Notification({
-		date: req.body.date,
+		date: new Date().toISOString(),
 		userId: req.body.userId,
 		reply: req.body.reply,
 		message: req.body.message
 	});
-	console.log(newNotification);
 
 	try {
 		await newNotification.save();
@@ -80,7 +77,7 @@ const getNotification = async (req, res, next) => {
 		const error = new HttpError('finding notification failed,try again', 500);
 		return next(error);
 	}
-
+	console.log(notification);
 	return res.status(201).json(notification.toObject({ getters: true }));
 };
 
@@ -91,10 +88,7 @@ const updateNotification = async (req, res, next) => {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 	}
 
-	// const { name, age } = req.body;
-	const { date, userId, message, reply } = req.body;
-
-	const notificationId = req.params.notificationId;
+	const { userId, message, notificationId } = req.body;
 
 	let notification;
 	try {
@@ -107,10 +101,10 @@ const updateNotification = async (req, res, next) => {
 		return next(error);
 	}
 
-	notification.date = date;
+	notification.date = new Date().toISOString();
 	notification.message = message;
 	notification.userId = userId;
-	notification.reply = reply;
+	notification.reply = false;
 
 	try {
 		await notification.save();
@@ -122,6 +116,7 @@ const updateNotification = async (req, res, next) => {
 		return next(error);
 	}
 
+	console.log(notification);
 	res
 		.status(201)
 		.json({ notification: notification.toObject({ getters: true }) });

@@ -11,6 +11,14 @@ const routes: Routes = [
   {
     path: 'add-intervention',
     loadChildren: () => import('./add-intervention/add-intervention.module').then( m => m.AddInterventionPageModule)
+  },
+  {
+    path: 'view',
+    loadChildren: () => import('./view/view.module').then( m => m.ViewPageModule)
+  },
+  {
+    path: 'edit',
+    loadChildren: () => import('./edit/edit.module').then( m => m.EditPageModule)
   }
 ];
 
