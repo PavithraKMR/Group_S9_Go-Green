@@ -20,7 +20,7 @@ export class HomeService {
     [
       {
         'name':'Onion',
-        'img':'assets/project_images/onion.jfif'
+        'img':'assets/project_images/Onion.png'
       },
       {
         'name':'Carrot',
@@ -28,20 +28,20 @@ export class HomeService {
       },
       {
         'name':'Ginger',
-        'img':'assets/project_images/ginger.jfif'
+        'img':'assets/project_images/ginger.png'
       }
       ,
       {
-        'name':'Pottato',
-        'img':'assets/project_images/pottato.jfif'
+        'name':'Potato',
+        'img':'assets/project_images/potato.png'
       },
       {
         'name':'Turmeric',
-        'img':'assets/project_images/turmeric.png'
+        'img':'assets/project_images/turmeric.png' 
       },
       {
         'name':'Paddy',
-        'img':'assets/project_images/paddy.jpg'
+        'img':'assets/project_images/paddys.jpg'
       }
     ]
   )

@@ -49,6 +49,9 @@
               <p>Please Enter the Address</p>
             </ion-item>
 
+            
+
+            
             <ion-item>
               <ion-label>Section</ion-label>
               <ion-select [interfaceOptions]="customAlertOptions" interface="alert" name ='zone' ngModel  required #zone="ngModel">
@@ -60,6 +63,7 @@
             <ion-item *ngIf="!zone.valid && zone.touched" lines="none">
               <ion-label>Zone Should be Valided</ion-label>
             </ion-item>
+          
 
             <ion-item>
               <ion-input type="text"  minlength="6"   required password name="password" ngModel #password="ngModel" placeholder="Password"></ion-input>
@@ -68,7 +72,7 @@
               <p>Please Enter the Valid Password</p>
             </ion-item>
 
-            <ion-button type="submit" size="large" fill="solid"  expand="block" color="primary" >Logup</ion-button>
+            <ion-button type="submit" size="large" fill="solid"  expand="block" color="primary" >SignUp</ion-button>
             <ion-button type="button" size="large" fill="solid"  expand="block" color="primary" routerLink="/login">Login</ion-button>
 
           </ion-list>

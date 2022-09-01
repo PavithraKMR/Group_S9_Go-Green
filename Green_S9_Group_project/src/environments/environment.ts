@@ -8,7 +8,7 @@ export const environment = {
   // eslint-disable-next-line @typescript-eslint/naming-convention
   API_KEY : '58aebac657bb0ed41e61c6ad97c9f01c',
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  API_URL: 'https://api.openweathermap.org/data/2.5/',
+  API_URL: 'https://api.openweathermap.org/data/2.5/', 
 };
 
 /*
@@ -19,3 +19,4 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+//
