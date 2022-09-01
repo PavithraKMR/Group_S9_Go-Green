@@ -15,7 +15,7 @@ const createIntervention = async (req, res, next) => {
 	const newIntervention = new AnimalIntervention({
 		cropName: req.body.cropName,
 		interventionName: req.body.interventionName,
-		image: url + '/uploads/Intervention/' + req.file.filename,
+		image: url + '/uploads/' + req.file.filename,
 		about: req.body.about,
 		whyIsImportant: req.body.whyIsImportant,
 		whatIdDoes: req.body.whatIdDoes,
