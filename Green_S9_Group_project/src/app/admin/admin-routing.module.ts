@@ -40,11 +40,11 @@ const routes: Routes = [
 											import('./home/crop/crop-tips/show-tip/show-tip.module').then(
 												m => m.ShowTipPageModule
 											)
-									}
+									},
 									// {
 									// 	path: 'edit/:tipId',
 									// 	loadChildren: () =>
-									// 		import('../admin/home/crop/crop-tips/edit-tip/edit-tip.module').then(
+									// 		import('.//home/crop/crop-tips/edit-tip/edit-tip.module').then(
 									// 			m => m.EditTipPageModule
 									// 		)
 									// }
