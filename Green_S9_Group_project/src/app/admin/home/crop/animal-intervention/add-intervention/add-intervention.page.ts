@@ -12,7 +12,7 @@ import { Crop } from 'src/app/models/crop.model';
 	templateUrl: './add-intervention.page.html',
 	styleUrls: ['./add-intervention.page.scss']
 })
-export class AddInterventionPage implements OnInit,OnDestroy {
+export class AddInterventionPage implements OnInit, OnDestroy {
 	interventionSub: Subscription;
 	cropTips: CropTips[];
 	form: FormGroup;
@@ -41,7 +41,6 @@ export class AddInterventionPage implements OnInit,OnDestroy {
 				.getCrop(paraMap.get('cropId'))
 				.subscribe(crop => {
 					this.crop = crop;
-					this.isLoading = false;
 				});
 		});
 
@@ -69,6 +68,8 @@ export class AddInterventionPage implements OnInit,OnDestroy {
 			}),
 			image: new FormControl(null, { validators: [Validators.required] })
 		});
+
+		this.isLoading = false;
 	}
 
 	uploadfile(event: Event) {
@@ -84,48 +85,80 @@ export class AddInterventionPage implements OnInit,OnDestroy {
 
 	SubmittedForm() {
 		if (this.form.invalid) {
-			console.log('invalid');
 			return;
-		} else {
-			// this.loadCtrl
-			// 	.create({
-			// 		message: 'Creating...',
-			// 		spinner: 'circular',
-			// 		animated: true,
-			// 		duration: 1000
-			// 	})
-			// 	.then(el => {
-			// 		el.present();
-			this.interventionSub = this.animalIntervention
-				.addIntervention(
-					this.form.value.about,
-					this.crop.name,
-					this.form.value.interventionName,
-					this.form.value.image,
-					this.form.value.whyIsImportant,
-					this.form.value.whatIdDoes,
-					this.form.value.whyAndWhereItOccours,
-					this.form.value.howToIdentify,
-					this.form.value.howToManage
-				)
-				.subscribe(() => {
-					// el.dismiss();
-					// });
-				});
-
-			this.router.navigate([
-				'/admin',
-				'tabs',
-				'home',
-				this.crop.name,
-				'animal-intervention'
-			]);
 		}
+		this.interventionSub = this.animalIntervention
+			.addIntervention(
+				this.form.value.about,
+				this.crop.name,
+				this.form.value.interventionName,
+				this.form.value.image,
+				this.form.value.whyIsImportant,
+				this.form.value.whatIdDoes,
+				this.form.value.whyAndWhereItOccours,
+				this.form.value.howToIdentify,
+				this.form.value.howToManage
+			)
+			.subscribe(() => {
+				// el.dismiss();
+				// });
+			});
+
+		this.router.navigate([
+			'/admin',
+			'tabs',
+			'home',
+			this.crop.name,
+			'animal-intervention'
+		]);
+
 		this.form.reset();
 	}
 
+	ionViewWillEnter() {
+		this.isLoading = true;
+		this.paramSub = this.route.paramMap.subscribe(paraMap => {
+			if (!paraMap.has('cropId')) {
+				return;
+			}
+
+			this.cropSub = this.homeService
+				.getCrop(paraMap.get('cropId'))
+				.subscribe(crop => {
+					this.crop = crop;
+				});
+		});
+
+		this.form = new FormGroup({
+			interventionName: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			about: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			whyIsImportant: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			whatIdDoes: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			whyAndWhereItOccours: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			howToIdentify: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			howToManage: new FormControl(null, {
+				validators: [Validators.required, Validators.minLength(3)]
+			}),
+			image: new FormControl(null, { validators: [Validators.required] })
+		});
+
+		this.isLoading = false;
+	}
+
 	ngOnDestroy() {
-		if (this.cropSub || this.paramSub || this.interventionSub) {
+		if (this.cropSub || this.paramSub || this.interventionSub ) {
 			this.cropSub.unsubscribe();
 			this.interventionSub.unsubscribe();
 			this.paramSub.unsubscribe();
