@@ -1,6 +1,6 @@
 import { AnimalinterventionService } from './../../../service/animalintervention.service';
 import { Intervention } from './../../../../models/intervention.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {
 	AnimationController,
@@ -17,9 +17,8 @@ import { Crop } from 'src/app/models/crop.model';
 	templateUrl: './animal-intervention.page.html',
 	styleUrls: ['./animal-intervention.page.scss']
 })
-export class AnimalInterventionPage implements OnInit {
+export class AnimalInterventionPage implements OnInit, OnDestroy {
 	constructor(
-		private animationCtrl: AnimationController,
 		private loadCtrl: LoadingController,
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
@@ -52,6 +51,7 @@ export class AnimalInterventionPage implements OnInit {
 		this.interventionSub = this.interventionService.AllInterventions.subscribe(
 			interventions => {
 				this.interventions = interventions;
+
 				this.isLoading = false;
 			}
 		);
@@ -79,7 +79,9 @@ export class AnimalInterventionPage implements OnInit {
 			});
 	}
 
-	addCropTips() {}
+	delete(id: string) {
+		console.log('delete');
+	}
 
 	ngOnDestroy() {
 		if (this.paramSub || this.cropSub || this.interventionSub) {

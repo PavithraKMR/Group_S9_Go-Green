@@ -32,18 +32,18 @@
       <ion-col>
         <ion-list *ngIf="interventions && interventions.length >= 0">
           <ion-item-sliding *ngFor="let intervention of interventions">
-            <ion-item >
+            <ion-item [routerLink]="['/admin','tabs','home',crop.name,'animal-intervention','view',intervention.interventionId]">
               <ion-label>{{intervention.interventionName}}</ion-label>
             </ion-item>
 
             <ion-item-options side="start">
-              <ion-item-option color="primary">
+              <ion-item-option color="primary" [routerLink]="['/admin','tabs','home',crop.name,'animal-intervention','edit',intervention.interventionId]">
                 <ion-icon name="create" slot="icon-only"></ion-icon>
               </ion-item-option>
             </ion-item-options>
 
             <ion-item-options side="end">
-              <ion-item-option color="danger">
+              <ion-item-option color="danger" (click)="delete(intervention.interventionId)">
                 <ion-icon name="trash" slot="icon-only"></ion-icon>
               </ion-item-option>
             </ion-item-options>

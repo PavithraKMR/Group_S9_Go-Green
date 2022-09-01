@@ -28,7 +28,7 @@ export class AnimalinterventionService {
 						const intervetions = [];
 						for (var intervention of data.cropInteventions) {
 							intervetions.push({
-								interventionId: intervention.interventionId,
+								interventionId: intervention.id,
 								about: intervention.about,
 								whyIsImportant: intervention.whyIsImportant,
 								cropName: intervention.cropName,
@@ -88,27 +88,28 @@ export class AnimalinterventionService {
 			);
 	}
 
-	// getIntervention(tipId: string) {
-	// 	return this.http
-	// 		.get<any>('http://localhost:5000/api/crop/cropTips/' + tipId)
-	// 		.pipe(
-	// 			take(1),
-	// 			map(data => {
-	// 				return {
-	// 					     interventionId: intervention.interventionId,
-	// about: intervention.about,
-	// whyIsImportant: intervention.whyIsImportant,
-	// cropName: intervention.cropName,
-	// image: intervention.image,
-	// interventionName: intervention.interventionName,
-	// whatIdDoes: intervention.whatIdDoes,
-	// whyAndWhereItOccours: intervention.whyAndWhereItOccours,
-	// howToIdentify: intervention.howToIdentify,
-	// howToManage: intervention.howToManage
-	// 				};
-	// 			})
-	// 		);
-	// }
+	getIntervention(id: string) {
+		return this.http
+			.get<any>('http://localhost:5000/api/Intervention/interventions/' + id)
+			.pipe(
+				take(1),
+				map(data => {
+          
+					return {
+						interventionId: data.id,
+						about: data.about,
+						whyIsImportant: data.whyIsImportant,
+						cropName: data.cropName,
+						image: data.image,
+						interventionName: data.interventionName,
+						whatIdDoes: data.whatIdDoes,
+						whyAndWhereItOccours: data.whyAndWhereItOccours,
+						howToIdentify: data.howToIdentify,
+						howToManage: data.howToManage
+					};
+				})
+			);
+	}
 
 	// updateIntervention(id: string, name: string, information: string) {
 	// 	let updatedtips: CropTips[];

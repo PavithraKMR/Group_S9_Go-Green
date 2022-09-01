@@ -1,6 +1,10 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>view</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button   [defaultHref]="['/admin','tabs','home',crop.name,'animal-intervention']"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="isLoading">Loading View .....</ion-title>
+    <ion-title *ngIf="!isLoading">{{intervention.interventionName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
