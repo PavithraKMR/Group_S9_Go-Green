@@ -235,6 +235,28 @@ export class AuthService {
 		);
 	}
 
+	updatePassword(currentPassword: string, newPassword: string, userId: string) {
+		const data = {
+			currentPassword,
+			newPassword,
+			userId
+		};
+
+		return this.http
+			.post<any>(
+				'http://localhost:5000/api/GreenLive/updatePassword',
+				data
+			)
+			.pipe(
+				take(1),
+				map(res => {
+					console.log(res);
+
+					return res;
+				})
+			);
+	}
+
 	ngOnDestroy() {
 		if (this.authSub) {
 			this.authSub.unsubscribe();
