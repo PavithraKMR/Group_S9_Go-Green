@@ -191,7 +191,7 @@ export class HomeService {
 					return {
 						diseaseId: data.id,
 						diseaseName: data.diseaseName,
-						aboutDisease: data.aboutDisease,
+						aboutDisease: data.about,
 						cropName: data.cropName,
 						remedyAction: data.remedyAction,
 						image: data.image

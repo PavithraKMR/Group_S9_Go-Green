@@ -25,13 +25,12 @@ const interventionRouter = require('./routes/AnimalIntervention');
 
 //connect mongodb
 mongoose
-	.connect(
+	.connect( 
 		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
-		// { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 	)
 	.then(() => {
 		console.log('connected to Database');
-		app.listen(5000); // start Node + Express server on port 5000
+		app.listen(5000); // start Node + Express server on port 5000 
 	})
 	.catch((error) => {
 		console.log(error);
