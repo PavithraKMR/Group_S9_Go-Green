@@ -5,8 +5,48 @@
         [defaultHref]="['/dashboard','tabs','home',crop.name]"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title>fertilizer_calculator</ion-title>
+    <ion-title>Fertilizer Calculator</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content> </ion-content>
+
+<ion-content style="background-color: rgb(132, 245, 132);">
+
+  <div class = "box">
+    <ion-select interface="popover" [(ngModel)]="type" placeholder="Select Area Type" (ionChange)="validate()">
+      <ion-select-option value = "hect">Hectares</ion-select-option>
+      <ion-select-option value = "acr">Acres</ion-select-option>
+      <ion-select-option value = "sq">Square Meters</ion-select-option>
+    </ion-select>
+    <ion-card id = "card" style="padding:5px ;">
+      <ion-label position="floating">Enter The Area : </ion-label>
+      <ion-input type="number" [(ngModel)]="area" (ionChange)="validate()"></ion-input>
+      <ion-footer>
+        <ion-button [disabled] = "buttonDisabled" style="margin-left:35%; margin-right: 35%; width:30%;" (click) = "Calculate()" size="small" color="danger">Calculate</ion-button>
+      </ion-footer>
+
+    </ion-card>
+  </div>
+
+
+  <div *ngIf="calculated" class = "box">
+    <ion-card id = "card">
+      <ion-card-header style="color:rgb(6, 6, 49); font-family:Georgia, 'Times New Roman', Times, serif; font-weight:bold">Fertilizer Amount</ion-card-header>
+
+      <ion-card-content>
+        <ion-grid>
+          <div *ngFor = "let itm of fert | keyvalue">
+            <ion-row *ngIf="itm.value != null" >
+            <ion-col>{{itm.key}} : </ion-col>
+            <ion-col>{{itm.value}} g </ion-col>
+          </ion-row>
+          </div>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+   </div>
+
+
+</ion-content>
+
