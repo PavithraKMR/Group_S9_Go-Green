@@ -10,38 +10,27 @@
 </ion-header>
 
 <ion-content>
-    <ion-row class="images">
-      <ion-col>
-        <h3>{{crop.name}}</h3>
-      </ion-col>
+  <ion-row class="images">
+    <ion-col>
+      <h3>{{crop.name}}</h3>
+    </ion-col>
 
-      <ion-col>
-        <ion-img [src]="crop.img"></ion-img>
-      </ion-col>
-    </ion-row>
+    <ion-col>
+      <ion-img [src]="crop.img"></ion-img>
+    </ion-col>
+  </ion-row>
 
-    <ion-row>
-      <ion-col class="img">
-        <ion-list *ngFor="let saw of cropTips ">
-          <ion-card [routerLink] = "['/dashboard','tabs','home',crop.name,'crop-tips',saw.tipsId]">
-            <ion-card-content> {{saw.information}} </ion-card-content>
-          </ion-card>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-
-    <!-- <ion-row *ngIf="crop.name !== 'Paddy'">
-      <ion-col class="img">
-        <ion-toolbar color="danger" class="sawbar">
-          <ion-title>Tips For Choosing What to Grow</ion-title>
-        </ion-toolbar>
-        <ion-list *ngFor="let saw of cropTips">
-          <ion-card *ngIf="saw.type === 'Tips_for_choosing'">
-            <ion-card-content> {{saw.information}} </ion-card-content>
-          </ion-card>
-        </ion-list>
-      </ion-col> -->
-  
+  <ion-row>
+    <ion-col class="img">
+      <ion-list *ngFor="let saw of cropTips ">
+        <ion-card
+          [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips',saw.tipsId]"
+        >
+          <ion-card-content> {{saw.information}} </ion-card-content>
+        </ion-card>
+      </ion-list>
+    </ion-col>
+  </ion-row>
 
   <ion-grid *ngIf="isLoading">
     <ion-list-header>
