@@ -10,18 +10,19 @@ ion-label{
 }
 
 img{
-    height: 400px;
+    height: 300px;
+    margin-top: 70px;
 }
 
 ion-input {
     background: rgb(255, 255, 255);
-    border-radius: 30px !important;
+    border-radius: 10px !important;
     padding-left: 30px !important;
-    font-size: 1.5em;
+    font-size: 1.3em;
     margin-bottom: 10px;
     border: 1px solid #ffffff;
     border-bottom: 0px !important;
-    box-shadow: none !important;
+    //box-shadow: none !important;
 }
 
 ion-title{
@@ -31,6 +32,10 @@ ion-title{
 ion-button
 {
     margin-top: 15px;
+}
+
+p{
+    text-align: center;
 }
 
 

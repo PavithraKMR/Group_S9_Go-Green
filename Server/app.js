@@ -27,7 +27,6 @@ const interventionRouter = require('./routes/AnimalIntervention');
 mongoose
 	.connect(
 		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
-		// { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }
 	)
 	.then(() => {
 		console.log('connected to Database');
@@ -80,3 +79,34 @@ app.use((error, req, res, next) => {
 		.status(error.code || 500)
 		.json({ message: error.message || 'An Unknown Error Occurred!' });
 });
+
+//connect mongodb
+/*
+mongoose
+	.connect(
+		"mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority"
+	)
+
+	.then(() => {
+		console.log('connected to Database');
+		app.listen(5000); // start Node + Express server on port 5000
+	})
+	.catch((error) => {
+		console.log(error);
+	});
+
+app.use(
+	bodyParser.urlencoded({
+		extended: false
+	})
+);
+*/
+app.use('/uploads', express.static(path.join('Server/uploads')));
+app.use(
+	'/uploads/Diseases',
+	express.static(path.join('Server/uploads/Diseases'))
+);
+app.use(
+	'/uploads/Intervention',
+	express.static(path.join('Server/uploads/Intervention'))
+);

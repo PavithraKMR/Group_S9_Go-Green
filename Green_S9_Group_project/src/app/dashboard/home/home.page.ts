@@ -48,8 +48,7 @@ export class HomePage implements OnInit {
 
 				this.weatherIcon = results['weather'][0];
 
-				this.weatherIcon = `http://openweathermap.org/img/wn/${this.weatherIcon
-					.icon}@4x.png`; //not weatherDeatail
+				this.weatherIcon = `http://openweathermap.org/img/wn/${this.weatherIcon.icon}@4x.png`; //not weatherDeatail
 				this.windSpeed = results['wind'].speed;
 			});
 	}

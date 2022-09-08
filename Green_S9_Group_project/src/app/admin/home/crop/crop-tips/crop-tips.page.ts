@@ -174,7 +174,8 @@ export class CropTipsPage implements OnInit, OnDestroy {
 			this.tipSub.unsubscribe();
 			this.cropSub.unsubscribe();
 			this.idSub.unsubscribe();
-			this.deletSub.unsubscribe();
+			if(this.deletSub)
+				this.deletSub.unsubscribe();
 		}
 	}
 }

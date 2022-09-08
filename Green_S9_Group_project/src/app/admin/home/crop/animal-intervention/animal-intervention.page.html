@@ -14,8 +14,12 @@
 
 <ion-content>
   <ion-grid *ngIf="!isLoading">
-    <ion-row>
-      <ion-col class="img">
+    <ion-row class="img">
+      <ion-col>
+        <h3>{{crop.name}}</h3>
+      </ion-col>
+
+      <ion-col>
         <ion-img [src]="crop.img"></ion-img>
       </ion-col>
     </ion-row>
@@ -55,8 +59,7 @@
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button
-      [routerLink]="['/admin','tabs','home',crop.name,'animal-intervention','add-intervention']"
-    >
+      [routerLink]="['/admin','tabs','home',crop.name,'animal-intervention','add-intervention']">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
