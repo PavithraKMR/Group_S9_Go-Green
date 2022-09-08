@@ -16,7 +16,7 @@ export class RegisterPage implements OnInit {
 		private authService: AuthService
 	) {}
 
-	zones = ['jaffna', 'colombo', 'abcd', 'dasdad', 'jyujyu', ';op;o'];
+	zones = ['Tholpuram', 'Puttur', 'Uduvil'];
 	ngOnInit() {}
 
 	submittedForm(form: NgForm) {

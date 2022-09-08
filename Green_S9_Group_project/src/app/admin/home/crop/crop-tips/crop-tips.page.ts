@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
+	AlertController,
 	AnimationController,
+	IonItemSliding,
 	LoadingController,
 	ModalController,
 	SegmentChangeEventDetail
@@ -20,11 +22,12 @@ import { AddtipPage } from './addtip/addtip.page';
 })
 export class CropTipsPage implements OnInit, OnDestroy {
 	constructor(
-		private animationCtrl: AnimationController,
-		private loadCtrl: LoadingController,
+    private router:Router,
+    private loadCtrl: LoadingController,
 		private modelCtrl: ModalController,
 		private homeService: HomeService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private alertCtrl: AlertController
 	) {}
 
 	tipSub: Subscription;
@@ -33,7 +36,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	crop: Crop;
 	isLoading = false;
 	cropSub: Subscription;
-
+	cropTip: CropTips;
 	sowTips: CropTips[];
 	csowTips: CropTips[];
 	Tips_for_choosing = 'Tips_for_choosing';
@@ -125,12 +128,54 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	}
 
 	showPage() {}
+	deletSub: Subscription;
 
+	deleteTip(id: string,item:IonItemSliding) {
+		this.alertCtrl
+			.create({
+				header: 'Do You Want to Delete',
+				message: 'If you delete it will be removed',
+				buttons: [
+					{
+						text: 'Okay',
+						handler: () => {
+							this.loadCtrl
+								.create({
+									message: 'Deleting...',
+									animated: true,
+									duration: 500,
+									keyboardClose: false,
+									spinner: 'circles'
+								})
+								.then(loadingEl => {
+                  item.close()
+									loadingEl.present();
+									this.deletSub = this.homeService
+										.DeleteTip(id)
+										.subscribe(() => {
+											loadingEl.dismiss();
+										});
+								});
+						}
+					},
+					{
+						text: 'Cancel'
+					}
+				]
+			})
+			.then(e => {
+				e.present();
+			});
+
+	
+	}
 	ngOnDestroy() {
-		if (this.tipSub || this.cropSub || this.idSub) {
+		if (this.tipSub || this.cropSub || this.idSub || this.deletSub) {
 			this.tipSub.unsubscribe();
 			this.cropSub.unsubscribe();
 			this.idSub.unsubscribe();
+			if(this.deletSub)
+				this.deletSub.unsubscribe();
 		}
 	}
 }

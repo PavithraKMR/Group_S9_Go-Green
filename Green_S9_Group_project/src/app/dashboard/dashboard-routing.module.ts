@@ -127,20 +127,23 @@ const routes: Routes = [
 			},
 			{
 				path: 'profile',
-				loadChildren: () =>
-					import('./profile/profile.module').then(m => m.ProfilePageModule)
+				children: [
+					{
+						path: '',
+						loadChildren: () =>
+							import('./profile/profile.module').then(m => m.ProfilePageModule)
+					},
+					{
+						path: 'reset-password',
+						loadChildren: () =>
+							import('./profile/reset-password/reset-password.module').then(m => m.ResetPasswordPageModule)
+					}
+				]
 			},
 			{
 				path: 'card',
 				loadChildren: () =>
 					import('./card/card.module').then(m => m.CardPageModule)
-			},
-			{
-				path: 'reset-password',
-				loadChildren: () =>
-					import('./profile/reset-password/reset-password.module').then(
-						m => m.ResetPasswordPageModule
-					)
 			},
 			{
 				path: '',

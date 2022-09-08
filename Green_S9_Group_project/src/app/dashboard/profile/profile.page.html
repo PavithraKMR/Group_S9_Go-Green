@@ -20,7 +20,6 @@
     <ion-row>
       <ion-col>
         <ion-list>
-
           <ion-item>
             <ion-label>
               <ion-text class="date"> YourName: {{user.yourName}} </ion-text>
@@ -45,15 +44,15 @@
             </ion-label>
           </ion-item>
 
-
           <ion-item>
             <ion-label>
               <ion-text class="date">Mobile: {{user.mobile}} </ion-text>
             </ion-label>
           </ion-item>
+
+          <ion-button color="primary" expand="block" routerLink="/dashboard/tabs/profile/reset-password">Reset Password</ion-button>
         </ion-list>
       </ion-col>
     </ion-row>
   </ion-grid>
-
 </ion-content>

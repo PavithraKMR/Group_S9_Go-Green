@@ -24,12 +24,15 @@ export class ProfilePage implements OnInit, OnDestroy {
 		this.notiSub = this.authService.getUser(this.userId).subscribe(user => {
 			this.user = user;
 			this.isLoading = false;
-
 		});
 	}
 
 	ionViewWillEnter() {
 		this.isLoading = true;
+
+		this.userSub = this.authService.getUserId.subscribe(userId => {
+			this.userId = userId;
+		});
 		this.notiSub = this.authService.getUser(this.userId).subscribe(user => {
 			this.user = user;
 			this.isLoading = false;
@@ -43,5 +46,3 @@ export class ProfilePage implements OnInit, OnDestroy {
 		}
 	}
 }
-
-

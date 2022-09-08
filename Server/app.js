@@ -1,18 +1,20 @@
+// npm install mongoose-unique-validator //  like email
+// npm install --save bcryptjs
+// npm install --save jsonwebtoken
+// var path = require('path');
+// var cookieParser = require('cookie-parser');
+// var logger = require('morgan');
+
+// npm install --save multer // for file upload
+
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
 
 const HttpError = require('./models/http-error');
-// npm install mongoose-unique-validator //  like email
-// npm install --save bcryptjs
-// npm install --save jsonwebtoken
-var createError = require('http-errors');
-// var path = require('path');
-// var cookieParser = require('cookie-parser');
-// var logger = require('morgan');
 
-// npm install --save multer // for file upload
+var createError = require('http-errors');
 const app = express();
 
 const adminRouter = require('./routes/Admin');
@@ -21,8 +23,24 @@ const notificationRouter = require('./routes/Notification');
 const userRouter = require('./routes/users');
 const interventionRouter = require('./routes/AnimalIntervention');
 
-app.use(bodyParser.json()); // to get body ,this should be used before routers
+//connect mongodb
+mongoose
+	.connect(
+		'mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority'
+	)
+	.then(() => {
+		console.log('connected to Database');
+		app.listen(5000); // start Node + Express server on port 5000
+	})
+	.catch((error) => {
+		console.log(error);
+	});
 
+app.use(bodyParser.json()); // to get body ,this should be used before routers
+app.use(bodyParser.urlencoded({ extended: false }));
+
+// app.use('/uploads', express.static(path.join('Server/uploads')));
+app.use(express.static(__dirname+'/'));
 // CORS Headers => Required for cross-origin/ cross-server communication
 app.use((req, res, next) => {
 	//middleware
@@ -63,6 +81,7 @@ app.use((error, req, res, next) => {
 });
 
 //connect mongodb
+/*
 mongoose
 	.connect(
 		"mongodb+srv://projectgreen:projectgreen152@projectgreen.t8h1b7r.mongodb.net/?retryWrites=true&w=majority"
@@ -75,11 +94,13 @@ mongoose
 	.catch((error) => {
 		console.log(error);
 	});
+
 app.use(
 	bodyParser.urlencoded({
 		extended: false
 	})
 );
+*/
 app.use('/uploads', express.static(path.join('Server/uploads')));
 app.use(
 	'/uploads/Diseases',

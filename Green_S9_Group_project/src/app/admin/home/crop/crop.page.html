@@ -11,7 +11,11 @@
 
   <ion-grid>
     <ion-row class="img">
-      <ion-col >
+      <ion-col>
+        <h3>{{crop.name}}</h3>
+      </ion-col>
+
+      <ion-col>
         <ion-img [src]="crop.img"></ion-img>
       </ion-col>
     </ion-row>
@@ -20,7 +24,7 @@
 
       <ion-col >
         <ion-card [routerLink]="['/admin','tabs','home',crop.name,'crop-tips']">
-          <ion-img src="assets//project_images/croptips.jfif"></ion-img>
+          <ion-img src="assets//project_images/croptips.jpg"></ion-img>
           <ion-card-title >
            Crop Tips
           </ion-card-title>
@@ -29,7 +33,7 @@
 
       <ion-col >
         <ion-card [routerLink]="['/admin','tabs','home',crop.name,'diseases']">
-          <ion-img src="assets//project_images/disease.jfif"></ion-img>
+          <ion-img src="assets//project_images/disease.jpg"></ion-img>
           <ion-card-title >
             Diseases
            </ion-card-title>
@@ -38,7 +42,7 @@
 
       <ion-col >
         <ion-card [routerLink]="['/admin','tabs','home',crop.name,'animal-intervention']">
-          <ion-img src="assets//project_images/animal_intervention.jfif"></ion-img>
+          <ion-img src="assets//project_images/grasshoper.jpg"></ion-img>
           <ion-card-title >
             Animal Intervention
            </ion-card-title>

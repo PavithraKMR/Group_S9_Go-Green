@@ -24,7 +24,6 @@ export class ShowTipPage implements OnInit, OnDestroy {
 		private homeService: HomeService,
 		private route: ActivatedRoute,
 		private router: Router,
-		private alertCtrl: AlertController
 	) {}
 
 	tipidSub: Subscription;
@@ -90,56 +89,10 @@ export class ShowTipPage implements OnInit, OnDestroy {
 
 	cancelSub: Subscription;
 
-	deleteTip(id: string) {
-		this.alertCtrl
-			.create({
-				header: 'Do You Want to Delete',
-				message: 'If you delete it will be removed',
-				buttons: [
-					{
-						text: 'Okay',
-						handler: () => {
-							this.loadCtrl
-								.create({
-									message: 'Deleting...',
-									animated: true,
-									duration: 100,
-									keyboardClose: false,
-									spinner: 'circles'
-								})
-								.then(loadingEl => {
-									loadingEl.present();
-									this.deletSub = this.homeService
-										.DeleteTip(id)
-										.subscribe(() => {
-											loadingEl.dismiss();
-										});
-								});
-						}
-					},
-					{
-						text: 'Cancel'
-					}
-				]
-			})
-			.then(e => {
-				e.present();
-			});
-
-		this.router.navigate([
-			'/admin',
-			'tabs',
-			'home',
-			this.cropTip.name,
-			'crop-tips'
-		]);
-	}
-
 	ngOnDestroy() {
-		if (this.cropTipSub || this.tipidSub || this.deletSub) {
+		if (this.cropTipSub || this.tipidSub) {
 			this.cropTipSub.unsubscribe();
 			this.tipidSub.unsubscribe();
-			this.deletSub.unsubscribe();
 		}
 	}
 }
