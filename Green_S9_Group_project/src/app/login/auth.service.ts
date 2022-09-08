@@ -39,6 +39,15 @@ export class AuthService {
 		);
 	}
 
+	get getUserRole() {
+		return this._user.asObservable().pipe(
+			take(1),
+			map(user => {
+				return user.role;
+			})
+		);
+	}
+
 	get getUserId() {
 		return this._user.asObservable().pipe(
 			map(user => {
@@ -194,47 +203,6 @@ export class AuthService {
 		);
 	}
 
-	farmerAutoLogin() {
-		return from(Preferences.get({ key: 'userData' })).pipe(
-			map(storeData => {
-				if (!storeData || !storeData.value) {
-					return null;
-				}
-
-				const parsedData = JSON.parse(storeData.value) as {
-					localId: string;
-					idToken: string;
-					role: string;
-					username: string;
-					tokenExpirationDate: string;
-				};
-				console.log(parsedData);
-
-				const expirationTime = new Date(parsedData.tokenExpirationDate);
-
-				if (expirationTime <= new Date()) {
-					return null;
-				}
-
-				const user = new User(
-					parsedData.role,
-					parsedData.localId,
-					parsedData.username,
-					parsedData.idToken,
-					expirationTime
-				);
-
-				return user;
-			}),
-			tap(user => {
-				this._user.next(user);
-			}),
-			map(user => {
-				return !!user;
-			})
-		);
-	}
-
 	updatePassword(currentPassword: string, newPassword: string, userId: string) {
 		const data = {
 			currentPassword,
@@ -243,10 +211,7 @@ export class AuthService {
 		};
 
 		return this.http
-			.post<any>(
-				'http://localhost:5000/api/GreenLive/updatePassword',
-				data
-			)
+			.post<any>('http://localhost:5000/api/GreenLive/updatePassword', data)
 			.pipe(
 				take(1),
 				map(res => {

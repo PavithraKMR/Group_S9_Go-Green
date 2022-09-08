@@ -170,7 +170,7 @@ export class CropTipsPage implements OnInit, OnDestroy {
 	
 	}
 	ngOnDestroy() {
-		if (this.tipSub || this.cropSub || this.idSub || this.deletSub) {
+		if (this.tipSub || this.cropSub || this.idSub || this.deletSub ) {
 			this.tipSub.unsubscribe();
 			this.cropSub.unsubscribe();
 			this.idSub.unsubscribe();

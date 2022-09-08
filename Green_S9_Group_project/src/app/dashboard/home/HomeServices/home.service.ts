@@ -32,12 +32,12 @@ export class HomeService {
       }
       ,
       {
-        'name':'Potato',
+        'name':'Pottato',
         'img':'assets/project_images/potato.png'
       },
       {
         'name':'Turmeric',
-        'img':'assets/project_images/turmeric.png' 
+        'img':'assets/project_images/turmeric.png'
       },
       {
         'name':'Paddy',

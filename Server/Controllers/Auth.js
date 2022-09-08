@@ -186,6 +186,8 @@ const updatePassword = async (req, res, next) => {
 		user: user.toObject({ getters: true })
 	});
 };
+
+
 exports.updatePassword = updatePassword;
 exports.signUp = signUp;
 exports.signIn = signIn;
