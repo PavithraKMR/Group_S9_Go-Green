@@ -41,7 +41,7 @@
       "Fertilizer_Calculator": "உர கணிப்பபொறி",
       "Crop_Tips": "பயிர் குறிப்புகள்",
       "Diseases": "நோய்கள்",
-      "Animal":"விலங்கு",
+      "Animal": "விலங்கு",
       "Intervention": "தலையீடு"
     },
     "CropTips": {
@@ -73,6 +73,25 @@
         "DownyMildew": "பூஞ்சை காளான்",
         "GreenMould": "பச்சை அச்சு"
       }
+    },
+    "Fertilizer_Calculator": {
+      "title": "உரக் கால்குலேட்டர்",
+      "EnterTheArea": "பகுதி மதிப்பை உள்ளிடவும்",
+      "SelectAreaType": "பகுதியைத் தேர்ந்தெடுக்கவும் வகை",
+      "CALCULATE": "கணக்கிடு",
+      "Hectares": "ஹெக்டேர்",
+      "Acres": "ஏக்கர்",
+      "Square_Meters": "சதுர மீட்டர்கள்",
+      "Fertilizer_Amount": "உர அளவு"
+    },
+    "AnimalInterventionName": {
+      "title": "விலங்கு தலையீடு பெயர்",
+      "About": "பற்றி",
+      "HowToIdentify": "எப்படி அடையாளம் காண்பது",
+      "HowToManage": "எப்படி நிர்வகிப்பது",
+      "WhatItDoes": "என்ன செய்கிறது",
+      "WhyAndWhereItOccurs": "ஏன் மற்றும் எங்கு இது நிகழ்கிறது",
+      "WhyIsImportant": "ஏன் முக்கியம்"
     }
   }
 }
