@@ -35,32 +35,19 @@
       </ion-col>
     </ion-row>
 
-
     <ion-row>
-      <ion-col class="img">
-        <ion-toolbar color="primary" class="sawbar"> </ion-toolbar>
-
+      <ion-col class="img-ion">
         <ion-list *ngFor="let saw of cropTips ">
           <ion-item-sliding #item>
-            <ion-item
-              [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','show',saw.tipsId]"
-            >
-              <p>{{saw.information}}</p>
+            <ion-item class="info"
+              [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','show',saw.tipsId]">
+              <p style="font-size: 1.4rem;">{{saw.information}}</p>
             </ion-item>
-            
-            <ion-item-options side="end">
-              <ion-item-option color="primary">
-                <ion-icon
-                  name="create-outline"
-                  slot="icon-only"
-                ></ion-icon>
-                <!-- [routerLink]="['/admin','tabs','home',crop.name,'crop-tips','edit',saw.tipsId]" -->
-
-              </ion-item-option>
-            </ion-item-options>
 
             <ion-item-options side="start">
-              <ion-item-option color="danger" (click)="deleteTip(saw.tipsId,item)">
+              <ion-item-option
+                color="danger"
+                (click)="deleteTip(saw.tipsId,item)">
                 <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
               </ion-item-option>
             </ion-item-options>

@@ -40,14 +40,7 @@ const routes: Routes = [
 											import('./home/crop/crop-tips/show-tip/show-tip.module').then(
 												m => m.ShowTipPageModule
 											)
-									},
-									// {
-									// 	path: 'edit/:tipId',
-									// 	loadChildren: () =>
-									// 		import('.//home/crop/crop-tips/edit-tip/edit-tip.module').then(
-									// 			m => m.EditTipPageModule
-									// 		)
-									// }
+									}
 								]
 							},
 							{
@@ -93,14 +86,14 @@ const routes: Routes = [
 												m => m.AddInterventionPageModule
 											)
 									},
-                  {
+									{
 										path: 'edit/:interventionId',
 										loadChildren: () =>
 											import('./home/crop/animal-intervention/edit/edit.module').then(
 												m => m.EditPageModule
 											)
 									},
-                  {
+									{
 										path: 'view/:interventionId',
 										loadChildren: () =>
 											import('./home/crop/animal-intervention/view/view.module').then(

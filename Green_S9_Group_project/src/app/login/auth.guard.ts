@@ -41,10 +41,9 @@ export class AuthGuard implements CanActivate, OnInit {
 		return this.authService.isAuthenticated.pipe(
 			take(1),
 			switchMap(isAuthenticated => {
-				console.log(route.routeConfig.path);
-				console.log(state);
 
-				if (!isAuthenticated) {
+
+				if (!isAuthenticated ) {
 					return this.authService.autoLogin();
 				} else {
 					return of(isAuthenticated);
