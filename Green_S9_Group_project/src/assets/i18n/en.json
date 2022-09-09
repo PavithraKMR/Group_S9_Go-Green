@@ -41,7 +41,8 @@
       "Fertilizer_Calculator": "Fertilizer Calculator",
       "Crop_Tips": "Crop Tips",
       "Diseases": "Diseases",
-      "Animal_Intervention": "Animal Intervention"
+      "Animal":"Animal",
+      "Intervention": "Intervention"
     },
     "CropTips": {
       "title": {
