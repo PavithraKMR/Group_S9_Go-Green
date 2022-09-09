@@ -14,14 +14,18 @@
 
 <ion-content>
   <ion-grid *ngIf="!isLoading">
-    <ion-row>
-      <ion-col class="img">
+    <ion-row class="img">
+      <ion-col>
+        <h3>{{crop.name}}</h3>
+      </ion-col>
+
+      <ion-col>
         <ion-img [src]="crop.img"></ion-img>
       </ion-col>
     </ion-row>
 
     <ion-row>
-      <ion-col class="img">
+      <ion-col class="img-io">
         <ion-toolbar color="primary" class="sawbar">
           <ion-title class="text-center">Animal Intervention Names</ion-title>
         </ion-toolbar>
@@ -29,12 +33,13 @@
     </ion-row>
 
     <ion-row>
-      <ion-col *ngIf="interventions && interventions.length >= 0">
+      <ion-col *ngIf="interventions && interventions.length >= 0" class="name">
         <ion-list *ngFor="let intervention of interventions">
           <ion-item
-            [routerLink]="['/dashboard','tabs','home',crop.name,'animal-intervention','view',intervention.interventionId]"
-          >
-            <ion-label>{{intervention.interventionName}}</ion-label>
+              [routerLink]="['/dashboard','tabs','home',crop.name,'animal-intervention','view',intervention.interventionId]">
+              <ion-label>
+                {{intervention.interventionName}}
+              </ion-label>
           </ion-item>
         </ion-list>
       </ion-col>

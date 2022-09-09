@@ -24,7 +24,7 @@
             <ion-item class="title">
               <ion-card-header>
                 <ion-card-title>
-                  <h1>
+                  <h1 style="font-weight:400;">
                     {{"Dashboard.CropDiseases.DiseaseName."+disease.diseaseName
                     | translate}}
                   </h1>
@@ -34,12 +34,12 @@
 
             <ion-item class="btns">
               <ion-buttons>
-                <ion-button class="about" (click)="about(disease.diseaseId)"
-                  >{{"Dashboard.CropDiseases.About" | translate}}</ion-button
-                >
-                <ion-button class="remedy" (click)="remedy(disease.diseaseId)"
-                  >{{"Dashboard.CropDiseases.Remedy" | translate}}</ion-button
-                >
+                <ion-button class="about" (click)="about(disease.diseaseId)">
+                  {{"Dashboard.CropDiseases.About" | translate}}
+                  </ion-button>
+                <ion-button class="remedy" (click)="remedy(disease.diseaseId)">
+                  {{"Dashboard.CropDiseases.Remedy" | translate}}
+                  </ion-button>
               </ion-buttons>
             </ion-item>
           </ion-card>
