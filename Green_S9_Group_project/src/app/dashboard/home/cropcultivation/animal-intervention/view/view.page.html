@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button
         [defaultHref]="['/admin','tabs','home',crop.name,'animal-intervention']"
@@ -14,7 +14,7 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <ion-list>
+        <ion-list class="list">
          
           <ion-item>
             <ion-img [src]="intervention.image"></ion-img>

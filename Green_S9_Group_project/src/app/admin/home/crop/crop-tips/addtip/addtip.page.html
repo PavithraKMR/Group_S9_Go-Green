@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="success">
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-back-button ></ion-back-button >
     </ion-buttons>
@@ -10,7 +10,11 @@
 <ion-content >
   <ion-grid *ngIf="!isLoading">
 
-    <ion-row>
+    <ion-row class="img">
+      <ion-col>
+        <h3>{{crop.name}}</h3>
+      </ion-col>
+
       <ion-col>
         <ion-img [src]="crop.img"></ion-img>
       </ion-col>
@@ -18,7 +22,7 @@
 
     <ion-row >
       <ion-col>
-        <form (ngSubmit)="submittedForm(formDetails)" #formDetails="ngForm">
+        <form (ngSubmit)="submittedForm(formDetails)" #formDetails="ngForm" class="list">
           <ion-list>
             <ion-item>
               <ion-label  position="floating">
