@@ -41,7 +41,8 @@
       "Fertilizer_Calculator": "உர கணிப்பபொறி",
       "Crop_Tips": "பயிர் குறிப்புகள்",
       "Diseases": "நோய்கள்",
-      "Animal_Intervention": "விலங்கு தலையீடு"
+      "Animal":"விலங்கு",
+      "Intervention": "தலையீடு"
     },
     "CropTips": {
       "title": {
