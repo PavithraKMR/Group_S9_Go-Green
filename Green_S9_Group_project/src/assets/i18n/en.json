@@ -41,7 +41,8 @@
       "Fertilizer_Calculator": "Fertilizer Calculator",
       "Crop_Tips": "Crop Tips",
       "Diseases": "Diseases",
-      "Animal_Intervention": "Animal Intervention"
+      "Animal": "Animal",
+      "Intervention": "Intervention"
     },
     "CropTips": {
       "title": {
@@ -72,6 +73,25 @@
         "DownyMildew": "Downy Mildew",
         "GreenMould": "Green Mould"
       }
+    },
+    "Fertilizer_Calculator": {
+      "title": "Fertilizer Calculator",
+      "EnterTheArea": "Enter The Area",
+      "SelectAreaType": "Select Area Type",
+      "CALCULATE": "CALCULATE",
+      "Hectares": "Hectares",
+      "Acres": "Acres",
+      "Square_Meters": "Square Meters",
+      "Fertilizer_Amount": "Fertilizer Amount"
+    },
+    "AnimalInterventionName":{
+      "title":"Animal Intervention Name",
+      "About":"About",
+      "HowToIdentify":"How To Identify",
+      "HowToManage":"How To Manage",
+      "WhatItDoes":"What It Does",
+      "WhyAndWhereItOccurs":"Why And Where It Occurs",
+      "WhyIsImportant":"Why Is Important"
     }
   }
 }
