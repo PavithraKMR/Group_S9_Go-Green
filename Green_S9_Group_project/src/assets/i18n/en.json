@@ -71,7 +71,20 @@
         "PinkRootRot": "Pink Root Rot",
         "BlackMould": "Black Mould",
         "DownyMildew": "Downy Mildew",
-        "GreenMould": "Green Mould"
+        "GreenMould": "Green Mould",
+        "RhizomeRot" : "Rhizome Rot",
+        "LeafSpot": "LeafSpot",
+        "LeafBlotch" : "LeafBlotch",
+        "Dryrot": "Dryrot",
+        "Rhizomerot/Softrot/Pythiumrot" : "Rhizomerot/Softrot/Pythiumrot",
+        "Bakanae": "Bakanae",
+        "Narrowleafspot (Cercosporaleafspot)" : "Narrowleafspot (Cercosporaleafspot)",
+        "Riceblast" : "Rice blast",
+        "Sheathbligh" : "Sheathbligh",
+        "Stemrot" : "Stemrot",
+        "Alternarialeafblight" : "Alternarialeafblight",
+        "Cercosporaleafblight" : "Cercosporaleafblight",
+        "Cottonyrot(Sclerotiniarot)" : "Cottonyrot(Sclerotiniarot)"
       }
     },
     "Fertilizer_Calculator": {
