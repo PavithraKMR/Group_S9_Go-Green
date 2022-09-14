@@ -19,6 +19,18 @@
 
   <ion-grid *ngIf="!isLoading && notifications.length >0">
     <ion-row>
+      <ion-toolbar color="success">
+        <ion-segment (ionChange)="segmentChanged($event)" [(ngModel)]="message"  value='All'>
+          <ion-segment-button value="All">
+            <ion-label>New Messages</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="replied">
+            <ion-label>Old Messages</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+      </ion-toolbar>
+    </ion-row>
+    <ion-row>
       <ion-col>
         <ion-list *ngFor="let notification of notifications">
           <ion-item >
