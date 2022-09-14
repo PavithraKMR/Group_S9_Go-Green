@@ -18,11 +18,19 @@
       <ion-spinner></ion-spinner>
     </div>
     <ion-col size-md="10" offset-md="1">
-      <ion-card>
+      <ion-card class="bg-light text-dark">
+        <ion-card-header> {{notification.date | date}} </ion-card-header>
+
         <ion-card-content> {{notification.message}} </ion-card-content>
-        <ion-card-subtitle>
-          {{notification.reply === true ? "Replied" : "Not Replied"}}
-        </ion-card-subtitle>
+      </ion-card>
+
+      <ion-card class="bg-secondary text-light" *ngIf="notification.reply">
+        <ion-card-header class="text-light">
+          {{notification.replyDate | date}}
+        </ion-card-header>
+        <ion-card-content>
+          <div>{{notification.replyMessage}}</div>
+        </ion-card-content>
       </ion-card>
     </ion-col>
   </ion-grid>
