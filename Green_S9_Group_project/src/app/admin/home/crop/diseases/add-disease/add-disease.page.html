@@ -11,13 +11,19 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <form [formGroup]="form" (ngSubmit) = 'SubmittedForm()' enctype="multipart/form-data" class="list">
+        <form
+          [formGroup]="form"
+          (ngSubmit)="SubmittedForm()"
+          enctype="multipart/form-data"
+          class="list"
+        >
           <ion-item>
             <ion-label position="floating">Disease Name</ion-label>
             <ion-input
               type="text"
               lines="none"
-              formControlName="diseaseName"></ion-input>
+              formControlName="diseaseName"
+            ></ion-input>
           </ion-item>
           <ion-item *ngIf="form.get('diseaseName').inValid">
             <p>Please Enter Disease Name</p>
@@ -50,7 +56,6 @@
           <ion-row class="btn-row">
             <ion-col size-md="8" offset-md="2">
               <ion-item>
-
                 <ion-input
                   class="file"
                   type="file"
@@ -61,8 +66,7 @@
               <ion-item
                 *ngIf="imagePreview && imagePreview !== '' && form.get('image').valid"
               >
-                <img [src]="imagePreview" [alt]="form.value.image">
-
+                <img [src]="imagePreview" [alt]="form.value.image" />
               </ion-item>
             </ion-col>
           </ion-row>
@@ -79,7 +83,6 @@
             </ion-col>
           </ion-row>
         </form>
-
       </ion-col>
     </ion-row>
   </ion-grid>

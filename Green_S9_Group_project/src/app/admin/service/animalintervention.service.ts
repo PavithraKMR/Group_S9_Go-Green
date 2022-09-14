@@ -94,7 +94,7 @@ export class AnimalinterventionService {
 			.pipe(
 				take(1),
 				map(data => {
-          
+
 					return {
 						interventionId: data.id,
 						about: data.about,
