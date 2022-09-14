@@ -28,7 +28,7 @@ export class NotificationPage implements OnInit, OnDestroy {
 	notiSub: Subscription;
 	isLoading = false;
 	deleteSub: Subscription;
-	messageTerm = false;
+	messageTerm: any = false;
 	userId: string;
 	userSub: Subscription;
 
@@ -120,7 +120,11 @@ export class NotificationPage implements OnInit, OnDestroy {
 	}
 
 	segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
-		console.log(event.detail.value);
+	
+	}
+
+	change() {
+		this.messageTerm = this.userId;
 	}
 
 	ngOnDestroy() {
