@@ -104,10 +104,17 @@ export class NotificationPage implements OnInit, OnDestroy {
 			});
 	}
 
+  value = 'new'
+	segmentChanged(event: Event) {
+    console.log(event.target);
+
+  }
+
 	ngOnDestroy() {
 		if (this.notiSub || this.deleteSub) {
 			this.notiSub.unsubscribe;
-			this.deleteSub.unsubscribe;
+      if(this.delete)
+			    this.deleteSub.unsubscribe;
 		}
 	}
 }

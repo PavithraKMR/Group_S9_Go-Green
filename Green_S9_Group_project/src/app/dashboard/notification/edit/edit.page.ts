@@ -71,10 +71,9 @@ export class EditPage implements OnInit, OnDestroy {
 					)
 					.subscribe(() => {
 						this.reactiveform.reset();
-            this.router.navigateByUrl('/dashboard/tabs/notification');
+						this.router.navigateByUrl('/dashboard/tabs/notification');
 						el.dismiss();
 					});
-
 			});
 	}
 
@@ -82,7 +81,7 @@ export class EditPage implements OnInit, OnDestroy {
 		if (this.paraSub || this.notiSub || this.authSub) {
 			this.paraSub.unsubscribe();
 			this.notiSub.unsubscribe();
-			this.authSub.unsubscribe();
+			if (this.authSub) this.authSub.unsubscribe();
 		}
 	}
 }
