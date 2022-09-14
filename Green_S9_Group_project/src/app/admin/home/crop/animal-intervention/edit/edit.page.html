@@ -1,7 +1,9 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button   [defaultHref]="['/admin','tabs','home',crop.name,'animal-intervention']"></ion-back-button>
+      <ion-back-button
+        [defaultHref]="['/admin','tabs','home',crop.name,'animal-intervention']"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title *ngIf="isLoading">Loading Edit .....</ion-title>
     <ion-title *ngIf="!isLoading">{{intervention.interventionName}}</ion-title>
@@ -9,5 +11,150 @@
 </ion-header>
 
 <ion-content>
+  <ion-spinner color="primary" *ngIf="isLoading"></ion-spinner>
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col>
+        <form
+          [formGroup]="form"
+          (ngSubmit)="SubmittedForm()"
+          enctype="multipart/form-data"
+          class="list"
+        >
 
+        <ion-item lines="none">
+          <ion-label position="floating">Intervention Name</ion-label>
+          <ion-input
+            type="text"
+            lines="none"
+            formControlName="interventionName"
+          ></ion-input>
+        </ion-item>
+        <ion-item *ngIf="form.get('interventionName').inValid" lines="none">
+          <p>Please Enter Intervention Name</p>
+        </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">About Intervention</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="about"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('about').inValid" lines="none">
+            <p>Please Enter about Intervention</p>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">whyIsImportant</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="whyIsImportant"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('whyIsImportant').inValid" lines="none">
+            <p>Please Enter whyIsImportant</p>
+          </ion-item>
+
+
+          <ion-item lines="none">
+            <ion-label position="floating">whatIdDoes</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="whatIdDoes"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('whatIdDoes').inValid" lines="none">
+            <p>Please Enter whatIdDoes</p>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">whyAndWhereItOccours</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="whyAndWhereItOccours"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('whyAndWhereItOccours').inValid" lines="none">
+            <p>Please Enter whyAndWhereItOccours</p>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">howToIdentify</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="howToIdentify"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('howToIdentify').inValid" lines="none">
+            <p>Please Enter howToIdentify</p>
+          </ion-item>
+
+
+          <ion-item lines="none">
+            <ion-label position="floating">howToManage</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="howToManage"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('howToManage').inValid" lines="none">
+            <p>Please Enter howToManage</p>
+          </ion-item>
+
+
+
+          <ion-item lines="none">
+            <ion-label position="floating">howToManage</ion-label>
+            <ion-input
+              type="text"
+              lines="none"
+              formControlName="howToManage"
+            ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('howToManage').inValid" lines="none">
+            <p>Please Enter howToManage</p>
+          </ion-item>
+
+          
+          <ion-row class="btn-row">
+            <ion-col size-md="8" offset-md="2">
+              <ion-item lines="none">
+                <ion-input
+                  class="file"
+                  type="file"
+                  #filePicker
+                  (change)="uploadfile($event)"
+                ></ion-input>
+              </ion-item>
+              <ion-item
+                *ngIf="imagePreview && imagePreview !== '' && form.get('image').valid"
+                lines="none"
+              >
+                <img [src]="imagePreview" [alt]="form.value.image" />
+              </ion-item>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col size-md="8" offset-md="2">
+              <ion-button
+                type="submit"
+                color="success"
+                expand="full"
+                [disabled]="!form.valid"
+                >Create</ion-button
+              >
+            </ion-col>
+          </ion-row>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
