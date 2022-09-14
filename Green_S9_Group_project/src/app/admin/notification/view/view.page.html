@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/admin/tabs/notification"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="isLoading">Loading...</ion-title>
+    <ion-title *ngIf="!isLoading">{{notification.userId}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid *ngIf="isLoading">
+    <ion-spinner color="primary" class="text-center"></ion-spinner>
+  </ion-grid>
+
+  <ion-grid *ngIf="!isLoading">
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          {{notification.message}}
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

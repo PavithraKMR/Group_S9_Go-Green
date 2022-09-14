@@ -129,15 +129,15 @@ const routes: Routes = [
 							import('./notification/notification.module').then(
 								m => m.NotificationPageModule
 							)
-					}
+					},
 					// {
 					//   path:'add',
 					//   loadChildren: () => import('./notification/add/add.module').then( m => m.AddPageModule)
 					// },
-					// {
-					//   path:'view/:id',
-					//   loadChildren:()=> import('./notification/view/view.module').then(m=>m.ViewPageModule)
-					// },
+					{
+					  path:'view/:id',
+					  loadChildren:()=> import('../admin/notification/view/view.module').then(m=>m.ViewPageModule)
+					},
 					// {
 					//   path:'edit/:id',
 					//   loadChildren:()=> import('./notification/edit/edit.module').then(m=>m.EditPageModule)
