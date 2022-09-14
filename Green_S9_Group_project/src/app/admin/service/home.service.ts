@@ -30,7 +30,7 @@ export class HomeService {
 			img: 'assets/project_images/ginger.png'
 		},
 		{
-			name: 'Potato',
+			name: 'Pottato',
 			img: 'assets/project_images/potato.png'
 		},
 		{

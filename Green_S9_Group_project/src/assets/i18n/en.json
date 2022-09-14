@@ -41,7 +41,7 @@
       "Fertilizer_Calculator": "Fertilizer Calculator",
       "Crop_Tips": "Crop Tips",
       "Diseases": "Diseases",
-      "Animal":"Animal",
+      "Animal": "Animal",
       "Intervention": "Intervention"
     },
     "CropTips": {
@@ -71,8 +71,43 @@
         "PinkRootRot": "Pink Root Rot",
         "BlackMould": "Black Mould",
         "DownyMildew": "Downy Mildew",
-        "GreenMould": "Green Mould"
+        "GreenMould": "Green Mould",
+        "RhizomeRot":"RhizomeRot",
+        "LeafSpot":"Leaf Spot",
+        "LeafBlotch":"Leaf Blotch",
+        "DryRot":"Dry Rot",
+        "Dryrot":"Dry rot",
+        "Rhizomerot/Softrot/Pythiumrot":"Rhizomerot/Softrot/Pythiumrot",
+        "Bakanae":"Bakanae",
+        "Narrowleafspot(Cercosporaleafspot)":"Narrowleafspot(Cercosporaleafspot)",
+        "Riceblast":"Rice Blast",
+        "Sheathblight":"Sheath Blight",
+        "Stemrot":"Stem Rot",
+        "Alternarialeafblight":"Alternaria Leaf Blight",
+        "Cercosporaleafblight":"Cercospora Leaf Blight",
+        "Cottonyrot(Sclerotiniarot)":"Cottonyrot(Sclerotiniarot)",
+        "Blackscurf&Rhizoctoniacanker":"Black scurf Rhizoctonia canker",
+        "PotatoEarlyBlight":"Potato Early Blight"
       }
+    },
+    "Fertilizer_Calculator": {
+      "title": "Fertilizer Calculator",
+      "EnterTheArea": "Enter The Area",
+      "SelectAreaType": "Select Area Type",
+      "CALCULATE": "CALCULATE",
+      "Hectares": "Hectares",
+      "Acres": "Acres",
+      "Square_Meters": "Square Meters",
+      "Fertilizer_Amount": "Fertilizer Amount"
+    },
+    "AnimalInterventionName":{
+      "title":"Animal Intervention Name",
+      "About":"About",
+      "HowToIdentify":"How To Identify",
+      "HowToManage":"How To Manage",
+      "WhatItDoes":"What It Does",
+      "WhyAndWhereItOccurs":"Why And Where It Occurs",
+      "WhyIsImportant":"Why Is Important"
     }
   }
 }
