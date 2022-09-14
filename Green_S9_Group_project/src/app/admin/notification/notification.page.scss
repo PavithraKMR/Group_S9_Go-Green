@@ -1,14 +1,15 @@
-*{margin:0%;
-padding: 0%;}
-ion-item{
-  margin-top: 0.5rem;
-  border: 1px solid black;
-  font-size: large;
+* {
+  margin: 0%;
+  padding: 0%;
+}
 
-  ion-label{
-    display: flex;
-    flex-direction: column;
-  }
+ion-item {
+  margin-top: 0.5rem;
+  border: 0.5px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  padding:0%;
+  padding-bottom: 10px;
 }
 
 

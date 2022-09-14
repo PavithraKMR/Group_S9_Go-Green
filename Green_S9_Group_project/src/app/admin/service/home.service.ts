@@ -78,7 +78,7 @@ export class HomeService {
 					}
 				}),
 				tap(data => {
-					this._croptips.next(data);
+					this._croptips.next(data);    
 				})
 			);
 	}

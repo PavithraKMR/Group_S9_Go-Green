@@ -134,7 +134,8 @@ export class NotificationService {
 						notificationId: notification.id,
 						date: notification.date,
 						message: notification.message,
-						reply: notification.reply
+						reply: notification.reply,
+            userId:notification.userId
 					});
 				}
 

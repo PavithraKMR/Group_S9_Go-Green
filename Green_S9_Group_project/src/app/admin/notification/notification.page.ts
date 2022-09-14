@@ -18,6 +18,8 @@ export class NotificationPage implements OnInit, OnDestroy {
 		this.notiSub = this.notificationService.AllNotification.subscribe(
 			notification => {
 				this.notifications = notification;
+        console.log(this.notifications);
+
 				this.isLoading = false;
 			}
 		);
