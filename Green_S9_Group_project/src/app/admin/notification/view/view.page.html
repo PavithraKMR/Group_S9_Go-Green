@@ -18,7 +18,16 @@
       <ion-col>
         <ion-card class="bg-light">
           <ion-card-header> {{notification.date | date}} </ion-card-header>
-          <ion-card-content>{{notification.message}}</ion-card-content>
+          <ion-card-content>
+            <div>{{notification.message}}</div>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="bg-secondary  text-light" *ngIf="notification.reply">
+          <ion-card-header class="text-light"> {{notification.replyDate | date}} </ion-card-header>
+          <ion-card-content >
+            <div>{{notification.replyMessage}}</div>
+          </ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>

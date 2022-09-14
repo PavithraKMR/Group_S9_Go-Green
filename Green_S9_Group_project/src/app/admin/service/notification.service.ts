@@ -27,7 +27,9 @@ export class NotificationService {
 						message: res['message'],
 						reply: res['reply'],
 						date: res['date'],
-						userId: res['userId']
+						userId: res['userId'],
+						replyMessage: res['replyMessage'] ? res['replyMessage'] : '',
+						replyDate: res['replyDate'] ? res['replyDate'] : ''
 					};
 				})
 			);
@@ -83,8 +85,8 @@ export class NotificationService {
 			notificationId: notificationId,
 			message: message,
 			userId: userId,
-      replyMessage:replyMessage,
-      date:date
+			replyMessage: replyMessage,
+			date: date
 		};
 
 		return this.http

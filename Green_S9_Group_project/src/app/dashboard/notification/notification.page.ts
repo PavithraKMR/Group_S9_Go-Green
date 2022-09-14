@@ -1,9 +1,11 @@
+import { AuthService } from 'src/app/login/auth.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import {
 	AlertController,
 	IonItemSliding,
-	LoadingController
+	LoadingController,
+	SegmentChangeEventDetail
 } from '@ionic/angular';
 import { Subscription } from 'rxjs';
 
@@ -18,13 +20,17 @@ export class NotificationPage implements OnInit, OnDestroy {
 	constructor(
 		private notificationService: NotificationService,
 		private loadCtrl: LoadingController,
-		private alertCtrl: AlertController
+		private alertCtrl: AlertController,
+		private authService: AuthService
 	) {}
 
 	notifications: Notification[];
 	notiSub: Subscription;
 	isLoading = false;
 	deleteSub: Subscription;
+	messageTerm = false;
+	userId: string;
+	userSub: Subscription;
 
 	userIcons = [
 		'assets/UserIcons/avatar.png',
@@ -46,6 +52,11 @@ export class NotificationPage implements OnInit, OnDestroy {
 				this.isLoading = false;
 			}
 		);
+
+		this.userSub = this.authService.getUserId.subscribe(userId => {
+			this.userId = userId;
+			this.isLoading = false;
+		});
 	}
 
 	ionViewWillEnter() {
@@ -55,8 +66,12 @@ export class NotificationPage implements OnInit, OnDestroy {
 			.fetchAllNotifications()
 			.subscribe(notifications => {
 				this.notifications = notifications;
-				this.isLoading = false;
 			});
+
+		this.userSub = this.authService.getUserId.subscribe(userId => {
+			this.userId = userId;
+			this.isLoading = false;
+		});
 	}
 
 	edit(id: string) {
@@ -104,17 +119,15 @@ export class NotificationPage implements OnInit, OnDestroy {
 			});
 	}
 
-  value = 'new'
-	segmentChanged(event: Event) {
-    console.log(event.target);
-
-  }
+	segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
+		console.log(event.detail.value);
+	}
 
 	ngOnDestroy() {
-		if (this.notiSub || this.deleteSub) {
+		if (this.notiSub || this.deleteSub || this.userSub) {
 			this.notiSub.unsubscribe;
-      if(this.delete)
-			    this.deleteSub.unsubscribe;
+			this.userSub.unsubscribe;
+			if (this.delete) this.deleteSub.unsubscribe;
 		}
 	}
 }
