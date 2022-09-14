@@ -1,4 +1,6 @@
-import { ActivatedRoute } from '@angular/router';
+import { Form, NgForm } from '@angular/forms';
+import { AuthService } from 'src/app/login/auth.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NotificationService } from 'src/app/admin/service/notification.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -11,11 +13,16 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 export class ViewPage implements OnInit, OnDestroy {
 	constructor(
 		private notificationService: NotificationService,
-		private route: ActivatedRoute
+		private route: ActivatedRoute,
+		private authService: AuthService,
+		private router: Router
 	) {}
 	notiSub: Subscription;
 	paraSub: Subscription;
+	userSub: Subscription;
 	notification: any;
+	user: any;
+	reply = false;
 
 	// export class Notification {
 	//   notificationId: string;
@@ -36,17 +43,23 @@ export class ViewPage implements OnInit, OnDestroy {
 			}
 
 			this.notiSub = this.notificationService
-				.getAllUserNotification(paramMap.get('id'))
+				.getNotification(paramMap.get('id'))
 				.subscribe(notification => {
 					this.notification = notification;
-					this.isLoading = false;
+					console.log(this.notification);
+
+					this.userSub = this.authService
+						.getUser(notification.userId)
+						.subscribe(user => {
+							this.user = user;
+							this.isLoading = false;
+						});
 				});
 		});
 	}
 
-  ionViewWillEnter()
-  {
-    this.isLoading = true;
+	ionViewWillEnter() {
+		this.isLoading = true;
 
 		this.paraSub = this.route.paramMap.subscribe(paramMap => {
 			if (!paramMap.has('id')) {
@@ -54,18 +67,51 @@ export class ViewPage implements OnInit, OnDestroy {
 			}
 
 			this.notiSub = this.notificationService
-				.getAllUserNotification(paramMap.get('id'))
+				.getNotification(paramMap.get('id'))
 				.subscribe(notification => {
 					this.notification = notification;
-					this.isLoading = false;
+
+					this.userSub = this.authService
+						.getUser(notification.userId)
+						.subscribe(user => {
+							this.user = user;
+
+							this.isLoading = false;
+						});
 				});
 		});
-  }
+	}
+	changeReplyMode() {
+		this.reply = !this.reply;
+		console.log(this.reply);
+	}
+
+	replySub: Subscription;
+	submitForm(form: NgForm) {
+		if (!form.valid) {
+			return;
+		}
+
+		this.replySub = this.notificationService
+			.replyNotifiction(
+				this.notification.notificationId,
+				this.notification.message,
+				form.value.replyMessage,
+				this.user.userId,
+				this.notification.date
+			)
+			.subscribe(() => {
+				this.router.navigateByUrl('/admin/tabs/notification');
+			});
+	}
 
 	ngOnDestroy(): void {
-		if (this.paraSub || this.notiSub) {
+		if (this.paraSub || this.notiSub || this.userSub || this.replySub) {
 			this.paraSub.unsubscribe();
 			this.notiSub.unsubscribe();
+			this.userSub.unsubscribe();
+
+			if (this.replySub) this.replySub.unsubscribe();
 		}
 	}
 }

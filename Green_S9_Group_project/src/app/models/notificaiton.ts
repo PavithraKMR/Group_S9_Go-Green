@@ -4,5 +4,8 @@ export class Notification {
 	message: string;
 	reply: boolean;
 	userId: string;
+
+  // replyMessage:string;
+  // replyDate:string;
 }
 
