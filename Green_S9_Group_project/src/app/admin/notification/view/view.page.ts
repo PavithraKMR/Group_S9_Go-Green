@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { Form, NgForm } from '@angular/forms';
 import { AuthService } from 'src/app/login/auth.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,7 +16,8 @@ export class ViewPage implements OnInit, OnDestroy {
 		private notificationService: NotificationService,
 		private route: ActivatedRoute,
 		private authService: AuthService,
-		private router: Router
+		private router: Router,
+		private loadCtrl: LoadingController
 	) {}
 	notiSub: Subscription;
 	paraSub: Subscription;
@@ -92,16 +94,27 @@ export class ViewPage implements OnInit, OnDestroy {
 			return;
 		}
 
-		this.replySub = this.notificationService
-			.replyNotifiction(
-				this.notification.notificationId,
-				this.notification.message,
-				form.value.replyMessage,
-				this.user.userId,
-				this.notification.date
-			)
-			.subscribe(() => {
-				this.router.navigateByUrl('/admin/tabs/notification');
+		this.loadCtrl
+			.create({
+				message: 'Replying...',
+				spinner: 'crescent',
+				animated: true,
+				duration: 500
+			})
+			.then(el => {
+				el.present();
+				this.replySub = this.notificationService
+					.replyNotifiction(
+						this.notification.notificationId,
+						this.notification.message,
+						form.value.replyMessage,
+						this.user.userId,
+						this.notification.date
+					)
+					.subscribe(() => {
+						el.dismiss();
+						this.router.navigateByUrl('/admin/tabs/notification');
+					});
 			});
 	}
 

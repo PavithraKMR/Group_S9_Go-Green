@@ -13,8 +13,12 @@ export class NotificationPage implements OnInit, OnDestroy {
 	notifications: Notification[];
 	notiSub: Subscription;
 	isLoading = false;
+	messageTerm = false;
+
 	ngOnInit() {
 		this.isLoading = true;
+    console.log(this.messageTerm);
+
 		this.notiSub = this.notificationService.AllNotification.subscribe(
 			notification => {
 				this.notifications = notification;
@@ -37,7 +41,6 @@ export class NotificationPage implements OnInit, OnDestroy {
 	}
 	// import { Ng2SearchPipeModule } from 'ng2-search-filter';
 	// Ng2SearchPipeModule
-	messageTerm = false;
 	segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
 		console.log(event.detail.value);
 	}
