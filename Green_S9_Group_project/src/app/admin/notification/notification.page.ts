@@ -1,6 +1,7 @@
 import { NotificationService } from 'src/app/admin/service/notification.service';
 import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { SegmentChangeEventDetail } from '@ionic/angular';
 
 @Component({
 	selector: 'app-notification',
@@ -32,12 +33,12 @@ export class NotificationPage implements OnInit, OnDestroy {
 				this.isLoading = false;
 			});
 	}
-
-  message = 'All'
-	segmentChanged(event: Event) {
-    console.log(this.message);
-
-  }
+	// import { Ng2SearchPipeModule } from 'ng2-search-filter';
+	// Ng2SearchPipeModule
+	messageTerm = false;
+	segmentChanged(event: CustomEvent<SegmentChangeEventDetail>) {
+		console.log(event.detail.value);
+	}
 
 	ngOnDestroy() {
 		if (this.notiSub) {
