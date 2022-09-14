@@ -5,7 +5,7 @@
         [defaultHref]="['/dashboard','tabs','home',crop.name]"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="!isLoading">{{crop.name}}</ion-title>
+    <ion-title *ngIf="!isLoading">{{"Dashboard.Home.Crops."+crop.name | translate}}</ion-title>
     <ion-title *ngIf="isLoading">
       <ion-spinner color="primary"></ion-spinner>
     </ion-title>
@@ -16,7 +16,7 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row class="img">
       <ion-col>
-        <h3>{{crop.name}}</h3>
+        <h3>{{"Dashboard.Home.Crops."+crop.name | translate}}</h3>
       </ion-col>
 
       <ion-col>
@@ -27,7 +27,7 @@
     <ion-row>
       <ion-col class="img-io">
         <ion-toolbar color="primary" class="sawbar">
-          <ion-title class="text-center">Animal Intervention Names</ion-title>
+          <ion-title class="text-center">{{"Dashboard.AnimalInterventionName.title" | translate}}</ion-title>
         </ion-toolbar>
       </ion-col>
     </ion-row>

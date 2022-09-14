@@ -18,7 +18,7 @@
   <ion-grid>
     <ion-row class="img">
       <ion-col>
-        <h3>{{crop.name}}</h3>
+        <h3>{{"Dashboard.Home.Crops."+crop.name | translate }}</h3>
       </ion-col>
 
       <ion-col>
@@ -40,47 +40,36 @@
       </ion-col>
 
       <ion-col>
-        <ion-card
-          [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips']"
-        >
-          <ion-img src="assets//project_images/croptips.jpg"></ion-img><br />
-          <ion-card-title>
-            {{"Dashboard.CropCultivation.Crop_Tips"|translate}}
-          </ion-card-title>
+        <ion-card [routerLink]="['/dashboard','tabs','home',crop.name,'crop-tips']">
+
+          <ion-img src="assets//project_images/croptips.jpg"></ion-img><br>
+          <ion-card-title> {{"Dashboard.CropCultivation.Crop_Tips"|translate}}</ion-card-title>
+
         </ion-card>
       </ion-col>
     </ion-row>
 
     <ion-row class="details">
       <ion-col>
-        <ion-card
-          [routerLink]="['/dashboard','tabs','home',crop.name,'diseases']"
-        >
-          <ion-img
-            style="width: 150px; height: 150px"
-            src="assets//project_images/disease.jpg"
-          ></ion-img
-          ><br />
-          <ion-card-title>
-            {{"Dashboard.CropCultivation.Diseases"|translate}}</ion-card-title
-          >
+        <ion-card [routerLink]="['/dashboard','tabs','home',crop.name,'diseases']">
+
+          <ion-img style = " width: 150px; height: 150px;" src="assets//project_images/disease.jpg"></ion-img><br>
+          <ion-card-title> {{"Dashboard.CropCultivation.Diseases"|translate}} </ion-card-title>
+
         </ion-card>
       </ion-col>
 
       <ion-col>
-        <ion-card
-          [routerLink]="['/dashboard','tabs','home',crop.name,'animal-intervention']"
-        >
-          <ion-img
-            style="width: 150px; height: 150px"
-            src="assets//project_images/grasshoper.jpg"
-          ></ion-img>
-          <ion-card-title>
-            {{"Dashboard.CropCultivation.Animal"|translate}} <br />
-            {{"Dashboard.CropCultivation.Intervention"|translate}}</ion-card-title
-          >
+        <ion-card [routerLink]="['/dashboard','tabs','home',crop.name,'animal-intervention']">
+          <ion-img style=" width: 150px; height: 150px;" src="assets//project_images/grasshoper.jpg"></ion-img>
+          <ion-card-title> {{"Dashboard.CropCultivation.Animal"|translate}} <br> {{"Dashboard.CropCultivation.Intervention"|translate}}</ion-card-title>
+
+
         </ion-card>
       </ion-col>
     </ion-row>
+
+
+
   </ion-grid>
 </ion-content>
