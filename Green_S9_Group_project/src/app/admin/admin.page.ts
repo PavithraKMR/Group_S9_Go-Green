@@ -1,4 +1,3 @@
-import { AddZoneComponent } from './home/add-zone/add-zone.component';
 import { ModalController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/login/auth.service';
@@ -23,14 +22,5 @@ export class AdminPage implements OnInit {
 		this.router.navigateByUrl('/login');
 	}
 
-	addZone() {
-		this.modelCtrl
-			.create({
-				component: AddZoneComponent,
-				animated: true
-			})
-			.then(el => {
-				el.present();
-			});
-	}
+
 }

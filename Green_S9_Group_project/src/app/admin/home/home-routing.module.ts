@@ -11,6 +11,10 @@ const routes: Routes = [
   {
     path: 'crop',
     loadChildren: () => import('./crop/crop.module').then( m => m.CropPageModule)
+  },
+  {
+    path: 'add-zone',
+    loadChildren: () => import('./add-zone/add-zone.module').then( m => m.AddZonePageModule)
   }
 ];
 
