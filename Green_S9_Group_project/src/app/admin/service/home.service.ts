@@ -371,16 +371,44 @@ export class HomeService {
 		);
 	}
 
-	addZone(zone: string) {
-		return this.http.post<any>('http://localhost:5000/api/zone', zone).pipe(
-			take(1),
-			switchMap(() => {
-				return this.AllZones;
-			}),
-			tap(zones => {
-				this._zones.next(zones.concat(zone));
-			})
-		);
+	addZone(zoneName: string) {
+		const zone = {
+			zone: zoneName
+		};
+		return this.http
+			.post<any>('http://localhost:5000/api/GreenLive/addZone', zone)
+			.pipe(
+				take(1),
+				switchMap(() => {
+					return this.AllZones;
+				}),
+				tap(zones => {
+					this._zones.next(zones.concat(zone));
+				})
+			);
+	}
+
+	getZones() {
+		return this.http
+			.get<any>('http://localhost:5000/api/GreenLive/getZones')
+			.pipe(
+				take(1),
+				map(res => {
+					const zones = [];
+
+					for (let zone of res.zones) {
+						zones.push({
+							id: zone.id,
+							zoneName: zone.zoneName
+						});
+					}
+
+					return zones;
+				}),
+				tap(zones => {
+					this._zones.next(zones);
+				})
+			);
 	}
 
 	delete(id: string) {}
