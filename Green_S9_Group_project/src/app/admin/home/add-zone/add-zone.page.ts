@@ -1,3 +1,4 @@
+import { LoadingController } from '@ionic/angular';
 import { HomeService } from 'src/app/admin/service/home.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/login/auth.service';
@@ -11,7 +12,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 	styleUrls: ['./add-zone.page.scss']
 })
 export class AddZonePage implements OnInit, OnDestroy {
-	constructor(private router: Router, private homeService: HomeService) {}
+	constructor(
+		private router: Router,
+		private homeService: HomeService,
+		private loadingCtrl: LoadingController
+	) {}
 
 	ngOnInit() {}
 
@@ -26,9 +31,20 @@ export class AddZonePage implements OnInit, OnDestroy {
 			return;
 		}
 
-		this.authSub = this.homeService
-			.addZone(form.value.zoneName)
-			.subscribe(() => {
+		this.loadingCtrl
+			.create({
+				message: 'Adding....',
+				spinner: 'circular',
+				animated: true,
+				duration: 500
+			})
+			.then(el => {
+				el.present();
+				this.authSub = this.homeService
+					.addZone(form.value.zoneName)
+					.subscribe(() => {
+						el.dismiss();
+					});
 				this.router.navigateByUrl('/admin/tabs/home');
 			});
 	}

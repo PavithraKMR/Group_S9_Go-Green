@@ -399,7 +399,7 @@ export class HomeService {
 					for (let zone of res.zones) {
 						zones.push({
 							id: zone.id,
-							zoneName: zone.zoneName
+							zoneName: zone.zone
 						});
 					}
 
