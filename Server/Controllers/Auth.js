@@ -1,6 +1,7 @@
 const HttpError = require('../models/http-error');
 const { validationResult } = require('express-validator');
 const User = require('../models/User');
+const Zone = require('../models/Zone');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -151,7 +152,7 @@ const updatePassword = async (req, res, next) => {
 		const error = new HttpError('User is not there provided by the id', 500);
 		return next(error);
 	}
-	console.log(user)
+	console.log(user);
 	try {
 		validCurrentPassword = await bcrypt.compare(currentPassword, user.password);
 		console.log(validCurrentPassword);
@@ -187,7 +188,46 @@ const updatePassword = async (req, res, next) => {
 	});
 };
 
+const addZone = async (req, res, next) => {
+	const errors = validationResult(req);
 
+	if (!errors.isEmpty()) {
+		throw new HttpError('Invalid inputs passed, please check your data.', 422);
+		// return next(new HttpError('Invalid inputs passed, please check your data.', 422)); // batter to use this
+	}
+	const { zone } = req.body;
+
+	const newZone = new Zone({
+		zone: zone
+	});
+	try {
+		await newZone.save();
+	} catch (err) {
+		const error = new HttpError('Creating Zone failed,try again', 500);
+		return next(error);
+	}
+	res.json({ zone: newZone.toObject({ getters: true }) });
+};
+
+const getZones = async (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		throw new HttpError('Invalid inputs passed, please check your data.', 422);
+	}
+
+	let zones;
+	try {
+		zones = await Zone.find();
+	} catch (err) {
+		const error = new HttpError('Creating Notification failed,try again', 500);
+		return next(error);
+	}
+	res.json({ zones: zones.map((zone) => zone.toObject({ getters: true })) });
+};
+
+exports.getZones = getZones;
+exports.addZone = addZone;
 exports.updatePassword = updatePassword;
 exports.signUp = signUp;
 exports.signIn = signIn;
