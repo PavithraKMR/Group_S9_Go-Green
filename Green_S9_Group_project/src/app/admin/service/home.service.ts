@@ -15,6 +15,7 @@ export class HomeService {
 
 	private _croptips = new BehaviorSubject([]);
 	private _cropdiseases = new BehaviorSubject([]);
+	private _zones = new BehaviorSubject([]);
 
 	private _crops = new BehaviorSubject<Crop[]>([
 		{
@@ -55,6 +56,10 @@ export class HomeService {
 		return this._cropdiseases.asObservable();
 	}
 
+	get AllZones() {
+		return this._zones.asObservable();
+	}
+
 	fetchAlltips(name: string) {
 		return this.http
 			.get<any>('http://localhost:5000/api/crop/getTips/' + name)
@@ -78,7 +83,7 @@ export class HomeService {
 					}
 				}),
 				tap(data => {
-					this._croptips.next(data);    
+					this._croptips.next(data);
 				})
 			);
 	}
@@ -144,7 +149,6 @@ export class HomeService {
 		image: File
 	) {
 		const formData = new FormData();
-
 
 		formData.append('image', image);
 		formData.append('diseaseName', diseaseName);
@@ -366,4 +370,20 @@ export class HomeService {
 			})
 		);
 	}
+
+	addZone(zone: string) {
+		return this.http.post<any>('http://localhost:5000/api/zone', zone).pipe(
+			take(1),
+			switchMap(() => {
+				return this.AllZones;
+			}),
+			tap(zones => {
+				this._zones.next(zones.concat(zone));
+			})
+		);
+	}
+
+	delete(id: string) {}
+
+	updateZone(id: string) {}
 }

@@ -21,108 +21,95 @@
           enctype="multipart/form-data"
           class="list"
         >
-
-        <ion-item lines="none">
-          <ion-label position="floating">Intervention Name</ion-label>
-          <ion-input
-            type="text"
-            lines="none"
-            formControlName="interventionName"
-          ></ion-input>
-        </ion-item>
-        <ion-item *ngIf="form.get('interventionName').inValid" lines="none">
-          <p>Please Enter Intervention Name</p>
-        </ion-item>
-
           <ion-item lines="none">
-            <ion-label position="floating">About Intervention</ion-label>
+            <ion-label position="floating">Intervention Name</ion-label>
             <ion-input
               type="text"
               lines="none"
-              formControlName="about"
+              formControlName="interventionName"
+
             ></ion-input>
+          </ion-item>
+          <ion-item *ngIf="form.get('interventionName').inValid" lines="none">
+            <p>Please Enter Intervention Name</p>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label position="floating">About Intervention</ion-label>
+            <ion-textarea
+              type="text"
+              lines="none"
+              formControlName="about"
+              rows="5"
+            ></ion-textarea>
           </ion-item>
           <ion-item *ngIf="form.get('about').inValid" lines="none">
             <p>Please Enter about Intervention</p>
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label position="floating">whyIsImportant</ion-label>
-            <ion-input
+            <ion-label position="floating">why Is Important</ion-label>
+            <ion-textarea
               type="text"
-              lines="none"
+              rows="5"
               formControlName="whyIsImportant"
-            ></ion-input>
+            ></ion-textarea>
           </ion-item>
           <ion-item *ngIf="form.get('whyIsImportant').inValid" lines="none">
-            <p>Please Enter whyIsImportant</p>
+            <p>Please Enter WhyIsImportant</p>
           </ion-item>
 
-
           <ion-item lines="none">
-            <ion-label position="floating">whatIdDoes</ion-label>
-            <ion-input
+            <ion-label position="floating">what Id Does</ion-label>
+            <ion-textarea
               type="text"
-              lines="none"
+              rows="5"
               formControlName="whatIdDoes"
-            ></ion-input>
+            ></ion-textarea>
           </ion-item>
           <ion-item *ngIf="form.get('whatIdDoes').inValid" lines="none">
-            <p>Please Enter whatIdDoes</p>
+            <p>Please Enter WhatIdDoes</p>
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label position="floating">whyAndWhereItOccours</ion-label>
-            <ion-input
+            <ion-label position="floating">why And Where It Occours</ion-label>
+            <ion-textarea
               type="text"
-              lines="none"
+              rows="5"
               formControlName="whyAndWhereItOccours"
-            ></ion-input>
+            ></ion-textarea>
           </ion-item>
-          <ion-item *ngIf="form.get('whyAndWhereItOccours').inValid" lines="none">
-            <p>Please Enter whyAndWhereItOccours</p>
+          <ion-item
+            *ngIf="form.get('whyAndWhereItOccours').inValid"
+            lines="none"
+          >
+            <p>Please Enter WhyAndWhereItOccours</p>
           </ion-item>
 
           <ion-item lines="none">
-            <ion-label position="floating">howToIdentify</ion-label>
-            <ion-input
+            <ion-label position="floating">how To Identify</ion-label>
+            <ion-textarea
               type="text"
-              lines="none"
+              rows="5"
               formControlName="howToIdentify"
-            ></ion-input>
+            ></ion-textarea>
           </ion-item>
           <ion-item *ngIf="form.get('howToIdentify').inValid" lines="none">
-            <p>Please Enter howToIdentify</p>
+            <p>Please Enter HowToIdentify</p>
           </ion-item>
-
 
           <ion-item lines="none">
-            <ion-label position="floating">howToManage</ion-label>
-            <ion-input
+            <ion-label position="floating">how To Manage</ion-label>
+            <ion-textarea
               type="text"
-              lines="none"
+              rows="5"
               formControlName="howToManage"
-            ></ion-input>
+            ></ion-textarea>
           </ion-item>
           <ion-item *ngIf="form.get('howToManage').inValid" lines="none">
-            <p>Please Enter howToManage</p>
+            <p>Please Enter HowToManage</p>
           </ion-item>
 
-
-
-          <ion-item lines="none">
-            <ion-label position="floating">howToManage</ion-label>
-            <ion-input
-              type="text"
-              lines="none"
-              formControlName="howToManage"
-            ></ion-input>
-          </ion-item>
-          <ion-item *ngIf="form.get('howToManage').inValid" lines="none">
-            <p>Please Enter howToManage</p>
-          </ion-item>
-
-          
           <ion-row class="btn-row">
             <ion-col size-md="8" offset-md="2">
               <ion-item lines="none">
@@ -149,7 +136,7 @@
                 color="success"
                 expand="full"
                 [disabled]="!form.valid"
-                >Create</ion-button
+                >Updated</ion-button
               >
             </ion-col>
           </ion-row>

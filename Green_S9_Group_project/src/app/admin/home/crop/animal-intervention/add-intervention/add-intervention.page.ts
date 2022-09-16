@@ -158,10 +158,10 @@ export class AddInterventionPage implements OnInit, OnDestroy {
 	}
 
 	ngOnDestroy() {
-		if (this.cropSub || this.paramSub || this.interventionSub ) {
+		if (this.cropSub || this.paramSub || this.interventionSub) {
 			this.cropSub.unsubscribe();
-			this.interventionSub.unsubscribe();
 			this.paramSub.unsubscribe();
+			if (this.interventionSub) this.interventionSub.unsubscribe();
 		}
 	}
 }

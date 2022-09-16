@@ -88,6 +88,8 @@ export class AnimalinterventionService {
 			);
 	}
 
+
+
 	getIntervention(id: string) {
 		return this.http
 			.get<any>('http://localhost:5000/api/Intervention/interventions/' + id)
@@ -96,16 +98,16 @@ export class AnimalinterventionService {
 				map(data => {
 
 					return {
-						interventionId: data.id,
-						about: data.about,
-						whyIsImportant: data.whyIsImportant,
-						cropName: data.cropName,
-						image: data.image,
-						interventionName: data.interventionName,
-						whatIdDoes: data.whatIdDoes,
-						whyAndWhereItOccours: data.whyAndWhereItOccours,
-						howToIdentify: data.howToIdentify,
-						howToManage: data.howToManage
+						interventionId: data.intervention.id,
+						about: data.intervention.about,
+						whyIsImportant: data.intervention.WhyIsImportant,
+						cropName: data.intervention.cropName,
+						image: data.intervention.image,
+						interventionName: data.intervention.interventionName,
+						whatIdDoes: data.intervention.WhatIdDoes,
+						whyAndWhereItOccours: data.intervention.WhyAndWhereItOccours,
+						howToIdentify: data.intervention.HowToIdentify,
+						howToManage: data.intervention.HowToManage
 					};
 				})
 			);

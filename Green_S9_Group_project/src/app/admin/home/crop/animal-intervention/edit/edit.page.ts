@@ -61,38 +61,38 @@ export class EditPage implements OnInit, OnDestroy {
 				.subscribe(intervention => {
 					this.intervention = intervention;
 
+					this.form = new FormGroup({
+						interventionName: new FormControl(
+							this.intervention.interventionName,
+							{
+								validators: [Validators.required, Validators.minLength(3)]
+							}
+						),
+						about: new FormControl(this.intervention.about, {
+							validators: [Validators.required, Validators.minLength(3)]
+						}),
+						whyIsImportant: new FormControl(this.intervention.whyIsImportant, {
+							validators: [Validators.required, Validators.minLength(3)]
+						}),
+						whatIdDoes: new FormControl(this.intervention.whatIdDoes, {
+							validators: [Validators.required, Validators.minLength(3)]
+						}),
+						whyAndWhereItOccours: new FormControl(
+							this.intervention.whyAndWhereItOccours,
+							{
+								validators: [Validators.required, Validators.minLength(3)]
+							}
+						),
+						howToIdentify: new FormControl(this.intervention.howToIdentify, {
+							validators: [Validators.required, Validators.minLength(3)]
+						}),
+						howToManage: new FormControl(this.intervention.howToManage, {
+							validators: [Validators.required, Validators.minLength(3)]
+						}),
+						image: new FormControl(this.intervention.image)
+					});
 					this.isLoading = false;
 				});
-		});
-
-		this.form = new FormGroup({
-			about: new FormControl(this.intervention.about, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			interventionName: new FormControl(this.intervention.interventionName, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			whyIsImportant: new FormControl(this.intervention.whyIsImportant, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			whatIdDoes: new FormControl(this.intervention.whatIdDoes, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			whyAndWhereItOccours: new FormControl(
-				this.intervention.whyAndWhereItOccours,
-				{
-					validators: [Validators.required, Validators.minLength(5)]
-				}
-			),
-			howToIdentify: new FormControl(this.intervention.howToIdentify, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			howToManage: new FormControl(this.intervention.howToManage, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			image: new FormControl(this.intervention.image, {
-				validators: [Validators.required, Validators.minLength(5)]
-			})
 		});
 	}
 	imagePreview: string;
@@ -115,15 +115,18 @@ export class EditPage implements OnInit, OnDestroy {
 
 			return;
 		} else {
-			this.cropSub = this.homeService
-				.addDisease(
-					this.form.value.diseaseName,
-					this.form.value.about,
-					this.crop.name,
-					this.form.value.remedyAction,
-					this.form.value.image
-				)
-				.subscribe();
+
+      console.log(this.form.value);
+
+			// this.cropSub = this.homeService
+			// 	.addDisease(
+			// 		this.form.value.diseaseName,
+			// 		this.form.value.about,
+			// 		this.crop.name,
+			// 		this.form.value.remedyAction,
+			// 		this.form.value.image
+			// 	)
+			// 	.subscribe();
 
 			// this.router.navigate([
 			// 	'/admin',
@@ -160,38 +163,39 @@ export class EditPage implements OnInit, OnDestroy {
 				.getIntervention(paraMap.get('interventionId'))
 				.subscribe(intervention => {
 					this.intervention = intervention;
+
+					this.form = new FormGroup({
+						about: new FormControl(this.intervention.about, {
+							validators: [Validators.required, Validators.minLength(5)]
+						}),
+						interventionName: new FormControl(
+							this.intervention.interventionName,
+							{
+								validators: [Validators.required, Validators.minLength(5)]
+							}
+						),
+						whyIsImportant: new FormControl(this.intervention.WhyIsImportant, {
+							validators: [Validators.required, Validators.minLength(5)]
+						}),
+						WhatIdDoes: new FormControl(this.intervention.WhatIdDoes, {
+							validators: [Validators.required, Validators.minLength(5)]
+						}),
+						WhyAndWhereItOccours: new FormControl(
+							this.intervention.WhyAndWhereItOccours,
+							{
+								validators: [Validators.required, Validators.minLength(5)]
+							}
+						),
+						HowToIdentify: new FormControl(this.intervention.HowToIdentify, {
+							validators: [Validators.required, Validators.minLength(5)]
+						}),
+						HowToManage: new FormControl(this.intervention.HowToManage, {
+							validators: [Validators.required, Validators.minLength(5)]
+						}),
+						image: new FormControl(this.intervention.image)
+					});
 					this.isLoading = false;
 				});
-		});
-
-		this.form = new FormGroup({
-			about: new FormControl(this.intervention.about, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			interventionName: new FormControl(this.intervention.interventionName, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			whyIsImportant: new FormControl(this.intervention.whyIsImportant, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			whatIdDoes: new FormControl(this.intervention.whatIdDoes, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			whyAndWhereItOccours: new FormControl(
-				this.intervention.whyAndWhereItOccours,
-				{
-					validators: [Validators.required, Validators.minLength(5)]
-				}
-			),
-			howToIdentify: new FormControl(this.intervention.howToIdentify, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			howToManage: new FormControl(this.intervention.howToManage, {
-				validators: [Validators.required, Validators.minLength(5)]
-			}),
-			image: new FormControl(this.intervention.image, {
-				validators: [Validators.required, Validators.minLength(5)]
-			})
 		});
 	}
 
