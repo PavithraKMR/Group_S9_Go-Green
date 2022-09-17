@@ -18,7 +18,7 @@
 
   <ion-grid *ngIf="!isLoading && notifications.length >0">
     <ion-row>
-      <ion-toolbar color="success">
+      <ion-toolbar color="danger">
         <ion-segment
           (ionChange)="segmentChanged($event)"
           [(ngModel)]="messageTerm"
@@ -39,11 +39,16 @@
         <ion-list
           *ngFor="let notification of notifications| filter: messageTerm "
         >
-          <ion-item lines="none" [routerLink] = "['/admin','tabs','notification','view',notification.notificationId]">
-            <div>{{notification.date | date}}</div>
-
-            <div > {{notification.message}} </div>
-          </ion-item>
+          <ion-card
+            [routerLink]="['/admin','tabs','notification','view',notification.notificationId]"
+          >
+            <ion-card-header>
+              <ion-card-title> {{notification.date | date}} </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-label>{{notification.message}}</ion-label>
+            </ion-card-content>
+          </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>

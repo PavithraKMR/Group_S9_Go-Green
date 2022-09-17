@@ -16,18 +16,23 @@
   <ion-grid *ngIf="!isLoading">
     <ion-row>
       <ion-col>
-        <ion-card class="bg-light">
-          <ion-card-header> {{notification.date | date}} </ion-card-header>
+        <ion-card class="bg-light left-card" >
           <ion-card-content>
-            <div>{{notification.message}}</div>
+            <ion-label>{{notification.message}}</ion-label>
           </ion-card-content>
+          <ion-card-header>
+            <ion-card-title>{{notification.date | date}} </ion-card-title>
+          </ion-card-header>
         </ion-card>
 
-        <ion-card class="bg-secondary  text-light" *ngIf="notification.reply">
-          <ion-card-header class="text-light"> {{notification.replyDate | date}} </ion-card-header>
-          <ion-card-content >
-            <div>{{notification.replyMessage}}</div>
+        <ion-card class="bg-secondary text-light right-card" *ngIf="notification.reply">
+          <ion-card-content>
+            <ion-label>{{notification.replyMessage}}</ion-label>
           </ion-card-content>
+
+          <ion-card-header class="text-light">
+            {{notification.replyDate | date}}
+          </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
