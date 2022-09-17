@@ -18,7 +18,7 @@
 
   <ion-grid *ngIf="!isLoading && notifications.length >0">
     <ion-row>
-      <ion-toolbar color="success">
+      <ion-toolbar color="warning">
         <ion-segment
           (ionChange)="segmentChanged($event)"
           [(ngModel)]="messageTerm"
@@ -27,7 +27,7 @@
           <ion-segment-button value="false">
             <ion-label>All</ion-label>
           </ion-segment-button>
-         
+
           <ion-segment-button value="true">
             <ion-label>Old Messages</ion-label>
           </ion-segment-button>
@@ -37,25 +37,20 @@
 
     <ion-row>
       <ion-col>
-        <ion-list #item *ngFor="let notification of notifications | filter: messageTerm; let i=index">
-          <ion-item
+        <ion-list
+          #item
+          *ngFor="let notification of notifications | filter: messageTerm; let i=index"
+        >
+          <ion-card
             [routerLink]="['/dashboard','tabs','notification','view',notification.notificationId]"
           >
-            <ion-avatar slot="start">
-              <ion-img [src]="userIcons[i]"></ion-img>
-            </ion-avatar>
-            <div class="div">
-              <label class="date">
-                <ion-note>{{notification.date | date}}</ion-note>
-              </label>
-
-              <label class="message">
-                <p>{{notification.message}}</p>
-              </label>
-
-              <label class="user"></label>
-            </div>
-          </ion-item>
+            <ion-card-header>
+              <ion-card-title> {{notification.date | date}} </ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-label>{{notification.message}}</ion-label>
+            </ion-card-content>
+          </ion-card>
         </ion-list>
       </ion-col>
     </ion-row>
