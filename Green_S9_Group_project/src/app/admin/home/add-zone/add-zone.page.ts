@@ -41,7 +41,7 @@ export class AddZonePage implements OnInit, OnDestroy {
 			.then(el => {
 				el.present();
 				this.authSub = this.homeService
-					.addZone(form.value.zoneName)
+					.addZone(form.value.zoneNameEnglish,form.value.zoneNameTamil)
 					.subscribe(() => {
 						el.dismiss();
 					});

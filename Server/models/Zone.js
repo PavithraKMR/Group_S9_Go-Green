@@ -4,7 +4,8 @@ const Schema = mongoose.Schema;
 const UniqueValidator = require('mongoose-unique-validator');
 
 const zoneSchema = new Schema({
-	zone: { type: String, required: true, unique: true }
+	zoneEnglish: { type: String, required: true, unique: true },
+	zoneTamil: { type: String, required: true, unique: true }
 });
 zoneSchema.plugin(UniqueValidator);
 

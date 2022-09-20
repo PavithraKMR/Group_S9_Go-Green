@@ -371,9 +371,10 @@ export class HomeService {
 		);
 	}
 
-	addZone(zoneName: string) {
+	addZone(zoneNameEnglish: string, zoneNameTamil: string) {
 		const zone = {
-			zone: zoneName
+			zoneEnglish: zoneNameEnglish,
+      zoneTamil:zoneNameTamil
 		};
 		return this.http
 			.post<any>('http://localhost:5000/api/GreenLive/addZone', zone)
@@ -399,7 +400,8 @@ export class HomeService {
 					for (let zone of res.zones) {
 						zones.push({
 							id: zone.id,
-							zoneName: zone.zone
+							zoneEnglish : zone.zoneEnglish,
+              zoneTamil:zone.zoneTamil
 						});
 					}
 

@@ -195,10 +195,11 @@ const addZone = async (req, res, next) => {
 		throw new HttpError('Invalid inputs passed, please check your data.', 422);
 		// return next(new HttpError('Invalid inputs passed, please check your data.', 422)); // batter to use this
 	}
-	const { zone } = req.body;
+	const { zoneEnglish, zoneTamil } = req.body;
 
 	const newZone = new Zone({
-		zone: zone
+		zoneEnglish: zoneEnglish,
+		zoneTamil: zoneTamil
 	});
 	try {
 		await newZone.save();
