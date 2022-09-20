@@ -1,6 +1,12 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title text-center>Register</ion-title>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="openLanguagePopover($event)">
+        <ion-icon name="ellipsis-vertical-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -102,8 +108,8 @@
                 required
                 #zone="ngModel"
               >
-                <ion-select-option *ngFor="let zone of zones" [value]="zone">
-                  {{zone.zoneName}}
+                <ion-select-option *ngFor="let zone of zones | filter:zone.zoneEnglish " [value]="zone">
+                  {{zone.zoneEnglish}}
                 </ion-select-option>
               </ion-select>
             </ion-item>

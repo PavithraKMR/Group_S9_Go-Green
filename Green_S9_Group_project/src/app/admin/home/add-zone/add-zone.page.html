@@ -20,12 +20,23 @@
                 type="text"
                 required
                 size="20"
-                name="zoneName"
+                name="zoneNameEnglish"
                 ngModel
                 #name="ngModel"
-                placeholder="Enter Zone Name"
+                placeholder="Enter Zone Name in English"
 
               ></ion-input>
+
+              <ion-input
+              type="text"
+              required
+              size="20"
+              name="zoneNameTamil"
+              ngModel
+              #name="ngModel"
+              placeholder="Enter Zone Name in Tamil"
+
+            ></ion-input>
 
             </ion-item>
             <ion-button type="submit" expand="block" [disabled] = '!form.valid'>Add</ion-button>
