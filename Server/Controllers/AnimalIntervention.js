@@ -82,7 +82,7 @@ const getIntrevention = async (req, res, next) => {
 	if (!intervention) {
 		res.status(201).json({ message: 'There is no Intervention ' });
 	} else {
-		return res.status(201).json(intervention.toObject({ getters: true }));
+		return res.status(201).json({intervention:intervention.toObject({ getters: true })});
 	}
 };
 

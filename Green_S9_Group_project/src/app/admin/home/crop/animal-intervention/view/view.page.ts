@@ -59,7 +59,7 @@ export class ViewPage implements OnInit, OnDestroy {
 				.subscribe(intervention => {
 					this.intervention = intervention;
           console.log(this.intervention);
-          
+
 					this.isLoading = false;
 				});
 		});
@@ -88,6 +88,7 @@ export class ViewPage implements OnInit, OnDestroy {
 				.getIntervention(paraMap.get('interventionId'))
 				.subscribe(intervention => {
 					this.intervention = intervention;
+          console.log(this.intervention);
 
 					this.isLoading = false;
 				});

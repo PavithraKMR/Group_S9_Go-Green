@@ -122,6 +122,49 @@ const updateNotification = async (req, res, next) => {
 		.json({ notification: notification.toObject({ getters: true }) });
 };
 
+const replyNotification = async (req, res, next) => {
+	const errors = validationResult(req);
+
+	if (!errors.isEmpty()) {
+		throw new HttpError('Invalid inputs passed, please check your data.', 422);
+	}
+
+	const { userId, message, notificationId, replyMessage, date } = req.body;
+
+	let notification;
+	try {
+		notification = await Notification.findById(notificationId);
+	} catch (err) {
+		const error = new HttpError(
+			'Something went Wrong,Could not update Place',
+			500
+		);
+		return next(error);
+	}
+
+	notification.date = date;
+	notification.message = message;
+	notification.userId = userId;
+	notification.reply = true;
+	notification.replyDate = new Date().toISOString();
+	notification.replyMessage = replyMessage;
+
+	try {
+		await notification.save();
+	} catch (err) {
+		const error = new HttpError(
+			'Something went Wrong,Could not update Place',
+			500
+		);
+		return next(error);
+	}
+
+	console.log(notification);
+	res
+		.status(201)
+		.json({ notification: notification.toObject({ getters: true }) });
+};
+
 const deleteNotification = async (req, res, next) => {
 	const notificationId = req.params.notificationId;
 	let notification;
@@ -178,3 +221,4 @@ exports.getNotificationByUserId = getNotificationByUserId;
 exports.createNotification = createNotification;
 exports.updateNotification = updateNotification;
 exports.deleteNotification = deleteNotification;
+exports.replyNotification = replyNotification;

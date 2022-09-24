@@ -27,7 +27,9 @@ export class NotificationService {
 						message: res['message'],
 						reply: res['reply'],
 						date: res['date'],
-						userId: res['userId']
+						userId: res['userId'],
+						replyMessage: res['replyMessage'] ? res['replyMessage'] : '',
+						replyDate: res['replyDate'] ? res['replyDate'] : ''
 					};
 				})
 			);
@@ -49,25 +51,51 @@ export class NotificationService {
 			);
 	}
 
-	updateNotifiction(
-		notificationId: string,
-		message: string,
-		userId: string
-	) {
-
-    const newNotification = {
-      notificationId:notificationId,
-      message:message,
-      userId:userId
-    }
+	updateNotifiction(notificationId: string, message: string, userId: string) {
+		const newNotification = {
+			notificationId: notificationId,
+			message: message,
+			userId: userId
+		};
 
 		return this.http
-			.patch<any>('http://localhost:5000/api/Notification/update', newNotification)
+			.patch<any>(
+				'http://localhost:5000/api/Notification/update',
+				newNotification
+			)
 			.pipe(
 				take(1),
 				switchMap(res => {
 					return this.AllNotification;
 				}),
+				tap(res => {
+					this._notification.next(res);
+				})
+			);
+	}
+
+	replyNotifiction(
+		notificationId: string,
+		message: string,
+		replyMessage: string,
+		userId: string,
+		date: string
+	) {
+		const replyNotification = {
+			notificationId: notificationId,
+			message: message,
+			userId: userId,
+			replyMessage: replyMessage,
+			date: date
+		};
+
+		return this.http
+			.patch<any>(
+				'http://localhost:5000/api/Notification/reply',
+				replyNotification
+			)
+			.pipe(
+				take(1),
 				tap(res => {
 					this._notification.next(res);
 				})
@@ -134,7 +162,8 @@ export class NotificationService {
 						notificationId: notification.id,
 						date: notification.date,
 						message: notification.message,
-						reply: notification.reply
+						reply: notification.reply,
+						userId: notification.userId
 					});
 				}
 

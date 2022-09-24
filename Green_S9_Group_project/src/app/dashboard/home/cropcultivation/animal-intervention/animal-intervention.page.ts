@@ -45,6 +45,8 @@ export class AnimalInterventionPage implements OnInit, OnDestroy {
 				.getCrop(paraMap.get('cropId'))
 				.subscribe(crop => {
 					this.crop = crop;
+          console.log(this.crop);
+
 				});
 		});
 

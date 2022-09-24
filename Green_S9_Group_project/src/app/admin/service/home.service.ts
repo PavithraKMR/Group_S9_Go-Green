@@ -15,6 +15,7 @@ export class HomeService {
 
 	private _croptips = new BehaviorSubject([]);
 	private _cropdiseases = new BehaviorSubject([]);
+	private _zones = new BehaviorSubject([]);
 
 	private _crops = new BehaviorSubject<Crop[]>([
 		{
@@ -30,7 +31,7 @@ export class HomeService {
 			img: 'assets/project_images/ginger.png'
 		},
 		{
-			name: 'Potato',
+			name: 'Pottato',
 			img: 'assets/project_images/potato.png'
 		},
 		{
@@ -53,6 +54,10 @@ export class HomeService {
 
 	get AllDiseases() {
 		return this._cropdiseases.asObservable();
+	}
+
+	get AllZones() {
+		return this._zones.asObservable();
 	}
 
 	fetchAlltips(name: string) {
@@ -144,7 +149,6 @@ export class HomeService {
 		image: File
 	) {
 		const formData = new FormData();
-
 
 		formData.append('image', image);
 		formData.append('diseaseName', diseaseName);
@@ -366,4 +370,50 @@ export class HomeService {
 			})
 		);
 	}
+
+	addZone(zoneNameEnglish: string, zoneNameTamil: string) {
+		const zone = {
+			zoneEnglish: zoneNameEnglish,
+      zoneTamil:zoneNameTamil
+		};
+		return this.http
+			.post<any>('http://localhost:5000/api/GreenLive/addZone', zone)
+			.pipe(
+				take(1),
+				switchMap(() => {
+					return this.AllZones;
+				}),
+				tap(zones => {
+					this._zones.next(zones.concat(zone));
+				})
+			);
+	}
+
+	getZones() {
+		return this.http
+			.get<any>('http://localhost:5000/api/GreenLive/getZones')
+			.pipe(
+				take(1),
+				map(res => {
+					const zones = [];
+
+					for (let zone of res.zones) {
+						zones.push({
+							id: zone.id,
+							zoneEnglish : zone.zoneEnglish,
+              zoneTamil:zone.zoneTamil
+						});
+					}
+
+					return zones;
+				}),
+				tap(zones => {
+					this._zones.next(zones);
+				})
+			);
+	}
+
+	delete(id: string) {}
+
+	updateZone(id: string) {}
 }
