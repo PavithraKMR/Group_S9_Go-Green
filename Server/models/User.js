@@ -11,7 +11,7 @@ const userSchema = new Schema({
 	password: { type: String, required: true },
 	role: { type: String, required: true },
 	mobile: { type: String, required: true },
-	zone: { type: String, required: true },
+	zone: { type: String, },
 	
     // location:{
     //     some:{},

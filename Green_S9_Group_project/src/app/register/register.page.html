@@ -76,7 +76,7 @@
                 lines="none"
                 ngModel
                 #nic="ngModel"
-                placeholder="Nic"
+                placeholder="NIC"
               ></ion-input>
             </ion-item>
             <ion-item *ngIf="!nic.valid && nic.touched" lines="none">
@@ -97,8 +97,8 @@
             <ion-item *ngIf="!address.valid && address.touched" lines="none">
               <p>Please Enter the Address</p>
             </ion-item>
-
-            <ion-item lines="none">
+<!--
+   <ion-item lines="none">
               <ion-label class="select">Zone</ion-label>
               <ion-select
                 [interfaceOptions]="customAlertOptions"
@@ -116,7 +116,9 @@
             <ion-item *ngIf="!zone.valid && zone.touched" lines="none">
               <ion-label>Zone Should be Valided</ion-label>
             </ion-item>
-
+-->
+           
+<br>
             <ion-item lines="none">
               <ion-input
                 type="text"
