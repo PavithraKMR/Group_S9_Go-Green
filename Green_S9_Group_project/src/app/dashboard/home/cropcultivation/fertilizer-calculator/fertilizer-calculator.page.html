@@ -53,9 +53,9 @@
 
     <div *ngIf="calculated" class="boxresult">
       <ion-card id="card" class="ansr">
-        <ion-card-header style="color: rgb(6, 6, 49); font-weight: bold"
-          >{{"Dashboard.Fertilizer_Calculator. Fertilizer_Amount" | translate}}</ion-card-header
-        >
+        <ion-card-header style="color: rgb(6, 6, 49); font-weight: bold">
+          <!--{{"Dashboard.Fertilizer_Calculator.Fertilizer_Amount"}}-->Fertilizer Amount
+        </ion-card-header>
         <ion-card-content>
           <ion-grid>
             <div *ngFor="let itm of fert | keyvalue">
