@@ -5,7 +5,7 @@
         [defaultHref]="['/dashboard','tabs','home',crop.name]"
       ></ion-back-button>
     </ion-buttons>
-    <ion-title *ngIf="!isLoading">{{"Dashboard.Home.Crops."+crop.name | translate}}</ion-title>
+    <ion-title *ngIf="!isLoading">{{"Dashboard.CropCultivation.Animal"|translate}}  {{"Dashboard.CropCultivation.Intervention"|translate}}</ion-title>
     <ion-title *ngIf="isLoading">
       <ion-spinner color="primary"></ion-spinner>
     </ion-title>
